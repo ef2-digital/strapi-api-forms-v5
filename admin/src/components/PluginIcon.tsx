@@ -1,57 +1,15 @@
 const PluginIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="512" height="512" rx="64" fill="#4DADF7" />
-
-    <rect
-      x="120"
-      y="140"
-      width="272"
-      height="200"
-      rx="16"
-      fill="none"
-      stroke="white"
-      stroke-width="10"
-    />
-    <line
-      x1="140"
-      y1="180"
-      x2="372"
-      y2="180"
-      stroke="white"
-      stroke-width="8"
-      stroke-linecap="round"
-    />
-    <line
-      x1="140"
-      y1="220"
-      x2="300"
-      y2="220"
-      stroke="white"
-      stroke-width="8"
-      stroke-linecap="round"
-    />
-    <line
-      x1="140"
-      y1="260"
-      x2="320"
-      y2="260"
-      stroke="white"
-      stroke-width="8"
-      stroke-linecap="round"
-    />
-    <circle cx="340" cy="220" r="10" fill="white" />
-    <circle cx="360" cy="260" r="10" fill="white" />
-    <text
-      x="80"
-      y="400"
-      font-size="80"
-      fill="white"
-      font-family="Arial, sans-serif"
-      font-weight="bold"
-    >
-      {}
-    </text>
-  </svg>
+	<svg baseProfile="full" height="24px" version="1.1" viewBox="0 0 32 32" width="24px" xmlns="http://www.w3.org/2000/svg">
+		<defs />
+		<rect fill="none" height="24" rx="2" ry="2" stroke="currentColor" stroke-width="1.5" width="24" x="4" y="4" />
+		<circle cx="8" cy="8" fill="currentColor" r="0.8" />
+		<circle cx="12" cy="8" fill="currentColor" r="0.8" />
+		<circle cx="16" cy="8" fill="currentColor" r="0.8" />
+		<rect fill="currentColor" height="2" rx="0.5" width="16" x="8" y="12" />
+		<rect fill="currentColor" height="2" rx="0.5" width="16" x="8" y="16" />
+		<rect fill="currentColor" height="2" rx="1" width="8" x="12" y="20" />
+		<polygon fill="currentColor" points="20,24 24,28 22,28 21,30 20,29" />
+	</svg>
 );
 
 export { PluginIcon };

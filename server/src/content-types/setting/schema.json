@@ -1,0 +1,40 @@
+{
+	"kind": "singleType",
+	"collectionName": "settings",
+	"info": {
+		"singularName": "setting",
+		"pluralName": "settings",
+		"displayName": "Settings"
+	},
+	"pluginOptions": {
+		"content-manager": {
+			"visible": true
+		},
+		"content-type-builder": {
+			"visible": true
+		}
+	},
+	"options": {
+		"draftAndPublish": false
+	},
+	"attributes": {
+		"htmlHeader": {
+			"type": "richtext"
+		},
+		"htmlFooter": {
+			"type": "richtext"
+		},
+		"globalFromName": {
+			"type": "string"
+		},
+		"globalFromEmail": {
+			"type": "email"
+		},
+		"globalSuccessMessage": {
+			"type": "richtext"
+		},
+		"globalErrorMessage": {
+			"type": "richtext"
+		}
+	}
+}

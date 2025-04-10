@@ -3249,7 +3249,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@strapi/design-system@npm:2.0.0-rc.14, @strapi/design-system@npm:^2.0.0-rc.14":
+"@strapi/design-system@npm:2.0.0-rc.14":
   version: 2.0.0-rc.14
   resolution: "@strapi/design-system@npm:2.0.0-rc.14"
   dependencies:
@@ -3281,6 +3281,44 @@ __metadata:
     react-dom: ^17.0.0 || ^18.0.0
     styled-components: ^6.0.0
   checksum: 10c0/db6290c2ee6617f81e4dc2f85e4d44902e79a7ad683c122cfa5f50e96d25b78ecfe5d0f3ad566cb8e54efb6082f3fca41311000cd466eaf8169047b9547e68cb
+  languageName: node
+  linkType: hard
+
+"@strapi/design-system@npm:^2.0.0-rc.21":
+  version: 2.0.0-rc.21
+  resolution: "@strapi/design-system@npm:2.0.0-rc.21"
+  dependencies:
+    "@codemirror/lang-json": "npm:6.0.1"
+    "@floating-ui/react-dom": "npm:2.1.0"
+    "@internationalized/date": "npm:3.5.4"
+    "@internationalized/number": "npm:3.5.3"
+    "@radix-ui/react-accordion": "npm:1.1.2"
+    "@radix-ui/react-alert-dialog": "npm:1.0.5"
+    "@radix-ui/react-avatar": "npm:1.0.4"
+    "@radix-ui/react-checkbox": "npm:1.0.4"
+    "@radix-ui/react-dialog": "npm:1.0.5"
+    "@radix-ui/react-dismissable-layer": "npm:1.0.5"
+    "@radix-ui/react-dropdown-menu": "npm:2.0.6"
+    "@radix-ui/react-focus-guards": "npm:1.0.1"
+    "@radix-ui/react-focus-scope": "npm:1.0.4"
+    "@radix-ui/react-popover": "npm:1.0.7"
+    "@radix-ui/react-progress": "npm:1.0.3"
+    "@radix-ui/react-radio-group": "npm:1.1.3"
+    "@radix-ui/react-scroll-area": "npm:1.0.5"
+    "@radix-ui/react-switch": "npm:1.0.3"
+    "@radix-ui/react-tabs": "npm:1.0.4"
+    "@radix-ui/react-tooltip": "npm:1.0.7"
+    "@radix-ui/react-use-callback-ref": "npm:1.0.1"
+    "@strapi/ui-primitives": "npm:2.0.0-rc.21"
+    "@uiw/react-codemirror": "npm:4.22.2"
+    lodash: "npm:4.17.21"
+    react-remove-scroll: "npm:2.5.10"
+  peerDependencies:
+    "@strapi/icons": ^2.0.0 || ^2.0.0-beta || ^2.0.0-alpha
+    react: ^17.0.0 || ^18.0.0
+    react-dom: ^17.0.0 || ^18.0.0
+    styled-components: ^6.0.0
+  checksum: 10c0/6671c7c5571418ec5bc5075ece98d16d9bbbe6e3186a28987f4e8cf4129b7ae6c97a85758c07b6b628946add30ba7843bd7ede4d001c03f7c233fba948ee2c04
   languageName: node
   linkType: hard
 
@@ -3630,6 +3668,37 @@ __metadata:
     react: ^17.0.0 || ^18.0.0
     react-dom: ^17.0.0 || ^18.0.0
   checksum: 10c0/9062bc6e13fb05e90dd42d7eeea88ebfe38e73affc077c3e08b9c68cd6c0a7d741da071020bc32a7c9e47d607476078647dba3b396990232823d33b0326feb39
+  languageName: node
+  linkType: hard
+
+"@strapi/ui-primitives@npm:2.0.0-rc.21":
+  version: 2.0.0-rc.21
+  resolution: "@strapi/ui-primitives@npm:2.0.0-rc.21"
+  dependencies:
+    "@radix-ui/number": "npm:1.0.1"
+    "@radix-ui/primitive": "npm:1.0.1"
+    "@radix-ui/react-collection": "npm:1.0.3"
+    "@radix-ui/react-compose-refs": "npm:1.0.1"
+    "@radix-ui/react-context": "npm:1.0.1"
+    "@radix-ui/react-direction": "npm:1.0.1"
+    "@radix-ui/react-dismissable-layer": "npm:1.0.5"
+    "@radix-ui/react-focus-guards": "npm:1.0.1"
+    "@radix-ui/react-focus-scope": "npm:1.0.4"
+    "@radix-ui/react-id": "npm:1.0.1"
+    "@radix-ui/react-popper": "npm:1.1.3"
+    "@radix-ui/react-portal": "npm:1.0.4"
+    "@radix-ui/react-primitive": "npm:1.0.3"
+    "@radix-ui/react-slot": "npm:1.0.2"
+    "@radix-ui/react-use-controllable-state": "npm:1.0.1"
+    "@radix-ui/react-use-layout-effect": "npm:1.0.1"
+    "@radix-ui/react-use-previous": "npm:1.0.1"
+    "@radix-ui/react-visually-hidden": "npm:1.0.3"
+    aria-hidden: "npm:1.2.4"
+    react-remove-scroll: "npm:2.5.10"
+  peerDependencies:
+    react: ^17.0.0 || ^18.0.0
+    react-dom: ^17.0.0 || ^18.0.0
+  checksum: 10c0/6324c99d6b2de754035c642bc49bc642fd346bb13d390188fe890775d239b62795b2fb821a3f356f1bc86591006089328325d79410cf32c79efae0c2929c55cf
   languageName: node
   linkType: hard
 
@@ -4159,6 +4228,15 @@ __metadata:
     "@tiptap/core": ^2.7.0
     "@tiptap/pm": ^2.7.0
   checksum: 10c0/2f5b2a4a04aec635379d2b2601d45ade8b35e8cbe316d0127047256440dfc59191b7d1c78d21883df54472d226a417799849c004c6c86868460307a372479204
+  languageName: node
+  linkType: hard
+
+"@tiptap/extension-text-align@npm:^2.11.7":
+  version: 2.11.7
+  resolution: "@tiptap/extension-text-align@npm:2.11.7"
+  peerDependencies:
+    "@tiptap/core": ^2.7.0
+  checksum: 10c0/2b2ba7bfff403cccf9e392041ae65a0107354d7d2b22a4c4ed0897b3ca41911fe4a589fdfe6d7a39c8c03cb7a41cea8a76ba2e3a2a5a569deccd925be8e6f04b
   languageName: node
   linkType: hard
 
@@ -10605,6 +10683,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lucide-react@npm:^0.487.0":
+  version: 0.487.0
+  resolution: "lucide-react@npm:0.487.0"
+  peerDependencies:
+    react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/7177778c584b8e9545957bef28e95841c4be1b3bf473f9e2e64454c3e183d7ed0bc977c9f7b5446088023c7000151b7a3b27398d4f70025bf343782192f653ca
+  languageName: node
+  linkType: hard
+
 "lunr@npm:^2.3.9":
   version: 2.3.9
   resolution: "lunr@npm:2.3.9"
@@ -14663,7 +14750,7 @@ __metadata:
     "@faker-js/faker": "npm:^9.4.0"
     "@json2csv/node": "npm:^7.0.6"
     "@material-symbols/svg-400": "npm:^0.27.2"
-    "@strapi/design-system": "npm:^2.0.0-rc.14"
+    "@strapi/design-system": "npm:^2.0.0-rc.21"
     "@strapi/icons": "npm:^2.0.0-rc.14"
     "@strapi/sdk-plugin": "npm:^5.2.8"
     "@strapi/strapi": "npm:^5.6.0"
@@ -14679,6 +14766,7 @@ __metadata:
     "@tiptap/extension-table-cell": "npm:^2.11.5"
     "@tiptap/extension-table-header": "npm:^2.11.5"
     "@tiptap/extension-table-row": "npm:^2.11.5"
+    "@tiptap/extension-text-align": "npm:^2.11.7"
     "@tiptap/react": "npm:^2.11.5"
     "@tiptap/starter-kit": "npm:^2.11.5"
     "@types/react": "npm:^19.0.2"
@@ -14687,6 +14775,7 @@ __metadata:
     ahooks: "npm:^3.8.4"
     date-fns: "npm:^4.1.0"
     lodash: "npm:^4.17.21"
+    lucide-react: "npm:^0.487.0"
     prettier: "npm:^3.4.2"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
@@ -14696,6 +14785,8 @@ __metadata:
     request: "npm:^2.88.2"
     sass-embedded: "npm:^1.83.4"
     styled-components: "npm:^6.1.14"
+    tiptap-extension-resizable-image: "npm:^1.0.7"
+    tiptap-extension-resize-image: "npm:^1.2.1"
     typescript: "npm:^5.7.2"
   peerDependencies:
     "@strapi/sdk-plugin": ^5.2.8
@@ -15185,6 +15276,29 @@ __metadata:
   dependencies:
     "@popperjs/core": "npm:^2.9.0"
   checksum: 10c0/ec3677beb8caec791ee1f715663f28f42d60e0f7250074a047d13d5e6db95fdb6d26d8a3ac16cecb4ebcaf33ae919dbc889cf97948d115e8d3c81518c911b379
+  languageName: node
+  linkType: hard
+
+"tiptap-extension-resizable-image@npm:^1.0.7":
+  version: 1.0.7
+  resolution: "tiptap-extension-resizable-image@npm:1.0.7"
+  peerDependencies:
+    "@tiptap/core": ">=2"
+    "@tiptap/pm": ">=2"
+    "@tiptap/react": ">=2"
+    react: ">=18"
+  checksum: 10c0/36d931a7ac771fe6a22a284ede0f19efb9225fb5be16535beb300c0364351e402fe3ccdcad00860ba12ae6c0d26a58e8b168e1c597c11f66578b1146aceb0d44
+  languageName: node
+  linkType: hard
+
+"tiptap-extension-resize-image@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "tiptap-extension-resize-image@npm:1.2.1"
+  peerDependencies:
+    "@tiptap/core": ^2.0.0
+    "@tiptap/extension-image": ^2.0.0
+    "@tiptap/pm": ^2.0.0
+  checksum: 10c0/21b22cc15fca218c65a142c37b2dba6bdb4b526d830896f2e23dd43613b4260dede2e7bd44a19c816b82a0754c244ff56647a340c89d1cf88b8d38dad3d62b25
   languageName: node
   linkType: hard
 

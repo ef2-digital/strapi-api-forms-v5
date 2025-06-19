@@ -14,6 +14,7 @@ import NotificationModal from '../components/Modals/NotificationModal';
 import { NotificationType } from '../utils/types';
 import { FormProvider } from '../context/FormContext';
 import GenerateForm from '../components/Buttons/GenerateForm';
+import { IconButton } from '@strapi/design-system';
 
 export const formatDate = (dateString) => {
 	return dateString.split('T')[0];
@@ -103,6 +104,7 @@ const HomePage = () => {
 		formatMessage({
 			id: getTranslation(`list.active`),
 		}),
+
 		<VisuallyHidden>Actions</VisuallyHidden>,
 	];
 
@@ -257,21 +259,20 @@ const HomePage = () => {
 																</Table.Cell>
 																<Table.Cell>
 																	<Flex gap={2} justifyContent="flex-end">
-																		<LinkButton
-																			href={`/admin/plugins/${PLUGIN_ID}/form/${row.documentId}`}
-																			startIcon={<Pencil />}
+																		<IconButton
+																			variant="primary"
+																			onClick={() => navigate(`/plugins/${PLUGIN_ID}/form/${row.documentId}`)}
 																			style={{ fill: 'white', color: 'white' }}
 																		>
-																			{formatMessage({ id: getTranslation('actions.edit') })}
-																		</LinkButton>
-																		<LinkButton
+																			<Pencil />
+																		</IconButton>
+																		<IconButton
 																			variant="danger"
-																			startIcon={<Trash />}
 																			onClick={() => handleDeleteClick(row)}
 																			style={{ fill: 'white', color: 'white' }}
 																		>
-																			{formatMessage({ id: getTranslation('actions.delete') })}
-																		</LinkButton>
+																			<Trash />
+																		</IconButton>
 																	</Flex>
 																</Table.Cell>
 															</Table.Row>

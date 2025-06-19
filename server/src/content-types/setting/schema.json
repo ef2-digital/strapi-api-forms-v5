@@ -18,16 +18,19 @@
 		"draftAndPublish": false
 	},
 	"attributes": {
-		"htmlHeader": {
+		"html": {
 			"type": "richtext"
 		},
-		"htmlFooter": {
-			"type": "richtext"
+		"htmlBgColor": {
+			"type": "string"
 		},
 		"globalFromName": {
 			"type": "string"
 		},
 		"globalFromEmail": {
+			"type": "email"
+		},
+		"globalEmail": {
 			"type": "email"
 		},
 		"globalSuccessMessage": {

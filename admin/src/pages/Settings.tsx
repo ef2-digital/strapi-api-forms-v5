@@ -42,10 +42,18 @@ const Settings = () => {
 						Authorization: `Bearer ${token}`,
 					},
 				});
+
 				setFormData(data.data);
 			} catch (error) {
-				setError(error as any);
 				console.info('Error fetching settings:', error);
+
+				setFormData({
+					globalEmail: '',
+					globalFromEmail: '',
+					globalFromName: '',
+					html: '',
+					htmlBgColor: '#ffffff',
+				});
 			} finally {
 				setIsFetching(false);
 			}

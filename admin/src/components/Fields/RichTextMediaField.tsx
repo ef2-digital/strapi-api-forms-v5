@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Heading from '@tiptap/extension-heading';
@@ -8,7 +8,6 @@ import Paragraph from '@tiptap/extension-paragraph';
 import Placeholder from '@tiptap/extension-placeholder';
 import HardBreak from '@tiptap/extension-hard-break';
 import Table from '@tiptap/extension-table';
-import TableCell from '@tiptap/extension-table-cell';
 import TableHeader from '@tiptap/extension-table-header';
 import TableRow from '@tiptap/extension-table-row';
 import { MediaLib } from '../Internal/MediaLibrary';
@@ -17,6 +16,11 @@ import styled from 'styled-components';
 import TableControls from '../RichText/TableControls';
 import TextAlign from '@tiptap/extension-text-align';
 import { ResizableImage } from 'tiptap-extension-resizable-image';
+import TextStyle from '@tiptap/extension-text-style';
+import Color from '@tiptap/extension-color';
+import Highlight from '@tiptap/extension-highlight'; // optional for background highlight
+import CustomTableCell from '../Internal/CustomTableCell';
+import { getDefaultEmailTemplate } from '../Settings/DefaultEmailPlaceholders';
 
 interface Block {
 	field?: {
@@ -40,6 +44,16 @@ const StyledEditor = styled.div`
 	}
 
 	.tiptap {
+		table {
+			border: 1px solid #ccc;
+			border-collapse: collapse;
+		}
+
+		td {
+			border: 1px solid #ccc !important;
+			padding: 8px !important;
+		}
+
 		.node-imageComponent {
 			position: relative;
 			display: inline-block;
@@ -202,15 +216,49 @@ const StyledEditor = styled.div`
 			display: block;
 			margin-top: 1rem;
 		}
+		span {
+			color: inherit;
+			background-color: inherit;
+		}
 	}
+`;
+
+export const sanitizeEmailHtml = (html: string): string => {
+	return html
+		.replace(/<colgroup>.*?<\/colgroup>/gs, '')
+		.replace(/colspan="1"|rowspan="1"/g, '')
+		.replace(/\s?data-keep-ratio=".*?"/g, '')
+		.replace(/\s?class=".*?"/g, '')
+		.replace(/<p>(&nbsp;|\s)*<\/p>/g, '')
+		.replace(/<span[^>]*>(.*?)<\/span>/g, '$1')
+		.replace(/<td([^>]*)>/g, '<td$1 style="padding:0;margin:0;border:0;">')
+		.replace(/<table([^>]*)>/g, '<table$1 border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse;"');
+};
+
+export const wrapInEmailTemplate = (innerHTML: string) => `
+  <body style="margin:0;padding:0;background:#f5f5f5;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f5f5f5">
+      <tr>
+        <td align="center">
+          <table width="600" cellpadding="0" cellspacing="0" border="0" style="background:#ffffff; width:600px; margin: 0 auto;">
+            <tr>
+              <td style="padding: 20px;">
+                ${innerHTML}
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
 `;
 
 const RichTextMediaField: React.FC<RichTextWithMediaProps> = ({ value, onChange, height = 200 }) => {
 	const [mediaOpen, setMediaOpen] = useState(false);
+	const [isSourceEditing, setSourceEditing] = useState(false);
 
 	const editor = useEditor({
 		extensions: [
-			StarterKit,
 			Paragraph,
 			HardBreak,
 			Heading.configure({ levels: [1, 2, 3] }),
@@ -220,14 +268,20 @@ const RichTextMediaField: React.FC<RichTextWithMediaProps> = ({ value, onChange,
 			Table.configure({ resizable: true }),
 			TableRow,
 			TableHeader,
-			TableCell,
+			CustomTableCell,
 			TextAlign.configure({
-				types: ['heading', 'paragraph'], // or 'all' if needed
+				types: ['heading', 'paragraph'],
 			}),
 			ResizableImage,
+			TextStyle,
+			Color,
+			Highlight,
+			StarterKit,
 		],
+
 		onUpdate: ({ editor }) => {
-			onChange(editor.getHTML());
+			const clean = sanitizeEmailHtml(editor.getHTML());
+			onChange(clean);
 		},
 		immediatelyRender: false,
 		content: value,
@@ -251,16 +305,26 @@ const RichTextMediaField: React.FC<RichTextWithMediaProps> = ({ value, onChange,
 		setMediaOpen(false);
 	};
 
-	if (!editor) return <p>Loading editor…</p>;
+	if (!editor) {
+		return <p>Loading editor…</p>;
+	}
 
 	return (
 		<Box padding={4} background="neutral100" borderRadius="4px">
-			<TableControls editor={editor} setMediaOpen={setMediaOpen} />
+			<TableControls editor={editor} setMediaOpen={setMediaOpen} isSourceEditing={isSourceEditing} setSourceEditing={setSourceEditing} />
 
 			<StyledEditor>
-				<Box background="neutral0" border="1px solid #EAEAEA" borderRadius="4px" padding={3} minHeight={height} className="tiptap">
-					<EditorContent editor={editor} className="editor" />
-				</Box>
+				{isSourceEditing ? (
+					<textarea
+						value={editor.getHTML()}
+						onChange={(e) => editor.commands.setContent(e.target.value)}
+						style={{ width: '100%', height }}
+					/>
+				) : (
+					<Box background="neutral0" border="1px solid #EAEAEA" borderRadius="4px" padding={3} minHeight={height} className="tiptap">
+						<EditorContent editor={editor} className="editor" />
+					</Box>
+				)}
 			</StyledEditor>
 			<MediaLib isOpen={mediaOpen} toggle={() => setMediaOpen(false)} handleChangeAssets={handleSelectMedia} />
 		</Box>

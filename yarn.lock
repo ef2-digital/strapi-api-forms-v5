@@ -3758,6 +3758,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@strapi/utils@npm:^5.12.6":
+  version: 5.12.6
+  resolution: "@strapi/utils@npm:5.12.6"
+  dependencies:
+    "@sindresorhus/slugify": "npm:1.1.0"
+    date-fns: "npm:2.30.0"
+    execa: "npm:5.1.1"
+    http-errors: "npm:2.0.0"
+    lodash: "npm:4.17.21"
+    node-machine-id: "npm:1.1.12"
+    p-map: "npm:4.0.0"
+    preferred-pm: "npm:3.1.2"
+    yup: "npm:0.32.9"
+    zod: "npm:^3.22.4"
+  checksum: 10c0/fe979461dc43beb3c2d97e8ad7514a42a9c7b8916bd83e4d027cf5781ceb5d8cb4e0b703db1568e695e4e92185b37f97458c9db7c044e19548156b6fffdb3b64
+  languageName: node
+  linkType: hard
+
 "@streamparser/json@npm:^0.0.20":
   version: 0.0.20
   resolution: "@streamparser/json@npm:0.0.20"
@@ -4041,6 +4059,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tiptap/extension-color@npm:^2.11.9":
+  version: 2.11.9
+  resolution: "@tiptap/extension-color@npm:2.11.9"
+  peerDependencies:
+    "@tiptap/core": ^2.7.0
+    "@tiptap/extension-text-style": ^2.7.0
+  checksum: 10c0/b824e7fedc780b58669db6e3ef3e0c99f76ae5767aa0a4888662577ba6aa7dc1bffbf0e72e5bf7d760f752038c448674238feb700fcddf540794d8660182e01e
+  languageName: node
+  linkType: hard
+
 "@tiptap/extension-document@npm:^2.11.5":
   version: 2.11.5
   resolution: "@tiptap/extension-document@npm:2.11.5"
@@ -4097,6 +4125,15 @@ __metadata:
   peerDependencies:
     "@tiptap/core": ^2.7.0
   checksum: 10c0/7bbef018e9eb70857b363cd443bc8989ee3933c0e58ee7114688faaf99f749e667398fbd229669d39d540900e8dd58bc34d65e53e66c8976b512bc078ae2459a
+  languageName: node
+  linkType: hard
+
+"@tiptap/extension-highlight@npm:^2.11.9":
+  version: 2.11.9
+  resolution: "@tiptap/extension-highlight@npm:2.11.9"
+  peerDependencies:
+    "@tiptap/core": ^2.7.0
+  checksum: 10c0/c0ba9409725c4c76873edd64b0e9c0f106924f8312b6982a3f563cf4cee31415d9f553d5df5a3bb2337d4e6423c109a60f97a710a24aedb6bb71652fd2d58715
   languageName: node
   linkType: hard
 
@@ -4246,6 +4283,15 @@ __metadata:
   peerDependencies:
     "@tiptap/core": ^2.7.0
   checksum: 10c0/f63f5f3005a2a64da63ea37bace392a46b68de4aaa5c17e3fa79cafcfa8184a35580f6a13ec441eb98a733d0744a5e39ddb7c87b1e3c3ee202da3dc66e850a0d
+  languageName: node
+  linkType: hard
+
+"@tiptap/extension-text-style@npm:^2.11.9":
+  version: 2.11.9
+  resolution: "@tiptap/extension-text-style@npm:2.11.9"
+  peerDependencies:
+    "@tiptap/core": ^2.7.0
+  checksum: 10c0/d6189c33c93a74dfe6bc447f2543b8563ca08940c5605cf591977a1c6f8e4d04c566ab7a637c76afba2f13cc654757b04f1dc135e62c29230537b41083497de4
   languageName: node
   linkType: hard
 
@@ -14755,8 +14801,11 @@ __metadata:
     "@strapi/sdk-plugin": "npm:^5.2.8"
     "@strapi/strapi": "npm:^5.6.0"
     "@strapi/typescript-utils": "npm:^5.6.0"
+    "@strapi/utils": "npm:^5.12.6"
     "@tiptap/extension-bold": "npm:^2.11.5"
+    "@tiptap/extension-color": "npm:^2.11.9"
     "@tiptap/extension-heading": "npm:^2.11.5"
+    "@tiptap/extension-highlight": "npm:^2.11.9"
     "@tiptap/extension-image": "npm:^2.11.5"
     "@tiptap/extension-italic": "npm:^2.11.5"
     "@tiptap/extension-list": "npm:3.0.0-next.4"
@@ -14767,6 +14816,7 @@ __metadata:
     "@tiptap/extension-table-header": "npm:^2.11.5"
     "@tiptap/extension-table-row": "npm:^2.11.5"
     "@tiptap/extension-text-align": "npm:^2.11.7"
+    "@tiptap/extension-text-style": "npm:^2.11.9"
     "@tiptap/react": "npm:^2.11.5"
     "@tiptap/starter-kit": "npm:^2.11.5"
     "@types/react": "npm:^19.0.2"

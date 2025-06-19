@@ -173,7 +173,6 @@ const NotificationModal = ({ formId, currentNotification, isModalVisible, setMod
 							value={notification.message}
 							onChange={(value) => setValue('message', value)}
 							availableFields={state.steps[0].layouts.lg}
-							height={200}
 						/>
 					</Flex>
 				</Modal.Body>

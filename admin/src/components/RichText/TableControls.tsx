@@ -18,10 +18,40 @@ import {
 	Box,
 	Minimize,
 	Maximize,
+	Eye,
+	Code,
 } from 'lucide-react';
 import TooltipIconButton from '../TooltipIconButton';
+import { sanitizeEmailHtml, wrapInEmailTemplate } from '../Fields/RichTextMediaField';
 
-const TableControls = ({ editor, setMediaOpen }: { editor: any; setMediaOpen: (open: boolean) => void }) => {
+function updateInlineStyle(style: string, property: string, value: string): string {
+	const styleObj: Record<string, string> = {};
+
+	style.split(';').forEach((part) => {
+		const [key, val] = part.split(':').map((s) => s?.trim());
+		if (key && val) styleObj[key] = val;
+	});
+
+	styleObj[property] = value;
+
+	return (
+		Object.entries(styleObj)
+			.map(([k, v]) => `${k}: ${v}`)
+			.join('; ') + ';'
+	);
+}
+
+const TableControls = ({
+	editor,
+	setMediaOpen,
+	setSourceEditing,
+	isSourceEditing,
+}: {
+	editor: any;
+	setMediaOpen: (open: boolean) => void;
+	setSourceEditing: (isSourceEditing: boolean) => void;
+	isSourceEditing: boolean;
+}) => {
 	if (!editor) return null;
 
 	const isInTable = editor.isActive('table');
@@ -54,7 +84,24 @@ const TableControls = ({ editor, setMediaOpen }: { editor: any; setMediaOpen: (o
 
 	return (
 		<Flex gap={1} paddingBottom={3} wrap="wrap" justifyContent="flex-start" alignItems="center">
-			{/* Format Controls */}
+			<input
+				type="color"
+				style={{
+					width: '32px',
+					height: '32px',
+					padding: '5px',
+					backgroundColor: 'white',
+					borderRadius: '4px',
+					borderColor: '#dcdce4',
+				}}
+				onInput={(event) =>
+					editor
+						.chain()
+						.focus()
+						.setColor((event.target as HTMLInputElement).value)
+						.run()
+				}
+			/>
 			<TooltipIconButton
 				label="Bold"
 				onClick={() => editor.chain().focus().toggleBold().run()}
@@ -203,6 +250,80 @@ const TableControls = ({ editor, setMediaOpen }: { editor: any; setMediaOpen: (o
 			</TooltipIconButton>
 			{isInTable && (
 				<>
+					<input
+						type="color"
+						style={{
+							width: '32px',
+							height: '32px',
+							padding: '5px',
+							backgroundColor: 'white',
+							borderRadius: '4px',
+							borderColor: '#dcdce4',
+						}}
+						onInput={(e) => {
+							const color = (e.target as HTMLInputElement).value;
+
+							//@ts-ignore
+							editor.commands.command(({ state, tr }) => {
+								const { $from } = state.selection;
+
+								for (let depth = $from.depth; depth > 0; depth--) {
+									const node = $from.node(depth);
+									if (node.type.name === 'tableCell') {
+										const pos = $from.before(depth);
+										const currentStyle = node.attrs.style || '';
+										const updatedStyle = updateInlineStyle(currentStyle, 'color', color);
+
+										tr.setNodeMarkup(pos, undefined, {
+											...node.attrs,
+											style: updatedStyle,
+										});
+
+										return true;
+									}
+								}
+
+								return false;
+							});
+						}}
+					/>
+					<input
+						type="color"
+						style={{
+							width: '32px',
+							height: '32px',
+							padding: '5px',
+							backgroundColor: 'white',
+							borderRadius: '4px',
+							borderColor: '#dcdce4',
+						}}
+						onInput={(e) => {
+							const color = (e.target as HTMLInputElement).value;
+
+							//@ts-ignore
+							editor.commands.command(({ state, tr }) => {
+								const { $from } = state.selection;
+
+								for (let depth = $from.depth; depth > 0; depth--) {
+									const node = $from.node(depth);
+									if (node.type.name === 'tableCell') {
+										const pos = $from.before(depth);
+										const currentStyle = node.attrs.style || '';
+										const updatedStyle = updateInlineStyle(currentStyle, 'background-color', color);
+
+										tr.setNodeMarkup(pos, undefined, {
+											...node.attrs,
+											style: updatedStyle,
+										});
+
+										return true;
+									}
+								}
+
+								return false;
+							});
+						}}
+					/>
 					<TooltipIconButton
 						label="Add row above"
 						onClick={() => editor.chain().focus().addRowBefore().run()}
@@ -268,6 +389,19 @@ const TableControls = ({ editor, setMediaOpen }: { editor: any; setMediaOpen: (o
 					</TooltipIconButton>
 				</>
 			)}
+			<Box style={{ width: '1px', height: '24px', backgroundColor: '#E4E4E7', margin: '0 8px' }} />
+			<TooltipIconButton label="Source" onClick={() => setSourceEditing(!isSourceEditing)} variant="tertiary" disabled={false} width="auto">
+				<Code size={16} />
+			</TooltipIconButton>
+			<TooltipIconButton
+				disabled={false}
+				label="Preview"
+				variant="tertiary"
+				width="auto"
+				onClick={() => window?.open()?.document.write(wrapInEmailTemplate(sanitizeEmailHtml(editor?.getHTML() ?? '')))}
+			>
+				<Eye size={16} />
+			</TooltipIconButton>
 		</Flex>
 	);
 };

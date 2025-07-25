@@ -25,6 +25,7 @@ const Submission = () => {
 	};
 
 	const handleOpenModal = (submission) => {
+		console.log('Selected submission:', submission);
 		setSelectedSubmission(submission);
 		setIsModalOpen(true);
 	};
@@ -204,33 +205,44 @@ const Submission = () => {
 									<Typography variant="beta">Submission Details</Typography>
 								</Modal.Header>
 								<Modal.Body>
-									{selectedSubmission?.submission && (
+									{selectedSubmission?.submission && selectedSubmission?.form && (
 										<Box padding={0}>
 											<Box background="neutral100" padding={4} shadow="tableShadow" hasRadius>
-												{Object.entries(selectedSubmission.submission).map(([key, value]) => (
-													<Flex key={key} marginBottom={4} justifyContent="space-between" alignItems="flex-start" wrap="wrap">
-														{/* Key */}
-														<Typography fontWeight="bold" textColor="neutral800" style={{ flex: 1, maxWidth: '200px' }}>
-															{key}:
-														</Typography>
-														{/* Value */}
-														<Typography textColor="neutral800" style={{ flex: 2 }}>
-															{typeof value === 'object' ? (
-																<pre
-																	style={{
-																		margin: 0,
-																		whiteSpace: 'pre-wrap',
-																		wordWrap: 'break-word',
-																	}}
-																>
-																	{JSON.stringify(value, null, 2)}
-																</pre>
-															) : (
-																value || 'N/A'
-															)}
-														</Typography>
-													</Flex>
-												))}
+												{Object.entries(selectedSubmission.submission).map(([key, value]) => {
+													const allFields =
+														selectedSubmission.form.steps?.flatMap((step) => step.layouts?.lg?.map((layout) => layout.field) || []) || [];
+													const fieldConfig = allFields.find((f) => f.name === key);
+													const label = fieldConfig?.label || key;
+
+													return (
+														<>
+															<Box key={key} justifyContent="space-between" alignItems="flex-start" wrap="wrap">
+																{/* Key */}
+																<Typography fontWeight="bold" textColor="neutral800" style={{ flex: 1, maxWidth: '200px' }}>
+																	{label}:
+																</Typography>
+															</Box>
+															<Box marginBottom={4} justifyContent="space-between" alignItems="flex-start" wrap="wrap">
+																{/* Value */}
+																<Typography textColor="neutral800" style={{ flex: 2 }}>
+																	{typeof value === 'object' ? (
+																		<pre
+																			style={{
+																				margin: 0,
+																				whiteSpace: 'pre-wrap',
+																				wordWrap: 'break-word',
+																			}}
+																		>
+																			{JSON.stringify(value, null, 2)}
+																		</pre>
+																	) : (
+																		value || 'N/A'
+																	)}
+																</Typography>
+															</Box>
+														</>
+													);
+												})}
 											</Box>
 										</Box>
 									)}

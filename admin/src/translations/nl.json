@@ -44,6 +44,7 @@
 	"api-forms.forms.fields.actions.notifications": "E-mailmeldingen",
 	"api-forms.forms.fields.actions.submissions": "Inzendingen",
 	"api-forms.forms.fields.actions.export_submissions": "Export",
+	"api-forms.forms.fields.test_email.label": "Verzend een test e-mail om de e-mailinstellingen te controleren",
 	"api-forms.forms.fields.test_email.send": "Verzend test e-mail",
 	"api-forms.forms.fields.test_email.info": "De test email wordt verzonden naar het 'van' e-mailadres",
 	"api-forms.forms.fields.title": "Titel",

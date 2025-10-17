@@ -1,58 +1,58 @@
 {
-  "kind": "collectionType",
-  "collectionName": "forms",
-  "info": {
-    "singularName": "form",
-    "pluralName": "forms",
-    "displayName": "form"
-  },
-  "pluginOptions": {
-    "content-manager": {
-      "visible": true
-    },
-    "content-type-builder": {
-      "visible": true
-    }
-  },
-  "options": {
-    "draftAndPublish": false
-  },
-  "attributes": {
-    "title": {
-      "type": "string"
-    },
-    "successMessage": {
-      "type": "text",
-      "required": true
-    },
-    "errorMessage": {
-      "type": "text",
-      "required": true
-    },
-    "active": {
-      "type": "boolean",
-      "default": true
-    },
-    "dateFrom": {
-      "type": "string"
-    },
-    "dateTill": {
-      "type": "string"
-    },
-    "steps": {
-      "type": "json"
-    },
-    "submissions": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "plugin::api-forms.submission",
-      "mappedBy": "form"
-    },
-    "notifications": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "plugin::api-forms.notification",
-      "mappedBy": "form"
-    }
-  }
+	"kind": "collectionType",
+	"collectionName": "forms",
+	"info": {
+		"singularName": "form",
+		"pluralName": "forms",
+		"displayName": "form"
+	},
+	"pluginOptions": {
+		"content-manager": {
+			"visible": true
+		},
+		"content-type-builder": {
+			"visible": true
+		}
+	},
+	"options": {
+		"draftAndPublish": false
+	},
+	"attributes": {
+		"title": {
+			"type": "string"
+		},
+		"successMessage": {
+			"type": "text",
+			"required": true
+		},
+		"errorMessage": {
+			"type": "text",
+			"required": true
+		},
+		"active": {
+			"type": "boolean",
+			"default": true
+		},
+		"dateFrom": {
+			"type": "string"
+		},
+		"dateTill": {
+			"type": "string"
+		},
+		"steps": {
+			"type": "json"
+		},
+		"submissions": {
+			"type": "relation",
+			"relation": "oneToMany",
+			"target": "plugin::api-forms.submission",
+			"mappedBy": "form"
+		},
+		"notifications": {
+			"type": "relation",
+			"relation": "oneToMany",
+			"target": "plugin::api-forms.notification",
+			"mappedBy": "form"
+		}
+	}
 }

@@ -1,4 +1,5 @@
 {
+	"api-forms.plugin.name": "Forms",
 	"api-forms.heading.menu": "API Forms",
 	"api-forms.heading.add": "Add form",
 	"api-forms.heading.edit": "Edit form",

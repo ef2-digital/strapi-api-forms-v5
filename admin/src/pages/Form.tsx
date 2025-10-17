@@ -104,8 +104,6 @@ const FormContent = () => {
 				const result = await formRequests.submitForm(token!, data);
 				setResponse(result.data);
 
-				console.log('Form created successfully:', result.data);
-				console.log(response.documentId);
 				return setIsDialogOpen(true);
 			}
 

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 /*
  * Strapi Design system
  */
-import { Button, Divider, Modal, TextInput, Flex, Field, Switch, Alert, Typography } from '@strapi/design-system';
+import { Button, Box, Divider, Modal, TextInput, Flex, Field, Switch, Alert, Typography } from '@strapi/design-system';
 
 import { useIntl } from 'react-intl';
 import { HandlerTypeEnum } from '../../utils/enums';
@@ -15,7 +15,6 @@ import SelectEmail from '../Fields/SelectEmail';
 import notificationRequests from '../../api/notification';
 import { useAuth } from '@strapi/strapi/admin';
 import RichTextEditor from '../Fields/RichTextField';
-import { set } from 'lodash';
 
 interface ModalProps {
 	formId: number;
@@ -33,6 +32,7 @@ const NotificationModal = ({ formId, currentNotification, isModalVisible, setMod
 	const [loading, setIsLoading] = useState<boolean>(true);
 	const [alertMessage, setAlertMessage] = useState<string>(formatMessage({ id: `${PLUGIN_ID}.required` }));
 	const [testEmailStatus, setTestEmailStatus] = useState<string | null>(null);
+	const [testEmail, setTestEmail] = useState<string | ''>('');
 
 	if (!notification) {
 		return <></>;
@@ -46,13 +46,14 @@ const NotificationModal = ({ formId, currentNotification, isModalVisible, setMod
 					type: 'EDIT_FORM',
 					payload: res.form,
 				});
-				console.log('res', res);
+
 				setNotification(res);
 			})
 			.finally(() => setIsLoading(false));
 	}, []);
 
 	const setValue = (name: string, value: string | boolean) => {
+		console.log(name, value);
 		const record = { ...notification, [name]: value };
 
 		setNotification(record);
@@ -73,8 +74,15 @@ const NotificationModal = ({ formId, currentNotification, isModalVisible, setMod
 	const sendTestEmail = async () => {
 		setTestEmailStatus('Sending...');
 
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+		if (!testEmail || !emailRegex.test(testEmail)) {
+			setTestEmailStatus('❌ Please provide a valid email address.');
+			return;
+		}
+
 		try {
-			const response = await notificationRequests.test(token!, notification?.documentId);
+			const response = await notificationRequests.test(token!, notification?.documentId, testEmail);
 
 			if (!response.ok) {
 				throw new Error('Failed to send test email');
@@ -104,9 +112,9 @@ const NotificationModal = ({ formId, currentNotification, isModalVisible, setMod
 				<Modal.Body>
 					<Flex direction="column" gap={4} alignItems="stretch" width="100%">
 						<Switch
-							onChange={() => setValue('enabled', (notification.enabled = !notification.enabled))}
+							onCheckedChange={(checked: boolean) => setValue('enabled', checked)}
 							visibleLabels
-							checked={Boolean(notification.enabled)}
+							defaultChecked={notification.enabled}
 						/>
 
 						<Field.Root name="from" id="from" error={hasAlert ? alertMessage : ''}>
@@ -150,23 +158,7 @@ const NotificationModal = ({ formId, currentNotification, isModalVisible, setMod
 								}}
 							/>
 						</Field.Root>
-						<Divider />
 
-						<Button variant="secondary" onClick={sendTestEmail}>
-							{formatMessage({
-								id: getTranslation('forms.fields.test_email.send'),
-							})}
-						</Button>
-						<Typography variant="pi" textColor="neutral600">
-							{formatMessage({
-								id: getTranslation('forms.fields.test_email.info'),
-							})}
-						</Typography>
-						{testEmailStatus && (
-							<Alert variant="info" style={{ width: '100%' }}>
-								{testEmailStatus}
-							</Alert>
-						)}
 						<Divider />
 
 						<RichTextEditor
@@ -178,9 +170,39 @@ const NotificationModal = ({ formId, currentNotification, isModalVisible, setMod
 				</Modal.Body>
 
 				<Modal.Footer>
+					<Box style={{ width: '100%' }}>
+						<Flex alignItems="center" justifyContent="space-between" style={{ width: '100%' }}>
+							<Typography variant="pi" style={{ width: '25%' }}>
+								{formatMessage({ id: getTranslation('forms.fields.test_email.label') })}
+							</Typography>
+							<Box flex={1} style={{ margin: '0 16px' }}>
+								<TextInput
+									name="test"
+									value={testEmail}
+									onChange={(e: any) => {
+										setTestEmail(e.target.value);
+									}}
+								/>
+							</Box>
+							<Button variant="secondary" onClick={sendTestEmail}>
+								{formatMessage({
+									id: getTranslation('forms.fields.test_email.send'),
+								})}
+							</Button>
+						</Flex>
+					</Box>
+
+					{testEmailStatus && (
+						<Alert variant="info" style={{ width: '100%' }}>
+							{testEmailStatus}
+						</Alert>
+					)}
+				</Modal.Footer>
+				<Modal.Footer>
 					<Modal.Close>
-						<Button variant="tertiary">{formatMessage({ id: getTranslation('cancel') })}</Button>
+						<Button variant="tertiary">{formatMessage({ id: getTranslation('close') })}</Button>
 					</Modal.Close>
+
 					<Button onClick={save}>{formatMessage({ id: getTranslation('save') })}</Button>
 				</Modal.Footer>
 			</Modal.Content>

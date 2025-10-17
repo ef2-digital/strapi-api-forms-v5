@@ -8,7 +8,7 @@ const submissionRequests = {
 		const data = await fetchInstance(
 			`submissions?${stringify({
 				sort: 'publishedAt:desc',
-				populate: ['form'],
+				populate: ['form', 'files'],
 				pagination: { page: queryFilter.page, pageSize: queryFilter.pageSize },
 			})}`,
 			token,

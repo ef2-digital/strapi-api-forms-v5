@@ -35,15 +35,6 @@ const StyledEditor = styled.div`
 			margin-top: 0;
 		}
 
-		table {
-			border-spacing: 10px;
-			border-collapse: separate;
-			td,
-			th {
-				padding: 10px;
-			}
-		}
-
 		/* Heading styles */
 		h1,
 		h2,
@@ -70,6 +61,53 @@ const StyledEditor = styled.div`
 		h5,
 		h6 {
 			font-size: 1.5rem;
+		}
+
+		table {
+			border-collapse: collapse;
+			table-layout: fixed;
+			width: 100%;
+			margin: 0;
+			overflow: hidden;
+
+			td {
+				min-width: 10em;
+				border: 2px solid #ced4da;
+				padding: 3px 5px;
+				vertical-align: top;
+				box-sizing: border-box;
+				position: relative;
+
+				> * {
+					margin-bottom: 0;
+				}
+			}
+
+			.selectedCell:after {
+				z-index: 2;
+				position: absolute;
+				content: '';
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				background: rgba(200, 200, 255, 0.4);
+				pointer-events: none;
+			}
+
+			.column-resize-handle {
+				position: absolute;
+				right: -2px;
+				top: 0;
+				bottom: -2px;
+				width: 4px;
+				background-color: #adf;
+				pointer-events: none;
+			}
+
+			p {
+				margin: 0;
+			}
 		}
 	}
 `;

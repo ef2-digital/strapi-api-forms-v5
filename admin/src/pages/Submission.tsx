@@ -25,7 +25,6 @@ const Submission = () => {
 	};
 
 	const handleOpenModal = (submission) => {
-		console.log('Selected submission:', submission);
 		setSelectedSubmission(submission);
 		setIsModalOpen(true);
 	};
@@ -208,6 +207,11 @@ const Submission = () => {
 									{selectedSubmission?.submission && selectedSubmission?.form && (
 										<Box padding={0}>
 											<Box background="neutral100" padding={4} shadow="tableShadow" hasRadius>
+												{selectedSubmission.referer && (
+													<Typography>
+														<strong>Referer:</strong> {selectedSubmission.referer}
+													</Typography>
+												)}
 												{Object.entries(selectedSubmission.submission).map(([key, value]) => {
 													const allFields =
 														selectedSubmission.form.steps?.flatMap((step) => step.layouts?.lg?.map((layout) => layout.field) || []) || [];
@@ -244,6 +248,20 @@ const Submission = () => {
 													);
 												})}
 											</Box>
+											{selectedSubmission.files && selectedSubmission.files.length > 0 && (
+												<Box marginTop={4} padding={4} background="neutral100" shadow="tableShadow" hasRadius>
+													<Typography variant="bold" marginBottom={4}>
+														Attached Files
+													</Typography>
+													{selectedSubmission.files.map((file) => (
+														<Box key={file.id} marginBottom={2}>
+															<LinkButton variant="tertiary" startIcon={<File />} href={file.url} target="_blank" rel="noopener noreferrer">
+																{file.name}
+															</LinkButton>
+														</Box>
+													))}
+												</Box>
+											)}
 										</Box>
 									)}
 								</Modal.Body>

@@ -44,25 +44,22 @@ export default {
 			settings && settings?.html
 				? settings?.html?.replace(
 						/(<td[^>]+contenteditable="false"[^>]*>)([\s\S]*?)(<\/td>)/i,
-						`$1<table width="100%" cellpadding="0" cellspacing="0">${tableRows}</table>$3`
+						`$1<table width="600" cellpadding="0" cellspacing="0"><tbody>${tableRows}</tbody></table>$3`
 					)
-				: tableRows;
+				: `<table width="600" cellpadding="0" cellspacing="0"><tbody>${tableRows}</tbody></table>`;
 
-		const message = `
-<body style="margin:0; padding:0; background-color: ${settings?.htmlBgColor};" bgcolor="${settings?.htmlBgColor}">
-  <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="${settings?.htmlBgColor}" style="background-color: ${settings?.htmlBgColor}; width: 100%;">
+		console.log(htmlWithSubmission);
+
+		const message = `<body style="margin:0; padding:0; background-color: ${settings?.htmlBgColor ?? '#FFFFFF'};" bgcolor="${settings?.htmlBgColor ?? '#FFFFFF'}">
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="${settings?.htmlBgColor ?? '#'}" style="background-color: ${settings?.htmlBgColor ?? '#FFFFFF'}; width: 100%;">
+  <tbody>
     <tr>
       <td align="center">
-        <table width="600" cellpadding="0" cellspacing="0" border="0" align="center" style="width:600px; margin:0 auto; background-color: ${settings?.htmlBgColor}">
-          <tr>
-            <td>
-              ${htmlWithSubmission}
-            </td>
-          </tr>
-        </table>
+       	 ${htmlWithSubmission}
       </td>
     </tr>
   </table>
+  </tbody>
 </body>
 `;
 

@@ -1,4 +1,5 @@
 import { errors } from '@strapi/utils';
+import { generateNotificationHtml } from '../../functions';
 const { ForbiddenError } = errors;
 
 function isJSON(str) {
@@ -20,50 +21,10 @@ export default {
 		}
 
 		const settings = await strapi.documents('plugin::api-forms.setting').findFirst();
+		const message = generateNotificationHtml(result, settings);
 		const defaultEmail = await strapi.plugins['email'].services.email.getProviderSettings().settings.defaultFrom;
 
-		const tableRows = result.steps
-			.map((step) => {
-				if (!step.layouts.lg) {
-					return '';
-				}
-
-				return step.layouts.lg.map((block) => {
-					const { field } = block;
-
-					if (field.type === 'file') {
-						return '';
-					}
-
-					return `<tr><td><strong>${field.label}</strong></td><td>{{${field.name}}}</td></tr>`;
-				});
-			})
-			.join('');
-
-		const htmlWithSubmission =
-			settings && settings?.html
-				? settings?.html?.replace(
-						/(<td[^>]+contenteditable="false"[^>]*>)([\s\S]*?)(<\/td>)/i,
-						`$1<table width="600" cellpadding="0" cellspacing="0"><tbody>${tableRows}</tbody></table>$3`
-					)
-				: `<table width="600" cellpadding="0" cellspacing="0"><tbody>${tableRows}</tbody></table>`;
-
-		console.log(htmlWithSubmission);
-
-		const message = `<body style="margin:0; padding:0; background-color: ${settings?.htmlBgColor ?? '#FFFFFF'};" bgcolor="${settings?.htmlBgColor ?? '#FFFFFF'}">
-  <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="${settings?.htmlBgColor ?? '#'}" style="background-color: ${settings?.htmlBgColor ?? '#FFFFFF'}; width: 100%;">
-  <tbody>
-    <tr>
-      <td align="center">
-       	 ${htmlWithSubmission}
-      </td>
-    </tr>
-  </table>
-  </tbody>
-</body>
-`;
-
-		const notification = await strapi.entityService.create('plugin::api-forms.notification', {
+		const notification = await strapi.documents('plugin::api-forms.notification').create({
 			data: {
 				form: result.id,
 				enabled: true,
@@ -76,7 +37,7 @@ export default {
 			},
 		});
 
-		const confirmation = await strapi.entityService.create('plugin::api-forms.notification', {
+		const confirmation = await strapi.documents('plugin::api-forms.notification').create({
 			data: {
 				form: result.id,
 				enabled: false,

@@ -3,6 +3,7 @@
  */
 
 import { factories } from '@strapi/strapi';
+import { generateNotificationHtml } from '../functions';
 
 export default factories.createCoreController('plugin::api-forms.form', ({ strapi }) => ({
 	async findOne(ctx) {
@@ -124,7 +125,65 @@ Keep the schema concise and focus on user description.
 		const response = await strapi.documents('plugin::api-forms.form').update({
 			documentId: documentId,
 			data,
+			populate: { notifications: true },
 		});
+
+		const settings = await strapi.documents('plugin::api-forms.setting').findFirst();
+		const message = generateNotificationHtml(response, settings);
+
+		const notificationId = response.notifications.find((n) => n.identifier === 'notification')?.documentId;
+		const confirmationId = response.notifications.find((n) => n.identifier === 'confirmation')?.documentId;
+		if (notificationId) {
+			await strapi.documents('plugin::api-forms.notification').update({
+				documentId: notificationId,
+				data: {
+					//@ts-ignore
+					message: message,
+				},
+			});
+		} else {
+			// In case notification doesn't exist, create it
+			const defaultEmail = await strapi.plugins['email'].services.email.getProviderSettings().settings.defaultFrom;
+
+			await strapi.documents('plugin::api-forms.notification').create({
+				data: {
+					form: documentId,
+					enabled: true,
+					identifier: 'notification',
+					service: 'emailService',
+					from: settings && settings?.globalFromEmail ? `${settings.globalFromName} <${settings.globalFromEmail}>` : defaultEmail,
+					to: settings && settings?.globalEmail ? settings.globalEmail : defaultEmail,
+					message: message,
+					subject: `New submission from API form: ${response.title}`,
+				},
+			});
+		}
+
+		if (confirmationId) {
+			await strapi.documents('plugin::api-forms.notification').update({
+				documentId: confirmationId,
+				data: {
+					//@ts-ignore
+					message: message,
+				},
+			});
+		} else {
+			// In case confirmation doesn't exist, create it
+			const defaultEmail = await strapi.plugins['email'].services.email.getProviderSettings().settings.defaultFrom;
+
+			await strapi.documents('plugin::api-forms.notification').create({
+				data: {
+					form: documentId,
+					enabled: false,
+					identifier: 'confirmation',
+					service: 'emailService',
+					from: settings && settings?.globalFromEmail ? `${settings.globalFromName} <${settings.globalFromEmail}>` : defaultEmail,
+					to: '',
+					subject: `Thank you for your submission on form: ${response.title}`,
+					message: message,
+				},
+			});
+		}
 
 		return { response };
 	},
@@ -142,7 +201,6 @@ Keep the schema concise and focus on user description.
 				return ctx.badRequest('No form steps found');
 			}
 
-			console.log(form);
 			// Convert layout widths into Tailwind grid classes
 			const widthClassMap = {
 				12: 'col-span-full',

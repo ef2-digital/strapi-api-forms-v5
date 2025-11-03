@@ -52,4 +52,39 @@ async function getFiles(submission: SubmissionType, provider: string): Promise<a
 	).then((files) => files.filter(Boolean)); // Remove failed file fetches
 }
 
-export { validateEmail, getValueFromSubmissionByKey, replaceDynamicVariables, getFiles };
+function generateNotificationHtml(result, settings) {
+	const tableRows = result.steps
+		.map((step) => {
+			if (!step.layouts.lg) return '';
+			return step.layouts.lg
+				.map((block) => {
+					const { field } = block;
+					if (field.type === 'file') return '';
+					return `<tr><td><strong>${field.label}</strong></td><td>{{${field.name}}}</td></tr>`;
+				})
+				.join('');
+		})
+		.join('');
+
+	const colorBg = settings?.htmlBgColor ?? '#FFFFFF';
+
+	const htmlWithSubmission =
+		settings && settings?.html
+			? settings?.html?.replace(
+					/(<td[^>]+contenteditable="false"[^>]*>)([\s\S]*?)(<\/td>)/i,
+					`$1<table width="600" cellpadding="0" cellspacing="0"><tbody>${tableRows}</tbody></table>$3`
+				)
+			: `<table width="600" cellpadding="0" cellspacing="0"><tbody>${tableRows}</tbody></table>`;
+
+	return `<body style="margin:0; padding:0; background-color: ${colorBg};" bgcolor="${colorBg}">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="${colorBg}" style="background-color: ${colorBg}; width: 100%;">
+      <tr>
+        <td align="center">
+          ${htmlWithSubmission}
+        </td>
+      </tr>
+    </table>
+  </body>`;
+}
+
+export { validateEmail, getValueFromSubmissionByKey, replaceDynamicVariables, getFiles, generateNotificationHtml };

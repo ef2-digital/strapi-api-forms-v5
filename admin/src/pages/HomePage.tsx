@@ -183,7 +183,7 @@ const HomePage = () => {
 											<Table.Loading />
 											<Table.Empty
 												action={
-													<LinkButton startIcon={<Plus style={{ fill: 'white' }} />} href={`/admin/plugins/${PLUGIN_ID}/form/add`}>
+													<LinkButton startIcon={<Plus style={{ fill: 'white' }} />} href={`/admin/plugins/${PLUGIN_ID}/form`}>
 														{formatMessage({
 															id: getTranslation('forms.subtitle'),
 														})}
@@ -281,12 +281,11 @@ const HomePage = () => {
 											</Table.Body>
 										</Table.Content>
 									</Table.Root>
-									{
-										<Pagination.Root {...pagination} defaultPageSize={10}>
-											<Pagination.PageSize />
-											<Pagination.Links />
-										</Pagination.Root>
-									}
+
+									<Pagination.Root {...pagination} defaultPageSize={10}>
+										<Pagination.PageSize />
+										<Pagination.Links />
+									</Pagination.Root>
 								</Box>
 							</Grid.Item>
 						</Grid.Root>

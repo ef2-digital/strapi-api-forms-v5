@@ -47,6 +47,7 @@
 	"api-forms.forms.fields.actions.export_submissions": "CSV export",
 	"api-forms.forms.fields.test_email.send": "Send test email",
 	"api-forms.forms.fields.test_email.info": "Test email will be sent to 'from' Email address ",
+	"api-forms.forms.fields.test_email.label": "Send a test email to check the email settings",
 	"api-forms.forms.fields.title": "Title",
 	"api-forms.forms.fields.general": "Form",
 	"api-forms.forms.fields.successMessage": "Message after successful submission",

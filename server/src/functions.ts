@@ -52,8 +52,10 @@ async function getFiles(submission: SubmissionType, provider: string): Promise<a
           const response = await fetch(fileUrl);
           const buffer = await response.arrayBuffer();
           return {
+            '@odata.type': '#microsoft.graph.fileAttachment',
             name: file.name,
             contentBytes: Buffer.from(buffer).toString('base64'),
+            contentType: file.mime,
           };
         } catch (error) {
           strapi.log.error(`Failed to fetch file: ${fileUrl}`, error);

@@ -24,6 +24,7 @@
   ],
   "scripts": {
     "build": "strapi-plugin build",
+    "prepare": "npm run build",
     "watch": "strapi-plugin watch",
     "watch:link": "strapi-plugin watch:link",
     "verify": "strapi-plugin verify",

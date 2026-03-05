@@ -53,7 +53,7 @@ export default {
 
       // // ✅ Fetch the related form with notifications
       const form = await strapi.documents('plugin::api-forms.form').findFirst({
-        where: { id: formId },
+        filters: { id: formId },
         populate: ['notifications'],
       });
 

@@ -47,6 +47,20 @@ async function getFiles(submission: SubmissionType, provider: string): Promise<a
           strapi.log.error(`Failed to fetch file: ${fileUrl}`, error);
           return null;
         }
+      } else if(provider === 'strapi-provider-email-microsoft-graph') {
+        try {
+          const response = await fetch(fileUrl);
+          const buffer = await response.arrayBuffer();
+          return {
+            '@odata.type': '#microsoft.graph.fileAttachment',
+            name: file.name,
+            contentBytes: Buffer.from(buffer).toString('base64'),
+            contentType: file.mime,
+          };
+        } catch (error) {
+          strapi.log.error(`Failed to fetch file: ${fileUrl}`, error);
+          return null;
+        }
       } else {
         return { filename: file.name, path: fileUrl };
       }

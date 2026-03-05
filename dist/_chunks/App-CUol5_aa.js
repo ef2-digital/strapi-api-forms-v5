@@ -1,31 +1,64 @@
-import { jsx, jsxs, Fragment as Fragment$2 } from "react/jsx-runtime";
-import { useAuth, Page, Layouts, BackButton, useFetchClient, useNotification, useQueryParams, Table as Table$1, Pagination } from "@strapi/strapi/admin";
-import { useNavigate, useParams, useLocation, NavLink, Routes, Route } from "react-router-dom";
-import * as React from "react";
-import { useReducer, useState, createContext, useContext, useCallback, useMemo, createElement, forwardRef, Fragment as Fragment$1, Children, isValidElement, cloneElement, useEffect, useRef, useLayoutEffect } from "react";
-import ReactGridLayout from "react-grid-layout";
-import { IconButton, Box, Typography, Checkbox as Checkbox$1, Radio, SingleSelect, SingleSelectOption, TextInput, Textarea, Field, Card, CardBody, Flex, IconButtonGroup, Divider, Modal, Button, Alert, Grid, DatePicker, Dialog, LinkButton, Loader, Switch, VisuallyHidden, Badge } from "@strapi/design-system";
-import { Pencil, Trash, ArrowLeft, ArrowRight, Plus, CheckCircle, Download, Bold as Bold$1, Italic as Italic$1, Magic, Mail, WarningCircle, File, Eye } from "@strapi/icons";
-import * as ReactDOM from "react-dom";
-import ReactDOM__default, { flushSync } from "react-dom";
-import { P as PLUGIN_ID } from "./index-DkOpGJxs.mjs";
-import { useIntl } from "react-intl";
-import { camelCase } from "lodash";
-import "react-grid-layout/css/styles.css";
-import { format } from "date-fns";
-import omit from "lodash/omit";
-import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import Heading from "@tiptap/extension-heading";
-import Bold from "@tiptap/extension-bold";
-import Italic from "@tiptap/extension-italic";
-import Paragraph from "@tiptap/extension-paragraph";
-import Placeholder from "@tiptap/extension-placeholder";
-import Table from "@tiptap/extension-table";
-import TableCell from "@tiptap/extension-table-cell";
-import TableHeader from "@tiptap/extension-table-header";
-import TableRow from "@tiptap/extension-table-row";
-import styled from "styled-components";
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const jsxRuntime = require("react/jsx-runtime");
+const admin = require("@strapi/strapi/admin");
+const reactRouterDom = require("react-router-dom");
+const React = require("react");
+const ReactGridLayout = require("react-grid-layout");
+const designSystem = require("@strapi/design-system");
+const icons = require("@strapi/icons");
+const ReactDOM = require("react-dom");
+const index$1 = require("./index-Bdtsx0TG.js");
+const reactIntl = require("react-intl");
+const lodash = require("lodash");
+require("react-grid-layout/css/styles.css");
+const dateFns = require("date-fns");
+const omit = require("lodash/omit");
+const react = require("@tiptap/react");
+const StarterKit = require("@tiptap/starter-kit");
+const Heading = require("@tiptap/extension-heading");
+const Bold = require("@tiptap/extension-bold");
+const Italic = require("@tiptap/extension-italic");
+const Paragraph = require("@tiptap/extension-paragraph");
+const Placeholder = require("@tiptap/extension-placeholder");
+const Table = require("@tiptap/extension-table");
+const TableCell = require("@tiptap/extension-table-cell");
+const TableHeader = require("@tiptap/extension-table-header");
+const TableRow = require("@tiptap/extension-table-row");
+const styled = require("styled-components");
+const _interopDefault = (e) => e && e.__esModule ? e : { default: e };
+function _interopNamespace(e) {
+  if (e && e.__esModule) return e;
+  const n = Object.create(null, { [Symbol.toStringTag]: { value: "Module" } });
+  if (e) {
+    for (const k in e) {
+      if (k !== "default") {
+        const d = Object.getOwnPropertyDescriptor(e, k);
+        Object.defineProperty(n, k, d.get ? d : {
+          enumerable: true,
+          get: () => e[k]
+        });
+      }
+    }
+  }
+  n.default = e;
+  return Object.freeze(n);
+}
+const React__namespace = /* @__PURE__ */ _interopNamespace(React);
+const ReactGridLayout__default = /* @__PURE__ */ _interopDefault(ReactGridLayout);
+const ReactDOM__namespace = /* @__PURE__ */ _interopNamespace(ReactDOM);
+const omit__default = /* @__PURE__ */ _interopDefault(omit);
+const StarterKit__default = /* @__PURE__ */ _interopDefault(StarterKit);
+const Heading__default = /* @__PURE__ */ _interopDefault(Heading);
+const Bold__default = /* @__PURE__ */ _interopDefault(Bold);
+const Italic__default = /* @__PURE__ */ _interopDefault(Italic);
+const Paragraph__default = /* @__PURE__ */ _interopDefault(Paragraph);
+const Placeholder__default = /* @__PURE__ */ _interopDefault(Placeholder);
+const Table__default = /* @__PURE__ */ _interopDefault(Table);
+const TableCell__default = /* @__PURE__ */ _interopDefault(TableCell);
+const TableHeader__default = /* @__PURE__ */ _interopDefault(TableHeader);
+const TableRow__default = /* @__PURE__ */ _interopDefault(TableRow);
+const styled__default = /* @__PURE__ */ _interopDefault(styled);
 const useBlockOperations = (layouts, updateLayouts, currentBreakpoint) => {
   const adjustLayout = (layout) => {
     let rowCount = 0;
@@ -204,7 +237,7 @@ const initialState = {
   currentStep: 1,
   active: true
 };
-const FormContext = createContext({
+const FormContext = React.createContext({
   state: initialState,
   dispatch: () => {
   },
@@ -240,8 +273,8 @@ const removeState = () => {
   return initialState;
 };
 const FormProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, loadState());
-  const [currentBreakpoint, setCurrentBreakpoint] = useState("lg");
+  const [state, dispatch] = React.useReducer(reducer, loadState());
+  const [currentBreakpoint, setCurrentBreakpoint] = React.useState("lg");
   const currentStep = state.steps.find((step) => step.id === state.currentStep) || {
     layouts: {}
   };
@@ -265,7 +298,7 @@ const FormProvider = ({ children }) => {
     });
   };
   const blockOperations = useBlockOperations(currentLayouts, updateLayouts, currentBreakpoint);
-  return /* @__PURE__ */ jsx(
+  return /* @__PURE__ */ jsxRuntime.jsx(
     FormContext.Provider,
     {
       value: {
@@ -287,7 +320,7 @@ const FormProvider = ({ children }) => {
   );
 };
 const useFormContext = () => {
-  const context = useContext(FormContext);
+  const context = React.useContext(FormContext);
   if (!context) {
     throw new Error("useFormContext must be used within a FormProvider");
   }
@@ -318,12 +351,12 @@ function $6ed0406888f73fc4$export$43e446d32b3d21af(...refs) {
   );
 }
 function $6ed0406888f73fc4$export$c7b2cbe3552a0d05(...refs) {
-  return useCallback($6ed0406888f73fc4$export$43e446d32b3d21af(...refs), refs);
+  return React.useCallback($6ed0406888f73fc4$export$43e446d32b3d21af(...refs), refs);
 }
 function $c512c27ab02ef895$export$50c7b4e9d9f19c1(scopeName, createContextScopeDeps = []) {
   let defaultContexts = [];
   function $c512c27ab02ef895$export$fd42f52fd3ae1109(rootComponentName, defaultContext) {
-    const BaseContext = /* @__PURE__ */ createContext(defaultContext);
+    const BaseContext = /* @__PURE__ */ React.createContext(defaultContext);
     const index2 = defaultContexts.length;
     defaultContexts = [
       ...defaultContexts,
@@ -332,17 +365,17 @@ function $c512c27ab02ef895$export$50c7b4e9d9f19c1(scopeName, createContextScopeD
     function Provider(props) {
       const { scope, children, ...context } = props;
       const Context = (scope === null || scope === void 0 ? void 0 : scope[scopeName][index2]) || BaseContext;
-      const value = useMemo(
+      const value = React.useMemo(
         () => context,
         Object.values(context)
       );
-      return /* @__PURE__ */ createElement(Context.Provider, {
+      return /* @__PURE__ */ React.createElement(Context.Provider, {
         value
       }, children);
     }
-    function useContext$1(consumerName, scope) {
+    function useContext(consumerName, scope) {
       const Context = (scope === null || scope === void 0 ? void 0 : scope[scopeName][index2]) || BaseContext;
-      const context = useContext(Context);
+      const context = React.useContext(Context);
       if (context) return context;
       if (defaultContext !== void 0) return defaultContext;
       throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
@@ -350,16 +383,16 @@ function $c512c27ab02ef895$export$50c7b4e9d9f19c1(scopeName, createContextScopeD
     Provider.displayName = rootComponentName + "Provider";
     return [
       Provider,
-      useContext$1
+      useContext
     ];
   }
   const createScope = () => {
     const scopeContexts = defaultContexts.map((defaultContext) => {
-      return /* @__PURE__ */ createContext(defaultContext);
+      return /* @__PURE__ */ React.createContext(defaultContext);
     });
     return function useScope(scope) {
       const contexts = (scope === null || scope === void 0 ? void 0 : scope[scopeName]) || scopeContexts;
-      return useMemo(
+      return React.useMemo(
         () => ({
           [`__scope${scopeName}`]: {
             ...scope,
@@ -398,7 +431,7 @@ function $c512c27ab02ef895$var$composeContextScopes(...scopes) {
           ...currentScope
         };
       }, {});
-      return useMemo(
+      return React.useMemo(
         () => ({
           [`__scope${baseScope.scopeName}`]: nextScopes1
         }),
@@ -411,41 +444,41 @@ function $c512c27ab02ef895$var$composeContextScopes(...scopes) {
   createScope1.scopeName = baseScope.scopeName;
   return createScope1;
 }
-const $5e63c961fc1ce211$export$8c6ed5c666ac1360 = /* @__PURE__ */ forwardRef((props, forwardedRef) => {
+const $5e63c961fc1ce211$export$8c6ed5c666ac1360 = /* @__PURE__ */ React.forwardRef((props, forwardedRef) => {
   const { children, ...slotProps } = props;
-  const childrenArray = Children.toArray(children);
+  const childrenArray = React.Children.toArray(children);
   const slottable = childrenArray.find($5e63c961fc1ce211$var$isSlottable);
   if (slottable) {
     const newElement = slottable.props.children;
     const newChildren = childrenArray.map((child) => {
       if (child === slottable) {
-        if (Children.count(newElement) > 1) return Children.only(null);
-        return /* @__PURE__ */ isValidElement(newElement) ? newElement.props.children : null;
+        if (React.Children.count(newElement) > 1) return React.Children.only(null);
+        return /* @__PURE__ */ React.isValidElement(newElement) ? newElement.props.children : null;
       } else return child;
     });
-    return /* @__PURE__ */ createElement($5e63c961fc1ce211$var$SlotClone, _extends({}, slotProps, {
+    return /* @__PURE__ */ React.createElement($5e63c961fc1ce211$var$SlotClone, _extends({}, slotProps, {
       ref: forwardedRef
-    }), /* @__PURE__ */ isValidElement(newElement) ? /* @__PURE__ */ cloneElement(newElement, void 0, newChildren) : null);
+    }), /* @__PURE__ */ React.isValidElement(newElement) ? /* @__PURE__ */ React.cloneElement(newElement, void 0, newChildren) : null);
   }
-  return /* @__PURE__ */ createElement($5e63c961fc1ce211$var$SlotClone, _extends({}, slotProps, {
+  return /* @__PURE__ */ React.createElement($5e63c961fc1ce211$var$SlotClone, _extends({}, slotProps, {
     ref: forwardedRef
   }), children);
 });
 $5e63c961fc1ce211$export$8c6ed5c666ac1360.displayName = "Slot";
-const $5e63c961fc1ce211$var$SlotClone = /* @__PURE__ */ forwardRef((props, forwardedRef) => {
+const $5e63c961fc1ce211$var$SlotClone = /* @__PURE__ */ React.forwardRef((props, forwardedRef) => {
   const { children, ...slotProps } = props;
-  if (/* @__PURE__ */ isValidElement(children)) return /* @__PURE__ */ cloneElement(children, {
+  if (/* @__PURE__ */ React.isValidElement(children)) return /* @__PURE__ */ React.cloneElement(children, {
     ...$5e63c961fc1ce211$var$mergeProps(slotProps, children.props),
     ref: forwardedRef ? $6ed0406888f73fc4$export$43e446d32b3d21af(forwardedRef, children.ref) : children.ref
   });
-  return Children.count(children) > 1 ? Children.only(null) : null;
+  return React.Children.count(children) > 1 ? React.Children.only(null) : null;
 });
 $5e63c961fc1ce211$var$SlotClone.displayName = "SlotClone";
 const $5e63c961fc1ce211$export$d9f1ccf0bdb05d45 = ({ children }) => {
-  return /* @__PURE__ */ createElement(Fragment$1, null, children);
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, children);
 };
 function $5e63c961fc1ce211$var$isSlottable(child) {
-  return /* @__PURE__ */ isValidElement(child) && child.type === $5e63c961fc1ce211$export$d9f1ccf0bdb05d45;
+  return /* @__PURE__ */ React.isValidElement(child) && child.type === $5e63c961fc1ce211$export$d9f1ccf0bdb05d45;
 }
 function $5e63c961fc1ce211$var$mergeProps(slotProps, childProps) {
   const overrideProps = {
@@ -494,13 +527,13 @@ const $8927f6f2acc4f386$var$NODES = [
   "ul"
 ];
 const $8927f6f2acc4f386$export$250ffa63cdc0d034 = $8927f6f2acc4f386$var$NODES.reduce((primitive, node) => {
-  const Node4 = /* @__PURE__ */ forwardRef((props, forwardedRef) => {
+  const Node4 = /* @__PURE__ */ React.forwardRef((props, forwardedRef) => {
     const { asChild, ...primitiveProps } = props;
     const Comp = asChild ? $5e63c961fc1ce211$export$8c6ed5c666ac1360 : node;
-    useEffect(() => {
+    React.useEffect(() => {
       window[Symbol.for("radix-ui")] = true;
     }, []);
-    return /* @__PURE__ */ createElement(Comp, _extends({}, primitiveProps, {
+    return /* @__PURE__ */ React.createElement(Comp, _extends({}, primitiveProps, {
       ref: forwardedRef
     }));
   });
@@ -511,16 +544,16 @@ const $8927f6f2acc4f386$export$250ffa63cdc0d034 = $8927f6f2acc4f386$var$NODES.re
   };
 }, {});
 function $8927f6f2acc4f386$export$6d1a0317bde7de7f(target, event) {
-  if (target) flushSync(
+  if (target) ReactDOM.flushSync(
     () => target.dispatchEvent(event)
   );
 }
 function $b1b2314f5f9a1d84$export$25bec8c6f54ee79a(callback) {
-  const callbackRef = useRef(callback);
-  useEffect(() => {
+  const callbackRef = React.useRef(callback);
+  React.useEffect(() => {
     callbackRef.current = callback;
   });
-  return useMemo(
+  return React.useMemo(
     () => (...args) => {
       var _callbackRef$current;
       return (_callbackRef$current = callbackRef.current) === null || _callbackRef$current === void 0 ? void 0 : _callbackRef$current.call(callbackRef, ...args);
@@ -530,7 +563,7 @@ function $b1b2314f5f9a1d84$export$25bec8c6f54ee79a(callback) {
 }
 function $addc16e1bbe58fd0$export$3a72a57244d6e765(onEscapeKeyDownProp, ownerDocument = globalThis === null || globalThis === void 0 ? void 0 : globalThis.document) {
   const onEscapeKeyDown = $b1b2314f5f9a1d84$export$25bec8c6f54ee79a(onEscapeKeyDownProp);
-  useEffect(() => {
+  React.useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === "Escape") onEscapeKeyDown(event);
     };
@@ -545,18 +578,18 @@ const $5cb92bef7577960e$var$CONTEXT_UPDATE = "dismissableLayer.update";
 const $5cb92bef7577960e$var$POINTER_DOWN_OUTSIDE = "dismissableLayer.pointerDownOutside";
 const $5cb92bef7577960e$var$FOCUS_OUTSIDE = "dismissableLayer.focusOutside";
 let $5cb92bef7577960e$var$originalBodyPointerEvents;
-const $5cb92bef7577960e$var$DismissableLayerContext = /* @__PURE__ */ createContext({
+const $5cb92bef7577960e$var$DismissableLayerContext = /* @__PURE__ */ React.createContext({
   layers: /* @__PURE__ */ new Set(),
   layersWithOutsidePointerEventsDisabled: /* @__PURE__ */ new Set(),
   branches: /* @__PURE__ */ new Set()
 });
-const $5cb92bef7577960e$export$177fb62ff3ec1f22 = /* @__PURE__ */ forwardRef((props, forwardedRef) => {
+const $5cb92bef7577960e$export$177fb62ff3ec1f22 = /* @__PURE__ */ React.forwardRef((props, forwardedRef) => {
   var _node$ownerDocument;
   const { disableOutsidePointerEvents = false, onEscapeKeyDown, onPointerDownOutside, onFocusOutside, onInteractOutside, onDismiss, ...layerProps } = props;
-  const context = useContext($5cb92bef7577960e$var$DismissableLayerContext);
-  const [node1, setNode2] = useState(null);
+  const context = React.useContext($5cb92bef7577960e$var$DismissableLayerContext);
+  const [node1, setNode2] = React.useState(null);
   const ownerDocument = (_node$ownerDocument = node1 === null || node1 === void 0 ? void 0 : node1.ownerDocument) !== null && _node$ownerDocument !== void 0 ? _node$ownerDocument : globalThis === null || globalThis === void 0 ? void 0 : globalThis.document;
-  const [, force] = useState({});
+  const [, force] = React.useState({});
   const composedRefs = $6ed0406888f73fc4$export$c7b2cbe3552a0d05(
     forwardedRef,
     (node) => setNode2(node)
@@ -602,7 +635,7 @@ const $5cb92bef7577960e$export$177fb62ff3ec1f22 = /* @__PURE__ */ forwardRef((pr
       onDismiss();
     }
   }, ownerDocument);
-  useEffect(() => {
+  React.useEffect(() => {
     if (!node1) return;
     if (disableOutsidePointerEvents) {
       if (context.layersWithOutsidePointerEventsDisabled.size === 0) {
@@ -622,7 +655,7 @@ const $5cb92bef7577960e$export$177fb62ff3ec1f22 = /* @__PURE__ */ forwardRef((pr
     disableOutsidePointerEvents,
     context
   ]);
-  useEffect(() => {
+  React.useEffect(() => {
     return () => {
       if (!node1) return;
       context.layers.delete(node1);
@@ -633,12 +666,12 @@ const $5cb92bef7577960e$export$177fb62ff3ec1f22 = /* @__PURE__ */ forwardRef((pr
     node1,
     context
   ]);
-  useEffect(() => {
+  React.useEffect(() => {
     const handleUpdate = () => force({});
     document.addEventListener($5cb92bef7577960e$var$CONTEXT_UPDATE, handleUpdate);
     return () => document.removeEventListener($5cb92bef7577960e$var$CONTEXT_UPDATE, handleUpdate);
   }, []);
-  return /* @__PURE__ */ createElement($8927f6f2acc4f386$export$250ffa63cdc0d034.div, _extends({}, layerProps, {
+  return /* @__PURE__ */ React.createElement($8927f6f2acc4f386$export$250ffa63cdc0d034.div, _extends({}, layerProps, {
     ref: composedRefs,
     style: {
       pointerEvents: isBodyPointerEventsDisabled ? isPointerEventsEnabled ? "auto" : "none" : void 0,
@@ -651,10 +684,10 @@ const $5cb92bef7577960e$export$177fb62ff3ec1f22 = /* @__PURE__ */ forwardRef((pr
 });
 function $5cb92bef7577960e$var$usePointerDownOutside(onPointerDownOutside, ownerDocument = globalThis === null || globalThis === void 0 ? void 0 : globalThis.document) {
   const handlePointerDownOutside = $b1b2314f5f9a1d84$export$25bec8c6f54ee79a(onPointerDownOutside);
-  const isPointerInsideReactTreeRef = useRef(false);
-  const handleClickRef = useRef(() => {
+  const isPointerInsideReactTreeRef = React.useRef(false);
+  const handleClickRef = React.useRef(() => {
   });
-  useEffect(() => {
+  React.useEffect(() => {
     const handlePointerDown = (event) => {
       if (event.target && !isPointerInsideReactTreeRef.current) {
         let handleAndDispatchPointerDownOutsideEvent = function() {
@@ -695,8 +728,8 @@ function $5cb92bef7577960e$var$usePointerDownOutside(onPointerDownOutside, owner
 }
 function $5cb92bef7577960e$var$useFocusOutside(onFocusOutside, ownerDocument = globalThis === null || globalThis === void 0 ? void 0 : globalThis.document) {
   const handleFocusOutside = $b1b2314f5f9a1d84$export$25bec8c6f54ee79a(onFocusOutside);
-  const isFocusInsideReactTreeRef = useRef(false);
-  useEffect(() => {
+  const isFocusInsideReactTreeRef = React.useRef(false);
+  React.useEffect(() => {
     const handleFocus = (event) => {
       if (event.target && !isFocusInsideReactTreeRef.current) {
         const eventDetail = {
@@ -735,12 +768,12 @@ function $5cb92bef7577960e$var$handleAndDispatchCustomEvent(name, handler, detai
   if (discrete) $8927f6f2acc4f386$export$6d1a0317bde7de7f(target, event);
   else target.dispatchEvent(event);
 }
-const $9f79659886946c16$export$e5c5a5f917a5871c = Boolean(globalThis === null || globalThis === void 0 ? void 0 : globalThis.document) ? useLayoutEffect : () => {
+const $9f79659886946c16$export$e5c5a5f917a5871c = Boolean(globalThis === null || globalThis === void 0 ? void 0 : globalThis.document) ? React.useLayoutEffect : () => {
 };
-const $1746a345f3d73bb7$var$useReactId = React["useId".toString()] || (() => void 0);
+const $1746a345f3d73bb7$var$useReactId = React__namespace["useId".toString()] || (() => void 0);
 let $1746a345f3d73bb7$var$count = 0;
 function $1746a345f3d73bb7$export$f680877a34711e37(deterministicId) {
-  const [id, setId] = React.useState($1746a345f3d73bb7$var$useReactId());
+  const [id, setId] = React__namespace.useState($1746a345f3d73bb7$var$useReactId());
   $9f79659886946c16$export$e5c5a5f917a5871c(() => {
     setId(
       (reactId) => reactId !== null && reactId !== void 0 ? reactId : String($1746a345f3d73bb7$var$count++)
@@ -2348,7 +2381,7 @@ const computePosition = (reference, floating, options) => {
     platform: platformWithCache
   });
 };
-var index = typeof document !== "undefined" ? useLayoutEffect : useEffect;
+var index = typeof document !== "undefined" ? React.useLayoutEffect : React.useEffect;
 function deepEqual(a, b) {
   if (a === b) {
     return true;
@@ -2408,7 +2441,7 @@ function roundByDPR(element, value) {
   return Math.round(value * dpr) / dpr;
 }
 function useLatestRef(value) {
-  const ref2 = React.useRef(value);
+  const ref2 = React__namespace.useRef(value);
   index(() => {
     ref2.current = value;
   });
@@ -2431,7 +2464,7 @@ function useFloating(options) {
     whileElementsMounted,
     open
   } = options;
-  const [data, setData] = React.useState({
+  const [data, setData] = React__namespace.useState({
     x: 0,
     y: 0,
     strategy,
@@ -2439,19 +2472,19 @@ function useFloating(options) {
     middlewareData: {},
     isPositioned: false
   });
-  const [latestMiddleware, setLatestMiddleware] = React.useState(middleware);
+  const [latestMiddleware, setLatestMiddleware] = React__namespace.useState(middleware);
   if (!deepEqual(latestMiddleware, middleware)) {
     setLatestMiddleware(middleware);
   }
-  const [_reference, _setReference] = React.useState(null);
-  const [_floating, _setFloating] = React.useState(null);
-  const setReference = React.useCallback((node) => {
+  const [_reference, _setReference] = React__namespace.useState(null);
+  const [_floating, _setFloating] = React__namespace.useState(null);
+  const setReference = React__namespace.useCallback((node) => {
     if (node !== referenceRef.current) {
       referenceRef.current = node;
       _setReference(node);
     }
   }, []);
-  const setFloating = React.useCallback((node) => {
+  const setFloating = React__namespace.useCallback((node) => {
     if (node !== floatingRef.current) {
       floatingRef.current = node;
       _setFloating(node);
@@ -2459,13 +2492,13 @@ function useFloating(options) {
   }, []);
   const referenceEl = externalReference || _reference;
   const floatingEl = externalFloating || _floating;
-  const referenceRef = React.useRef(null);
-  const floatingRef = React.useRef(null);
-  const dataRef = React.useRef(data);
+  const referenceRef = React__namespace.useRef(null);
+  const floatingRef = React__namespace.useRef(null);
+  const dataRef = React__namespace.useRef(data);
   const hasWhileElementsMounted = whileElementsMounted != null;
   const whileElementsMountedRef = useLatestRef(whileElementsMounted);
   const platformRef = useLatestRef(platform2);
-  const update = React.useCallback(() => {
+  const update = React__namespace.useCallback(() => {
     if (!referenceRef.current || !floatingRef.current) {
       return;
     }
@@ -2484,7 +2517,7 @@ function useFloating(options) {
       };
       if (isMountedRef.current && !deepEqual(dataRef.current, fullData)) {
         dataRef.current = fullData;
-        ReactDOM.flushSync(() => {
+        ReactDOM__namespace.flushSync(() => {
           setData(fullData);
         });
       }
@@ -2499,7 +2532,7 @@ function useFloating(options) {
       }));
     }
   }, [open]);
-  const isMountedRef = React.useRef(false);
+  const isMountedRef = React__namespace.useRef(false);
   index(() => {
     isMountedRef.current = true;
     return () => {
@@ -2516,17 +2549,17 @@ function useFloating(options) {
       update();
     }
   }, [referenceEl, floatingEl, update, whileElementsMountedRef, hasWhileElementsMounted]);
-  const refs = React.useMemo(() => ({
+  const refs = React__namespace.useMemo(() => ({
     reference: referenceRef,
     floating: floatingRef,
     setReference,
     setFloating
   }), [setReference, setFloating]);
-  const elements = React.useMemo(() => ({
+  const elements = React__namespace.useMemo(() => ({
     reference: referenceEl,
     floating: floatingEl
   }), [referenceEl, floatingEl]);
-  const floatingStyles = React.useMemo(() => {
+  const floatingStyles = React__namespace.useMemo(() => {
     const initialStyles = {
       position: strategy,
       left: 0,
@@ -2552,7 +2585,7 @@ function useFloating(options) {
       top: y
     };
   }, [strategy, transform, elements.floating, data.x, data.y]);
-  return React.useMemo(() => ({
+  return React__namespace.useMemo(() => ({
     ...data,
     update,
     refs,
@@ -2619,21 +2652,21 @@ const arrow = (options, deps) => ({
   ...arrow$1(options),
   options: [options, deps]
 });
-const $7e8f5cd07187803e$export$21b07c8f274aebd5 = /* @__PURE__ */ forwardRef((props, forwardedRef) => {
+const $7e8f5cd07187803e$export$21b07c8f274aebd5 = /* @__PURE__ */ React.forwardRef((props, forwardedRef) => {
   const { children, width = 10, height = 5, ...arrowProps } = props;
-  return /* @__PURE__ */ createElement($8927f6f2acc4f386$export$250ffa63cdc0d034.svg, _extends({}, arrowProps, {
+  return /* @__PURE__ */ React.createElement($8927f6f2acc4f386$export$250ffa63cdc0d034.svg, _extends({}, arrowProps, {
     ref: forwardedRef,
     width,
     height,
     viewBox: "0 0 30 10",
     preserveAspectRatio: "none"
-  }), props.asChild ? children : /* @__PURE__ */ createElement("polygon", {
+  }), props.asChild ? children : /* @__PURE__ */ React.createElement("polygon", {
     points: "0,0 30,0 15,10"
   }));
 });
 const $7e8f5cd07187803e$export$be92b6f5f03c0fe9 = $7e8f5cd07187803e$export$21b07c8f274aebd5;
 function $db6c3485150b8e66$export$1ab7ae714698c4b8(element) {
-  const [size2, setSize2] = useState(void 0);
+  const [size2, setSize2] = React.useState(void 0);
   $9f79659886946c16$export$e5c5a5f917a5871c(() => {
     if (element) {
       setSize2({
@@ -2676,38 +2709,38 @@ const [$cf1ac5d9fe0e8206$var$createPopperContext, $cf1ac5d9fe0e8206$export$722aa
 const [$cf1ac5d9fe0e8206$var$PopperProvider, $cf1ac5d9fe0e8206$var$usePopperContext] = $cf1ac5d9fe0e8206$var$createPopperContext($cf1ac5d9fe0e8206$var$POPPER_NAME);
 const $cf1ac5d9fe0e8206$export$badac9ada3a0bdf9 = (props) => {
   const { __scopePopper, children } = props;
-  const [anchor, setAnchor] = useState(null);
-  return /* @__PURE__ */ createElement($cf1ac5d9fe0e8206$var$PopperProvider, {
+  const [anchor, setAnchor] = React.useState(null);
+  return /* @__PURE__ */ React.createElement($cf1ac5d9fe0e8206$var$PopperProvider, {
     scope: __scopePopper,
     anchor,
     onAnchorChange: setAnchor
   }, children);
 };
 const $cf1ac5d9fe0e8206$var$ANCHOR_NAME = "PopperAnchor";
-const $cf1ac5d9fe0e8206$export$ecd4e1ccab6ed6d = /* @__PURE__ */ forwardRef((props, forwardedRef) => {
+const $cf1ac5d9fe0e8206$export$ecd4e1ccab6ed6d = /* @__PURE__ */ React.forwardRef((props, forwardedRef) => {
   const { __scopePopper, virtualRef, ...anchorProps } = props;
   const context = $cf1ac5d9fe0e8206$var$usePopperContext($cf1ac5d9fe0e8206$var$ANCHOR_NAME, __scopePopper);
-  const ref2 = useRef(null);
+  const ref2 = React.useRef(null);
   const composedRefs = $6ed0406888f73fc4$export$c7b2cbe3552a0d05(forwardedRef, ref2);
-  useEffect(() => {
+  React.useEffect(() => {
     context.onAnchorChange((virtualRef === null || virtualRef === void 0 ? void 0 : virtualRef.current) || ref2.current);
   });
-  return virtualRef ? null : /* @__PURE__ */ createElement($8927f6f2acc4f386$export$250ffa63cdc0d034.div, _extends({}, anchorProps, {
+  return virtualRef ? null : /* @__PURE__ */ React.createElement($8927f6f2acc4f386$export$250ffa63cdc0d034.div, _extends({}, anchorProps, {
     ref: composedRefs
   }));
 });
 const $cf1ac5d9fe0e8206$var$CONTENT_NAME = "PopperContent";
 const [$cf1ac5d9fe0e8206$var$PopperContentProvider, $cf1ac5d9fe0e8206$var$useContentContext] = $cf1ac5d9fe0e8206$var$createPopperContext($cf1ac5d9fe0e8206$var$CONTENT_NAME);
-const $cf1ac5d9fe0e8206$export$bc4ae5855d3c4fc = /* @__PURE__ */ forwardRef((props, forwardedRef) => {
+const $cf1ac5d9fe0e8206$export$bc4ae5855d3c4fc = /* @__PURE__ */ React.forwardRef((props, forwardedRef) => {
   var _arrowSize$width, _arrowSize$height, _middlewareData$arrow, _middlewareData$arrow2, _middlewareData$arrow3, _middlewareData$trans, _middlewareData$trans2, _middlewareData$hide;
   const { __scopePopper, side = "bottom", sideOffset = 0, align = "center", alignOffset = 0, arrowPadding = 0, avoidCollisions = true, collisionBoundary = [], collisionPadding: collisionPaddingProp = 0, sticky = "partial", hideWhenDetached = false, updatePositionStrategy = "optimized", onPlaced, ...contentProps } = props;
   const context = $cf1ac5d9fe0e8206$var$usePopperContext($cf1ac5d9fe0e8206$var$CONTENT_NAME, __scopePopper);
-  const [content, setContent2] = useState(null);
+  const [content, setContent2] = React.useState(null);
   const composedRefs = $6ed0406888f73fc4$export$c7b2cbe3552a0d05(
     forwardedRef,
     (node) => setContent2(node)
   );
-  const [arrow$12, setArrow] = useState(null);
+  const [arrow$12, setArrow] = React.useState(null);
   const arrowSize = $db6c3485150b8e66$export$1ab7ae714698c4b8(arrow$12);
   const arrowWidth = (_arrowSize$width = arrowSize === null || arrowSize === void 0 ? void 0 : arrowSize.width) !== null && _arrowSize$width !== void 0 ? _arrowSize$width : 0;
   const arrowHeight = (_arrowSize$height = arrowSize === null || arrowSize === void 0 ? void 0 : arrowSize.height) !== null && _arrowSize$height !== void 0 ? _arrowSize$height : 0;
@@ -2792,13 +2825,13 @@ const $cf1ac5d9fe0e8206$export$bc4ae5855d3c4fc = /* @__PURE__ */ forwardRef((pro
   const arrowX = (_middlewareData$arrow = middlewareData.arrow) === null || _middlewareData$arrow === void 0 ? void 0 : _middlewareData$arrow.x;
   const arrowY = (_middlewareData$arrow2 = middlewareData.arrow) === null || _middlewareData$arrow2 === void 0 ? void 0 : _middlewareData$arrow2.y;
   const cannotCenterArrow = ((_middlewareData$arrow3 = middlewareData.arrow) === null || _middlewareData$arrow3 === void 0 ? void 0 : _middlewareData$arrow3.centerOffset) !== 0;
-  const [contentZIndex, setContentZIndex] = useState();
+  const [contentZIndex, setContentZIndex] = React.useState();
   $9f79659886946c16$export$e5c5a5f917a5871c(() => {
     if (content) setContentZIndex(window.getComputedStyle(content).zIndex);
   }, [
     content
   ]);
-  return /* @__PURE__ */ createElement("div", {
+  return /* @__PURE__ */ React.createElement("div", {
     ref: refs.setFloating,
     "data-radix-popper-content-wrapper": "",
     style: {
@@ -2813,14 +2846,14 @@ const $cf1ac5d9fe0e8206$export$bc4ae5855d3c4fc = /* @__PURE__ */ forwardRef((pro
       ].join(" ")
     },
     dir: props.dir
-  }, /* @__PURE__ */ createElement($cf1ac5d9fe0e8206$var$PopperContentProvider, {
+  }, /* @__PURE__ */ React.createElement($cf1ac5d9fe0e8206$var$PopperContentProvider, {
     scope: __scopePopper,
     placedSide,
     onArrowChange: setArrow,
     arrowX,
     arrowY,
     shouldHideArrow: cannotCenterArrow
-  }, /* @__PURE__ */ createElement($8927f6f2acc4f386$export$250ffa63cdc0d034.div, _extends({
+  }, /* @__PURE__ */ React.createElement($8927f6f2acc4f386$export$250ffa63cdc0d034.div, _extends({
     "data-side": placedSide,
     "data-align": placedAlign
   }, contentProps, {
@@ -2842,7 +2875,7 @@ const $cf1ac5d9fe0e8206$var$OPPOSITE_SIDE = {
   bottom: "top",
   left: "right"
 };
-const $cf1ac5d9fe0e8206$export$79d62cd4e10a3fd0 = /* @__PURE__ */ forwardRef(function $cf1ac5d9fe0e8206$export$79d62cd4e10a3fd02(props, forwardedRef) {
+const $cf1ac5d9fe0e8206$export$79d62cd4e10a3fd0 = /* @__PURE__ */ React.forwardRef(function $cf1ac5d9fe0e8206$export$79d62cd4e10a3fd02(props, forwardedRef) {
   const { __scopePopper, ...arrowProps } = props;
   const contentContext = $cf1ac5d9fe0e8206$var$useContentContext($cf1ac5d9fe0e8206$var$ARROW_NAME, __scopePopper);
   const baseSide = $cf1ac5d9fe0e8206$var$OPPOSITE_SIDE[contentContext.placedSide];
@@ -2850,7 +2883,7 @@ const $cf1ac5d9fe0e8206$export$79d62cd4e10a3fd0 = /* @__PURE__ */ forwardRef(fun
     // we have to use an extra wrapper because `ResizeObserver` (used by `useSize`)
     // doesn't report size as we'd expect on SVG elements.
     // it reports their bounding box which is effectively the largest path inside the SVG.
-    /* @__PURE__ */ createElement("span", {
+    /* @__PURE__ */ React.createElement("span", {
       ref: contentContext.onArrowChange,
       style: {
         position: "absolute",
@@ -2871,7 +2904,7 @@ const $cf1ac5d9fe0e8206$export$79d62cd4e10a3fd0 = /* @__PURE__ */ forwardRef(fun
         }[contentContext.placedSide],
         visibility: contentContext.shouldHideArrow ? "hidden" : void 0
       }
-    }, /* @__PURE__ */ createElement($7e8f5cd07187803e$export$be92b6f5f03c0fe9, _extends({}, arrowProps, {
+    }, /* @__PURE__ */ React.createElement($7e8f5cd07187803e$export$be92b6f5f03c0fe9, _extends({}, arrowProps, {
       ref: forwardedRef,
       style: {
         ...arrowProps.style,
@@ -2939,15 +2972,15 @@ const $cf1ac5d9fe0e8206$export$be92b6f5f03c0fe9 = $cf1ac5d9fe0e8206$export$badac
 const $cf1ac5d9fe0e8206$export$b688253958b8dfe7 = $cf1ac5d9fe0e8206$export$ecd4e1ccab6ed6d;
 const $cf1ac5d9fe0e8206$export$7c6e2c02157bb7d2 = $cf1ac5d9fe0e8206$export$bc4ae5855d3c4fc;
 const $cf1ac5d9fe0e8206$export$21b07c8f274aebd5 = $cf1ac5d9fe0e8206$export$79d62cd4e10a3fd0;
-const $f1701beae083dbae$export$602eac185826482c = /* @__PURE__ */ forwardRef((props, forwardedRef) => {
+const $f1701beae083dbae$export$602eac185826482c = /* @__PURE__ */ React.forwardRef((props, forwardedRef) => {
   var _globalThis$document;
   const { container = globalThis === null || globalThis === void 0 ? void 0 : (_globalThis$document = globalThis.document) === null || _globalThis$document === void 0 ? void 0 : _globalThis$document.body, ...portalProps } = props;
-  return container ? /* @__PURE__ */ ReactDOM__default.createPortal(/* @__PURE__ */ createElement($8927f6f2acc4f386$export$250ffa63cdc0d034.div, _extends({}, portalProps, {
+  return container ? /* @__PURE__ */ ReactDOM__namespace.default.createPortal(/* @__PURE__ */ React.createElement($8927f6f2acc4f386$export$250ffa63cdc0d034.div, _extends({}, portalProps, {
     ref: forwardedRef
   })), container) : null;
 });
 function $fe963b355347cc68$export$3e6543de14f8614f(initialState2, machine) {
-  return useReducer((state, event) => {
+  return React.useReducer((state, event) => {
     const nextState = machine[state][event];
     return nextState !== null && nextState !== void 0 ? nextState : state;
   }, initialState2);
@@ -2957,19 +2990,19 @@ const $921a889cee6df7e8$export$99c2b779aa4e8b8b = (props) => {
   const presence = $921a889cee6df7e8$var$usePresence(present);
   const child = typeof children === "function" ? children({
     present: presence.isPresent
-  }) : Children.only(children);
+  }) : React.Children.only(children);
   const ref2 = $6ed0406888f73fc4$export$c7b2cbe3552a0d05(presence.ref, child.ref);
   const forceMount = typeof children === "function";
-  return forceMount || presence.isPresent ? /* @__PURE__ */ cloneElement(child, {
+  return forceMount || presence.isPresent ? /* @__PURE__ */ React.cloneElement(child, {
     ref: ref2
   }) : null;
 };
 $921a889cee6df7e8$export$99c2b779aa4e8b8b.displayName = "Presence";
 function $921a889cee6df7e8$var$usePresence(present) {
-  const [node1, setNode2] = useState();
-  const stylesRef = useRef({});
-  const prevPresentRef = useRef(present);
-  const prevAnimationNameRef = useRef("none");
+  const [node1, setNode2] = React.useState();
+  const stylesRef = React.useRef({});
+  const prevPresentRef = React.useRef(present);
+  const prevAnimationNameRef = React.useRef("none");
   const initialState2 = present ? "mounted" : "unmounted";
   const [state, send] = $fe963b355347cc68$export$3e6543de14f8614f(initialState2, {
     mounted: {
@@ -2984,7 +3017,7 @@ function $921a889cee6df7e8$var$usePresence(present) {
       MOUNT: "mounted"
     }
   });
-  useEffect(() => {
+  React.useEffect(() => {
     const currentAnimationName = $921a889cee6df7e8$var$getAnimationName(stylesRef.current);
     prevAnimationNameRef.current = state === "mounted" ? currentAnimationName : "none";
   }, [
@@ -3017,7 +3050,7 @@ function $921a889cee6df7e8$var$usePresence(present) {
         const currentAnimationName = $921a889cee6df7e8$var$getAnimationName(stylesRef.current);
         const isCurrentAnimation = currentAnimationName.includes(event.animationName);
         if (event.target === node1 && isCurrentAnimation)
-          flushSync(
+          ReactDOM.flushSync(
             () => send("ANIMATION_END")
           );
       };
@@ -3044,7 +3077,7 @@ function $921a889cee6df7e8$var$usePresence(present) {
       "mounted",
       "unmountSuspended"
     ].includes(state),
-    ref: useCallback((node) => {
+    ref: React.useCallback((node) => {
       if (node) stylesRef.current = getComputedStyle(node);
       setNode2(node);
     }, [])
@@ -3062,7 +3095,7 @@ function $71cd76cc60e0454e$export$6f32135080cb4c3({ prop, defaultProp, onChange 
   const isControlled = prop !== void 0;
   const value1 = isControlled ? prop : uncontrolledProp;
   const handleChange = $b1b2314f5f9a1d84$export$25bec8c6f54ee79a(onChange);
-  const setValue = useCallback((nextValue) => {
+  const setValue = React.useCallback((nextValue) => {
     if (isControlled) {
       const setter = nextValue;
       const value = typeof nextValue === "function" ? setter(prop) : nextValue;
@@ -3080,11 +3113,11 @@ function $71cd76cc60e0454e$export$6f32135080cb4c3({ prop, defaultProp, onChange 
   ];
 }
 function $71cd76cc60e0454e$var$useUncontrolledState({ defaultProp, onChange }) {
-  const uncontrolledState = useState(defaultProp);
+  const uncontrolledState = React.useState(defaultProp);
   const [value] = uncontrolledState;
-  const prevValueRef = useRef(value);
+  const prevValueRef = React.useRef(value);
   const handleChange = $b1b2314f5f9a1d84$export$25bec8c6f54ee79a(onChange);
-  useEffect(() => {
+  React.useEffect(() => {
     if (prevValueRef.current !== value) {
       handleChange(value);
       prevValueRef.current = value;
@@ -3096,8 +3129,8 @@ function $71cd76cc60e0454e$var$useUncontrolledState({ defaultProp, onChange }) {
   ]);
   return uncontrolledState;
 }
-const $ea1ef594cf570d83$export$439d29a4e110a164 = /* @__PURE__ */ forwardRef((props, forwardedRef) => {
-  return /* @__PURE__ */ createElement($8927f6f2acc4f386$export$250ffa63cdc0d034.span, _extends({}, props, {
+const $ea1ef594cf570d83$export$439d29a4e110a164 = /* @__PURE__ */ React.forwardRef((props, forwardedRef) => {
+  return /* @__PURE__ */ React.createElement($8927f6f2acc4f386$export$250ffa63cdc0d034.span, _extends({}, props, {
     ref: forwardedRef,
     style: {
       // See: https://github.com/twbs/bootstrap/blob/master/scss/mixins/_screen-reader.scss
@@ -3126,22 +3159,22 @@ const $a093c7e1ec25a057$var$TOOLTIP_OPEN = "tooltip.open";
 const [$a093c7e1ec25a057$var$TooltipProviderContextProvider, $a093c7e1ec25a057$var$useTooltipProviderContext] = $a093c7e1ec25a057$var$createTooltipContext($a093c7e1ec25a057$var$PROVIDER_NAME);
 const $a093c7e1ec25a057$export$f78649fb9ca566b8 = (props) => {
   const { __scopeTooltip, delayDuration = $a093c7e1ec25a057$var$DEFAULT_DELAY_DURATION, skipDelayDuration = 300, disableHoverableContent = false, children } = props;
-  const [isOpenDelayed, setIsOpenDelayed] = useState(true);
-  const isPointerInTransitRef = useRef(false);
-  const skipDelayTimerRef = useRef(0);
-  useEffect(() => {
+  const [isOpenDelayed, setIsOpenDelayed] = React.useState(true);
+  const isPointerInTransitRef = React.useRef(false);
+  const skipDelayTimerRef = React.useRef(0);
+  React.useEffect(() => {
     const skipDelayTimer = skipDelayTimerRef.current;
     return () => window.clearTimeout(skipDelayTimer);
   }, []);
-  return /* @__PURE__ */ createElement($a093c7e1ec25a057$var$TooltipProviderContextProvider, {
+  return /* @__PURE__ */ React.createElement($a093c7e1ec25a057$var$TooltipProviderContextProvider, {
     scope: __scopeTooltip,
     isOpenDelayed,
     delayDuration,
-    onOpen: useCallback(() => {
+    onOpen: React.useCallback(() => {
       window.clearTimeout(skipDelayTimerRef.current);
       setIsOpenDelayed(false);
     }, []),
-    onClose: useCallback(() => {
+    onClose: React.useCallback(() => {
       window.clearTimeout(skipDelayTimerRef.current);
       skipDelayTimerRef.current = window.setTimeout(
         () => setIsOpenDelayed(true),
@@ -3151,7 +3184,7 @@ const $a093c7e1ec25a057$export$f78649fb9ca566b8 = (props) => {
       skipDelayDuration
     ]),
     isPointerInTransitRef,
-    onPointerInTransitChange: useCallback((inTransit) => {
+    onPointerInTransitChange: React.useCallback((inTransit) => {
       isPointerInTransitRef.current = inTransit;
     }, []),
     disableHoverableContent
@@ -3163,12 +3196,12 @@ const $a093c7e1ec25a057$export$28c660c63b792dea = (props) => {
   const { __scopeTooltip, children, open: openProp, defaultOpen = false, onOpenChange, disableHoverableContent: disableHoverableContentProp, delayDuration: delayDurationProp } = props;
   const providerContext = $a093c7e1ec25a057$var$useTooltipProviderContext($a093c7e1ec25a057$var$TOOLTIP_NAME, props.__scopeTooltip);
   const popperScope = $a093c7e1ec25a057$var$usePopperScope(__scopeTooltip);
-  const [trigger, setTrigger] = useState(null);
+  const [trigger, setTrigger] = React.useState(null);
   const contentId = $1746a345f3d73bb7$export$f680877a34711e37();
-  const openTimerRef = useRef(0);
+  const openTimerRef = React.useRef(0);
   const disableHoverableContent = disableHoverableContentProp !== null && disableHoverableContentProp !== void 0 ? disableHoverableContentProp : providerContext.disableHoverableContent;
   const delayDuration = delayDurationProp !== null && delayDurationProp !== void 0 ? delayDurationProp : providerContext.delayDuration;
-  const wasOpenDelayedRef = useRef(false);
+  const wasOpenDelayedRef = React.useRef(false);
   const [open1 = false, setOpen] = $71cd76cc60e0454e$export$6f32135080cb4c3({
     prop: openProp,
     defaultProp: defaultOpen,
@@ -3180,25 +3213,25 @@ const $a093c7e1ec25a057$export$28c660c63b792dea = (props) => {
       onOpenChange === null || onOpenChange === void 0 || onOpenChange(open);
     }
   });
-  const stateAttribute = useMemo(() => {
+  const stateAttribute = React.useMemo(() => {
     return open1 ? wasOpenDelayedRef.current ? "delayed-open" : "instant-open" : "closed";
   }, [
     open1
   ]);
-  const handleOpen = useCallback(() => {
+  const handleOpen = React.useCallback(() => {
     window.clearTimeout(openTimerRef.current);
     wasOpenDelayedRef.current = false;
     setOpen(true);
   }, [
     setOpen
   ]);
-  const handleClose = useCallback(() => {
+  const handleClose = React.useCallback(() => {
     window.clearTimeout(openTimerRef.current);
     setOpen(false);
   }, [
     setOpen
   ]);
-  const handleDelayedOpen = useCallback(() => {
+  const handleDelayedOpen = React.useCallback(() => {
     window.clearTimeout(openTimerRef.current);
     openTimerRef.current = window.setTimeout(() => {
       wasOpenDelayedRef.current = true;
@@ -3208,17 +3241,17 @@ const $a093c7e1ec25a057$export$28c660c63b792dea = (props) => {
     delayDuration,
     setOpen
   ]);
-  useEffect(() => {
+  React.useEffect(() => {
     return () => window.clearTimeout(openTimerRef.current);
   }, []);
-  return /* @__PURE__ */ createElement($cf1ac5d9fe0e8206$export$be92b6f5f03c0fe9, popperScope, /* @__PURE__ */ createElement($a093c7e1ec25a057$var$TooltipContextProvider, {
+  return /* @__PURE__ */ React.createElement($cf1ac5d9fe0e8206$export$be92b6f5f03c0fe9, popperScope, /* @__PURE__ */ React.createElement($a093c7e1ec25a057$var$TooltipContextProvider, {
     scope: __scopeTooltip,
     contentId,
     open: open1,
     stateAttribute,
     trigger,
     onTriggerChange: setTrigger,
-    onTriggerEnter: useCallback(() => {
+    onTriggerEnter: React.useCallback(() => {
       if (providerContext.isOpenDelayed) handleDelayedOpen();
       else handleOpen();
     }, [
@@ -3226,7 +3259,7 @@ const $a093c7e1ec25a057$export$28c660c63b792dea = (props) => {
       handleDelayedOpen,
       handleOpen
     ]),
-    onTriggerLeave: useCallback(() => {
+    onTriggerLeave: React.useCallback(() => {
       if (disableHoverableContent) handleClose();
       else
         window.clearTimeout(openTimerRef.current);
@@ -3240,27 +3273,27 @@ const $a093c7e1ec25a057$export$28c660c63b792dea = (props) => {
   }, children));
 };
 const $a093c7e1ec25a057$var$TRIGGER_NAME = "TooltipTrigger";
-const $a093c7e1ec25a057$export$8c610744efcf8a1d = /* @__PURE__ */ forwardRef((props, forwardedRef) => {
+const $a093c7e1ec25a057$export$8c610744efcf8a1d = /* @__PURE__ */ React.forwardRef((props, forwardedRef) => {
   const { __scopeTooltip, ...triggerProps } = props;
   const context = $a093c7e1ec25a057$var$useTooltipContext($a093c7e1ec25a057$var$TRIGGER_NAME, __scopeTooltip);
   const providerContext = $a093c7e1ec25a057$var$useTooltipProviderContext($a093c7e1ec25a057$var$TRIGGER_NAME, __scopeTooltip);
   const popperScope = $a093c7e1ec25a057$var$usePopperScope(__scopeTooltip);
-  const ref2 = useRef(null);
+  const ref2 = React.useRef(null);
   const composedRefs = $6ed0406888f73fc4$export$c7b2cbe3552a0d05(forwardedRef, ref2, context.onTriggerChange);
-  const isPointerDownRef = useRef(false);
-  const hasPointerMoveOpenedRef = useRef(false);
-  const handlePointerUp = useCallback(
+  const isPointerDownRef = React.useRef(false);
+  const hasPointerMoveOpenedRef = React.useRef(false);
+  const handlePointerUp = React.useCallback(
     () => isPointerDownRef.current = false,
     []
   );
-  useEffect(() => {
+  React.useEffect(() => {
     return () => document.removeEventListener("pointerup", handlePointerUp);
   }, [
     handlePointerUp
   ]);
-  return /* @__PURE__ */ createElement($cf1ac5d9fe0e8206$export$b688253958b8dfe7, _extends({
+  return /* @__PURE__ */ React.createElement($cf1ac5d9fe0e8206$export$b688253958b8dfe7, _extends({
     asChild: true
-  }, popperScope), /* @__PURE__ */ createElement($8927f6f2acc4f386$export$250ffa63cdc0d034.button, _extends({
+  }, popperScope), /* @__PURE__ */ React.createElement($8927f6f2acc4f386$export$250ffa63cdc0d034.button, _extends({
     // We purposefully avoid adding `type=button` here because tooltip triggers are also
     // commonly anchors and the anchor `type` attribute signifies MIME type.
     "aria-describedby": context.open ? context.contentId : void 0,
@@ -3298,49 +3331,49 @@ const [$a093c7e1ec25a057$var$PortalProvider, $a093c7e1ec25a057$var$usePortalCont
 const $a093c7e1ec25a057$export$7b36b8f925ab7497 = (props) => {
   const { __scopeTooltip, forceMount, children, container } = props;
   const context = $a093c7e1ec25a057$var$useTooltipContext($a093c7e1ec25a057$var$PORTAL_NAME, __scopeTooltip);
-  return /* @__PURE__ */ createElement($a093c7e1ec25a057$var$PortalProvider, {
+  return /* @__PURE__ */ React.createElement($a093c7e1ec25a057$var$PortalProvider, {
     scope: __scopeTooltip,
     forceMount
-  }, /* @__PURE__ */ createElement($921a889cee6df7e8$export$99c2b779aa4e8b8b, {
+  }, /* @__PURE__ */ React.createElement($921a889cee6df7e8$export$99c2b779aa4e8b8b, {
     present: forceMount || context.open
-  }, /* @__PURE__ */ createElement($f1701beae083dbae$export$602eac185826482c, {
+  }, /* @__PURE__ */ React.createElement($f1701beae083dbae$export$602eac185826482c, {
     asChild: true,
     container
   }, children)));
 };
 const $a093c7e1ec25a057$var$CONTENT_NAME = "TooltipContent";
-const $a093c7e1ec25a057$export$e9003e2be37ec060 = /* @__PURE__ */ forwardRef((props, forwardedRef) => {
+const $a093c7e1ec25a057$export$e9003e2be37ec060 = /* @__PURE__ */ React.forwardRef((props, forwardedRef) => {
   const portalContext = $a093c7e1ec25a057$var$usePortalContext($a093c7e1ec25a057$var$CONTENT_NAME, props.__scopeTooltip);
   const { forceMount = portalContext.forceMount, side = "top", ...contentProps } = props;
   const context = $a093c7e1ec25a057$var$useTooltipContext($a093c7e1ec25a057$var$CONTENT_NAME, props.__scopeTooltip);
-  return /* @__PURE__ */ createElement($921a889cee6df7e8$export$99c2b779aa4e8b8b, {
+  return /* @__PURE__ */ React.createElement($921a889cee6df7e8$export$99c2b779aa4e8b8b, {
     present: forceMount || context.open
-  }, context.disableHoverableContent ? /* @__PURE__ */ createElement($a093c7e1ec25a057$var$TooltipContentImpl, _extends({
+  }, context.disableHoverableContent ? /* @__PURE__ */ React.createElement($a093c7e1ec25a057$var$TooltipContentImpl, _extends({
     side
   }, contentProps, {
     ref: forwardedRef
-  })) : /* @__PURE__ */ createElement($a093c7e1ec25a057$var$TooltipContentHoverable, _extends({
+  })) : /* @__PURE__ */ React.createElement($a093c7e1ec25a057$var$TooltipContentHoverable, _extends({
     side
   }, contentProps, {
     ref: forwardedRef
   })));
 });
-const $a093c7e1ec25a057$var$TooltipContentHoverable = /* @__PURE__ */ forwardRef((props, forwardedRef) => {
+const $a093c7e1ec25a057$var$TooltipContentHoverable = /* @__PURE__ */ React.forwardRef((props, forwardedRef) => {
   const context = $a093c7e1ec25a057$var$useTooltipContext($a093c7e1ec25a057$var$CONTENT_NAME, props.__scopeTooltip);
   const providerContext = $a093c7e1ec25a057$var$useTooltipProviderContext($a093c7e1ec25a057$var$CONTENT_NAME, props.__scopeTooltip);
-  const ref2 = useRef(null);
+  const ref2 = React.useRef(null);
   const composedRefs = $6ed0406888f73fc4$export$c7b2cbe3552a0d05(forwardedRef, ref2);
-  const [pointerGraceArea, setPointerGraceArea] = useState(null);
+  const [pointerGraceArea, setPointerGraceArea] = React.useState(null);
   const { trigger, onClose } = context;
   const content = ref2.current;
   const { onPointerInTransitChange } = providerContext;
-  const handleRemoveGraceArea = useCallback(() => {
+  const handleRemoveGraceArea = React.useCallback(() => {
     setPointerGraceArea(null);
     onPointerInTransitChange(false);
   }, [
     onPointerInTransitChange
   ]);
-  const handleCreateGraceArea = useCallback((event, hoverTarget) => {
+  const handleCreateGraceArea = React.useCallback((event, hoverTarget) => {
     const currentTarget = event.currentTarget;
     const exitPoint = {
       x: event.clientX,
@@ -3358,12 +3391,12 @@ const $a093c7e1ec25a057$var$TooltipContentHoverable = /* @__PURE__ */ forwardRef
   }, [
     onPointerInTransitChange
   ]);
-  useEffect(() => {
+  React.useEffect(() => {
     return () => handleRemoveGraceArea();
   }, [
     handleRemoveGraceArea
   ]);
-  useEffect(() => {
+  React.useEffect(() => {
     if (trigger && content) {
       const handleTriggerLeave = (event) => handleCreateGraceArea(event, content);
       const handleContentLeave = (event) => handleCreateGraceArea(event, trigger);
@@ -3380,7 +3413,7 @@ const $a093c7e1ec25a057$var$TooltipContentHoverable = /* @__PURE__ */ forwardRef
     handleCreateGraceArea,
     handleRemoveGraceArea
   ]);
-  useEffect(() => {
+  React.useEffect(() => {
     if (pointerGraceArea) {
       const handleTrackPointerGrace = (event) => {
         const target = event.target;
@@ -3406,25 +3439,25 @@ const $a093c7e1ec25a057$var$TooltipContentHoverable = /* @__PURE__ */ forwardRef
     onClose,
     handleRemoveGraceArea
   ]);
-  return /* @__PURE__ */ createElement($a093c7e1ec25a057$var$TooltipContentImpl, _extends({}, props, {
+  return /* @__PURE__ */ React.createElement($a093c7e1ec25a057$var$TooltipContentImpl, _extends({}, props, {
     ref: composedRefs
   }));
 });
 const [$a093c7e1ec25a057$var$VisuallyHiddenContentContextProvider, $a093c7e1ec25a057$var$useVisuallyHiddenContentContext] = $a093c7e1ec25a057$var$createTooltipContext($a093c7e1ec25a057$var$TOOLTIP_NAME, {
   isInside: false
 });
-const $a093c7e1ec25a057$var$TooltipContentImpl = /* @__PURE__ */ forwardRef((props, forwardedRef) => {
+const $a093c7e1ec25a057$var$TooltipContentImpl = /* @__PURE__ */ React.forwardRef((props, forwardedRef) => {
   const { __scopeTooltip, children, "aria-label": ariaLabel, onEscapeKeyDown, onPointerDownOutside, ...contentProps } = props;
   const context = $a093c7e1ec25a057$var$useTooltipContext($a093c7e1ec25a057$var$CONTENT_NAME, __scopeTooltip);
   const popperScope = $a093c7e1ec25a057$var$usePopperScope(__scopeTooltip);
   const { onClose } = context;
-  useEffect(() => {
+  React.useEffect(() => {
     document.addEventListener($a093c7e1ec25a057$var$TOOLTIP_OPEN, onClose);
     return () => document.removeEventListener($a093c7e1ec25a057$var$TOOLTIP_OPEN, onClose);
   }, [
     onClose
   ]);
-  useEffect(() => {
+  React.useEffect(() => {
     if (context.trigger) {
       const handleScroll = (event) => {
         const target = event.target;
@@ -3441,14 +3474,14 @@ const $a093c7e1ec25a057$var$TooltipContentImpl = /* @__PURE__ */ forwardRef((pro
     context.trigger,
     onClose
   ]);
-  return /* @__PURE__ */ createElement($5cb92bef7577960e$export$177fb62ff3ec1f22, {
+  return /* @__PURE__ */ React.createElement($5cb92bef7577960e$export$177fb62ff3ec1f22, {
     asChild: true,
     disableOutsidePointerEvents: false,
     onEscapeKeyDown,
     onPointerDownOutside,
     onFocusOutside: (event) => event.preventDefault(),
     onDismiss: onClose
-  }, /* @__PURE__ */ createElement($cf1ac5d9fe0e8206$export$7c6e2c02157bb7d2, _extends({
+  }, /* @__PURE__ */ React.createElement($cf1ac5d9fe0e8206$export$7c6e2c02157bb7d2, _extends({
     "data-state": context.stateAttribute
   }, popperScope, contentProps, {
     ref: forwardedRef,
@@ -3460,20 +3493,20 @@ const $a093c7e1ec25a057$var$TooltipContentImpl = /* @__PURE__ */ forwardRef((pro
       "--radix-tooltip-trigger-width": "var(--radix-popper-anchor-width)",
       "--radix-tooltip-trigger-height": "var(--radix-popper-anchor-height)"
     }
-  }), /* @__PURE__ */ createElement($5e63c961fc1ce211$export$d9f1ccf0bdb05d45, null, children), /* @__PURE__ */ createElement($a093c7e1ec25a057$var$VisuallyHiddenContentContextProvider, {
+  }), /* @__PURE__ */ React.createElement($5e63c961fc1ce211$export$d9f1ccf0bdb05d45, null, children), /* @__PURE__ */ React.createElement($a093c7e1ec25a057$var$VisuallyHiddenContentContextProvider, {
     scope: __scopeTooltip,
     isInside: true
-  }, /* @__PURE__ */ createElement($ea1ef594cf570d83$export$be92b6f5f03c0fe9, {
+  }, /* @__PURE__ */ React.createElement($ea1ef594cf570d83$export$be92b6f5f03c0fe9, {
     id: context.contentId,
     role: "tooltip"
   }, ariaLabel || children))));
 });
 const $a093c7e1ec25a057$var$ARROW_NAME = "TooltipArrow";
-const $a093c7e1ec25a057$export$c27ee0ad710f7559 = /* @__PURE__ */ forwardRef((props, forwardedRef) => {
+const $a093c7e1ec25a057$export$c27ee0ad710f7559 = /* @__PURE__ */ React.forwardRef((props, forwardedRef) => {
   const { __scopeTooltip, ...arrowProps } = props;
   const popperScope = $a093c7e1ec25a057$var$usePopperScope(__scopeTooltip);
   const visuallyHiddenContentContext = $a093c7e1ec25a057$var$useVisuallyHiddenContentContext($a093c7e1ec25a057$var$ARROW_NAME, __scopeTooltip);
-  return visuallyHiddenContentContext.isInside ? null : /* @__PURE__ */ createElement($cf1ac5d9fe0e8206$export$21b07c8f274aebd5, _extends({}, popperScope, arrowProps, {
+  return visuallyHiddenContentContext.isInside ? null : /* @__PURE__ */ React.createElement($cf1ac5d9fe0e8206$export$21b07c8f274aebd5, _extends({}, popperScope, arrowProps, {
     ref: forwardedRef
   }));
 });
@@ -3627,8 +3660,8 @@ const TooltipIconButton = ({
   showBorder = false
 }) => {
   if (!label)
-    return /* @__PURE__ */ jsx(
-      IconButton,
+    return /* @__PURE__ */ jsxRuntime.jsx(
+      designSystem.IconButton,
       {
         className,
         variant,
@@ -3638,8 +3671,8 @@ const TooltipIconButton = ({
         children
       }
     );
-  const tooltipContent = showBorder ? /* @__PURE__ */ jsxs(
-    Box,
+  const tooltipContent = showBorder ? /* @__PURE__ */ jsxRuntime.jsxs(
+    designSystem.Box,
     {
       padding: 4,
       margin: 2,
@@ -3649,17 +3682,17 @@ const TooltipIconButton = ({
       className,
       style: { width: "100%" },
       children: [
-        /* @__PURE__ */ jsx(Typography, { style: { fontSize: "10px" }, children: label }),
-        /* @__PURE__ */ jsx($a093c7e1ec25a057$export$21b07c8f274aebd5, {})
+        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { style: { fontSize: "10px" }, children: label }),
+        /* @__PURE__ */ jsxRuntime.jsx($a093c7e1ec25a057$export$21b07c8f274aebd5, {})
       ]
     }
-  ) : /* @__PURE__ */ jsxs(Fragment$2, { children: [
-    /* @__PURE__ */ jsx(Typography, { style: { fontSize: "10px" }, children: label }),
-    /* @__PURE__ */ jsx($a093c7e1ec25a057$export$21b07c8f274aebd5, {})
+  ) : /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { style: { fontSize: "10px" }, children: label }),
+    /* @__PURE__ */ jsxRuntime.jsx($a093c7e1ec25a057$export$21b07c8f274aebd5, {})
   ] });
-  return /* @__PURE__ */ jsx($a093c7e1ec25a057$export$2881499e37b75b9a, { children: /* @__PURE__ */ jsxs($a093c7e1ec25a057$export$be92b6f5f03c0fe9, { children: [
-    /* @__PURE__ */ jsx($a093c7e1ec25a057$export$41fb9f06171c75f4, { asChild: true, children: /* @__PURE__ */ jsx(
-      IconButton,
+  return /* @__PURE__ */ jsxRuntime.jsx($a093c7e1ec25a057$export$2881499e37b75b9a, { children: /* @__PURE__ */ jsxRuntime.jsxs($a093c7e1ec25a057$export$be92b6f5f03c0fe9, { children: [
+    /* @__PURE__ */ jsxRuntime.jsx($a093c7e1ec25a057$export$41fb9f06171c75f4, { asChild: true, children: /* @__PURE__ */ jsxRuntime.jsx(
+      designSystem.IconButton,
       {
         variant,
         onClick,
@@ -3671,7 +3704,7 @@ const TooltipIconButton = ({
         children
       }
     ) }),
-    /* @__PURE__ */ jsx($a093c7e1ec25a057$export$602eac185826482c, { children: /* @__PURE__ */ jsx(
+    /* @__PURE__ */ jsxRuntime.jsx($a093c7e1ec25a057$export$602eac185826482c, { children: /* @__PURE__ */ jsxRuntime.jsx(
       $a093c7e1ec25a057$export$7c6e2c02157bb7d2,
       {
         style: {
@@ -3687,50 +3720,50 @@ const TooltipIconButton = ({
     ) })
   ] }) });
 };
-const getTranslation = (id) => `${PLUGIN_ID}.${id}`;
+const getTranslation = (id) => `${index$1.PLUGIN_ID}.${id}`;
 const Checkbox = ({ ...props }) => {
-  return /* @__PURE__ */ jsx(Checkbox$1, { ...props, children: props.label });
+  return /* @__PURE__ */ jsxRuntime.jsx(designSystem.Checkbox, { ...props, children: props.label });
 };
 const CheckboxGroup = ({ ...props }) => {
   if (!props.options) {
-    return /* @__PURE__ */ jsx(Fragment$2, {});
+    return /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, {});
   }
-  return /* @__PURE__ */ jsx(Fragment$2, { children: props.options.map((option, index2) => /* @__PURE__ */ jsx(Checkbox, { ...option, disabled: true }, index2)) });
+  return /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, { children: props.options.map((option, index2) => /* @__PURE__ */ jsxRuntime.jsx(Checkbox, { ...option, disabled: true }, index2)) });
 };
 const RadioGroup = ({ ...props }) => {
   if (!props.options) {
-    return /* @__PURE__ */ jsx(Fragment$2, {});
+    return /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, {});
   }
-  return /* @__PURE__ */ jsx(Radio.Group, { children: props.options.map((option) => {
-    return /* @__PURE__ */ jsx(Radio.Item, { checked: false, disabled: true, children: option.label });
+  return /* @__PURE__ */ jsxRuntime.jsx(designSystem.Radio.Group, { children: props.options.map((option) => {
+    return /* @__PURE__ */ jsxRuntime.jsx(designSystem.Radio.Item, { checked: false, disabled: true, children: option.label });
   }) });
 };
 const Select = ({ ...props }) => {
-  return /* @__PURE__ */ jsx(SingleSelect, { ...props, children: props.options.map((option, index2) => /* @__PURE__ */ jsx(SingleSelectOption, { value: option.label, children: option.label }, index2)) });
+  return /* @__PURE__ */ jsxRuntime.jsx(designSystem.SingleSelect, { ...props, children: props.options.map((option, index2) => /* @__PURE__ */ jsxRuntime.jsx(designSystem.SingleSelectOption, { value: option.label, children: option.label }, index2)) });
 };
 const fieldMap = /* @__PURE__ */ new Map([
-  ["text", (props) => /* @__PURE__ */ jsx(TextInput, { ...props })],
-  ["email", (props) => /* @__PURE__ */ jsx(TextInput, { ...props })],
-  ["number", (props) => /* @__PURE__ */ jsx(TextInput, { ...props })],
-  ["textarea", (props) => /* @__PURE__ */ jsx(Textarea, { ...props })],
-  ["checkbox", (props) => /* @__PURE__ */ jsx(Checkbox, { ...props })],
-  ["checkboxgroup", (props) => /* @__PURE__ */ jsx(CheckboxGroup, { ...props })],
-  ["radio", (props) => /* @__PURE__ */ jsx(RadioGroup, { ...props })],
-  ["select", (props) => /* @__PURE__ */ jsx(Select, { ...props })],
-  ["file", (props) => /* @__PURE__ */ jsx(TextInput, { ...props })]
+  ["text", (props) => /* @__PURE__ */ jsxRuntime.jsx(designSystem.TextInput, { ...props })],
+  ["email", (props) => /* @__PURE__ */ jsxRuntime.jsx(designSystem.TextInput, { ...props })],
+  ["number", (props) => /* @__PURE__ */ jsxRuntime.jsx(designSystem.TextInput, { ...props })],
+  ["textarea", (props) => /* @__PURE__ */ jsxRuntime.jsx(designSystem.Textarea, { ...props })],
+  ["checkbox", (props) => /* @__PURE__ */ jsxRuntime.jsx(Checkbox, { ...props })],
+  ["checkboxgroup", (props) => /* @__PURE__ */ jsxRuntime.jsx(CheckboxGroup, { ...props })],
+  ["radio", (props) => /* @__PURE__ */ jsxRuntime.jsx(RadioGroup, { ...props })],
+  ["select", (props) => /* @__PURE__ */ jsxRuntime.jsx(Select, { ...props })],
+  ["file", (props) => /* @__PURE__ */ jsxRuntime.jsx(designSystem.TextInput, { ...props })]
 ]);
 const FieldPreview = ({ field }) => {
   const Component = fieldMap.get(field.type);
   if (!Component) {
     return null;
   }
-  return /* @__PURE__ */ jsxs(Field.Root, { required: field.config?.required ?? false, style: { width: "100%" }, children: [
-    field.type !== "checkbox" && /* @__PURE__ */ jsx(Field.Label, { children: field.label }),
-    /* @__PURE__ */ jsx(Component, { disabled: true, style: { width: "100%" }, ...field })
+  return /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Field.Root, { required: field.config?.required ?? false, style: { width: "100%" }, children: [
+    field.type !== "checkbox" && /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Label, { children: field.label }),
+    /* @__PURE__ */ jsxRuntime.jsx(Component, { disabled: true, style: { width: "100%" }, ...field })
   ] });
 };
 const ResizeIcon = ({ ...props }) => {
-  return /* @__PURE__ */ jsxs(
+  return /* @__PURE__ */ jsxRuntime.jsxs(
     "svg",
     {
       fill: "currentColor",
@@ -3738,10 +3771,10 @@ const ResizeIcon = ({ ...props }) => {
       width: props.height ?? 2e3,
       viewBox: "0 0 201.377 201.377",
       children: [
-        /* @__PURE__ */ jsx("g", { id: "SVGRepo_bgCarrier", strokeWidth: "0" }),
-        /* @__PURE__ */ jsx("g", { id: "SVGRepo_tracerCarrier", strokeLinecap: "round", strokeLinejoin: "round" }),
-        /* @__PURE__ */ jsxs("g", { id: "SVGRepo_iconCarrier", children: [
-          /* @__PURE__ */ jsx("path", { d: "M157.511,63.77l43.866,36.918l-43.865,36.92l0-24.421h-25.813v41.752h-25v-108.5h25v41.748h25.813L157.511,63.77z M43.866,113.19h25.813v41.748h25v-108.5h-25V88.19H43.866l0-24.421L0,100.689l43.866,36.918L43.866,113.19z" }),
+        /* @__PURE__ */ jsxRuntime.jsx("g", { id: "SVGRepo_bgCarrier", strokeWidth: "0" }),
+        /* @__PURE__ */ jsxRuntime.jsx("g", { id: "SVGRepo_tracerCarrier", strokeLinecap: "round", strokeLinejoin: "round" }),
+        /* @__PURE__ */ jsxRuntime.jsxs("g", { id: "SVGRepo_iconCarrier", children: [
+          /* @__PURE__ */ jsxRuntime.jsx("path", { d: "M157.511,63.77l43.866,36.918l-43.865,36.92l0-24.421h-25.813v41.752h-25v-108.5h25v41.748h25.813L157.511,63.77z M43.866,113.19h25.813v41.748h25v-108.5h-25V88.19H43.866l0-24.421L0,100.689l43.866,36.918L43.866,113.19z" }),
           " "
         ] })
       ]
@@ -3768,71 +3801,71 @@ const FieldCard = ({
   field,
   index: index2
 }) => {
-  const { formatMessage } = useIntl();
+  const { formatMessage } = reactIntl.useIntl();
   const { currentLayouts, currentBreakpoint, resizeBlock, removeBlock, moveBlock } = useFormContext();
   const editField = (block2) => {
     return handleEditField(block2);
   };
   const renderButtons = () => {
-    return /* @__PURE__ */ jsxs(IconButtonGroup, { children: [
-      /* @__PURE__ */ jsx(
+    return /* @__PURE__ */ jsxRuntime.jsxs(designSystem.IconButtonGroup, { children: [
+      /* @__PURE__ */ jsxRuntime.jsx(
         TooltipIconButton,
         {
           label: "Previous",
           onClick: () => moveBlock(block.i, "prev"),
           disabled: index2 === 0,
           variant: "secondary",
-          children: /* @__PURE__ */ jsx(ArrowLeft, {})
+          children: /* @__PURE__ */ jsxRuntime.jsx(icons.ArrowLeft, {})
         }
       ),
-      /* @__PURE__ */ jsx(
+      /* @__PURE__ */ jsxRuntime.jsx(
         TooltipIconButton,
         {
           label: "Next",
           onClick: () => moveBlock(block.i, "next"),
           disabled: index2 === currentLayouts[currentBreakpoint].length - 1,
           variant: "secondary",
-          children: /* @__PURE__ */ jsx(ArrowRight, {})
+          children: /* @__PURE__ */ jsxRuntime.jsx(icons.ArrowRight, {})
         }
       )
     ] });
   };
-  return /* @__PURE__ */ jsx(Card, { background: "neutral100", hasRadius: true, children: /* @__PURE__ */ jsxs(CardBody, { alignItems: "flex-start", gap: 4, children: [
-    /* @__PURE__ */ jsxs(Flex, { gap: 1, alignItems: "flex-start", direction: "column", style: { minWidth: "150px" }, children: [
-      /* @__PURE__ */ jsx(
+  return /* @__PURE__ */ jsxRuntime.jsx(designSystem.Card, { background: "neutral100", hasRadius: true, children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.CardBody, { alignItems: "flex-start", gap: 4, children: [
+    /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { gap: 1, alignItems: "flex-start", direction: "column", style: { minWidth: "150px" }, children: [
+      /* @__PURE__ */ jsxRuntime.jsx(
         TooltipIconButton,
         {
           label: "Resize",
           onClick: () => editField(block),
           variant: "secondary",
           disabled: false,
-          children: /* @__PURE__ */ jsxs(Flex, { gap: 1, alignItems: "center", children: [
-            /* @__PURE__ */ jsx(Pencil, { style: { width: "12px" } }),
-            /* @__PURE__ */ jsx(Typography, { variant: "sigma", lineHeight: "16px", children: formatMessage({
+          children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { gap: 1, alignItems: "center", children: [
+            /* @__PURE__ */ jsxRuntime.jsx(icons.Pencil, { style: { width: "12px" } }),
+            /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { variant: "sigma", lineHeight: "16px", children: formatMessage({
               id: getTranslation(`forms.fields.types.${field.type}`)
             }) })
           ] })
         }
       ),
-      /* @__PURE__ */ jsx(
+      /* @__PURE__ */ jsxRuntime.jsx(
         TooltipIconButton,
         {
           label: "Remove",
           onClick: () => removeBlock(block.i),
           disabled: false,
           variant: "danger-light",
-          children: /* @__PURE__ */ jsxs(Flex, { gap: 1, alignItems: "center", children: [
-            /* @__PURE__ */ jsx(Trash, { style: { width: "12px" } }),
-            /* @__PURE__ */ jsx(Typography, { variant: "sigma", lineHeight: "16px", children: formatMessage({
+          children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { gap: 1, alignItems: "center", children: [
+            /* @__PURE__ */ jsxRuntime.jsx(icons.Trash, { style: { width: "12px" } }),
+            /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { variant: "sigma", lineHeight: "16px", children: formatMessage({
               id: getTranslation(`actions.delete`)
             }) })
           ] })
         }
       )
     ] }),
-    /* @__PURE__ */ jsx(Flex, { gap: 2, alignItems: "center", justifyContent: "space-between", style: { width: "100%" }, children: /* @__PURE__ */ jsx(FieldPreview, { field }) }),
-    /* @__PURE__ */ jsxs(
-      Flex,
+    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { gap: 2, alignItems: "center", justifyContent: "space-between", style: { width: "100%" }, children: /* @__PURE__ */ jsxRuntime.jsx(FieldPreview, { field }) }),
+    /* @__PURE__ */ jsxRuntime.jsxs(
+      designSystem.Flex,
       {
         direction: "column",
         alignItems: "flex-end",
@@ -3840,23 +3873,23 @@ const FieldCard = ({
         style: { marginLeft: "auto", minWidth: "64px" },
         children: [
           renderButtons(),
-          /* @__PURE__ */ jsx(
+          /* @__PURE__ */ jsxRuntime.jsx(
             TooltipIconButton,
             {
               label: "Resize",
               onClick: () => resizeBlock(block.i),
               variant: "secondary",
               disabled: false,
-              children: /* @__PURE__ */ jsxs(
-                Flex,
+              children: /* @__PURE__ */ jsxRuntime.jsxs(
+                designSystem.Flex,
                 {
                   gap: 1,
                   alignItems: "center",
                   justifyContent: "space-between",
                   style: { width: "100%" },
                   children: [
-                    /* @__PURE__ */ jsx(ResizeIcon, { width: 15, height: 15 }),
-                    /* @__PURE__ */ jsx(Typography, { variant: "sigma", lineHeight: "16px", children: getBlockWidth(block.w) })
+                    /* @__PURE__ */ jsxRuntime.jsx(ResizeIcon, { width: 15, height: 15 }),
+                    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { variant: "sigma", lineHeight: "16px", children: getBlockWidth(block.w) })
                   ]
                 }
               )
@@ -3890,15 +3923,15 @@ var FieldActionsEnum = /* @__PURE__ */ ((FieldActionsEnum2) => {
   return FieldActionsEnum2;
 })(FieldActionsEnum || {});
 const FieldValidation = ({ field, config, setConfig }) => {
-  const { formatMessage } = useIntl();
+  const { formatMessage } = reactIntl.useIntl();
   const setValidationSettings = (value, name) => {
     setConfig({
       ...config,
       validation: { ...config.validation, [name]: value }
     });
   };
-  return /* @__PURE__ */ jsx(Fragment$2, { children: field === FieldTypeEnum.File && /* @__PURE__ */ jsx(Fragment$2, { children: /* @__PURE__ */ jsxs(
-    SingleSelect,
+  return /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, { children: field === FieldTypeEnum.File && /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, { children: /* @__PURE__ */ jsxRuntime.jsxs(
+    designSystem.SingleSelect,
     {
       value: config.validation?.allowedTypes,
       onChange: (event) => setValidationSettings(event, "allowedTypes"),
@@ -3907,16 +3940,16 @@ const FieldValidation = ({ field, config, setConfig }) => {
         id: getTranslation(`forms.fields.extra_props.file_exts`)
       }),
       children: [
-        /* @__PURE__ */ jsx(SingleSelectOption, { value: "images", children: "Image (JPG, PNG, GIF)" }),
-        /* @__PURE__ */ jsx(SingleSelectOption, { value: "files", children: "File (PDF, CSV, EXCEL, DOCX)" })
+        /* @__PURE__ */ jsxRuntime.jsx(designSystem.SingleSelectOption, { value: "images", children: "Image (JPG, PNG, GIF)" }),
+        /* @__PURE__ */ jsxRuntime.jsx(designSystem.SingleSelectOption, { value: "files", children: "File (PDF, CSV, EXCEL, DOCX)" })
       ]
     }
   ) }) });
 };
 const FieldOptions = ({ field, config, setConfig, options, setOptions }) => {
-  const [content, setContent2] = useState(options);
-  const [checked, setChecked] = useState(config?.required);
-  const { formatMessage } = useIntl();
+  const [content, setContent2] = React.useState(options);
+  const [checked, setChecked] = React.useState(config?.required);
+  const { formatMessage } = reactIntl.useIntl();
   const setIsChecked = (checked2) => {
     setChecked(checked2);
     setConfig({ ...config, required: checked2 });
@@ -3925,10 +3958,10 @@ const FieldOptions = ({ field, config, setConfig, options, setOptions }) => {
     setContent2(content2);
     setOptions(content2);
   };
-  return /* @__PURE__ */ jsxs(Flex, { direction: "column", gap: 3, style: { width: "100%" }, alignItems: "flex-start", children: [
-    field === FieldTypeEnum.Select || field === FieldTypeEnum.Radio || field === FieldTypeEnum.CheckboxGroup ? /* @__PURE__ */ jsxs(Fragment$2, { children: [
-      /* @__PURE__ */ jsx(Box, { style: { width: "100%" }, children: /* @__PURE__ */ jsx(
-        Textarea,
+  return /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "column", gap: 3, style: { width: "100%" }, alignItems: "flex-start", children: [
+    field === FieldTypeEnum.Select || field === FieldTypeEnum.Radio || field === FieldTypeEnum.CheckboxGroup ? /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
+      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Box, { style: { width: "100%" }, children: /* @__PURE__ */ jsxRuntime.jsx(
+        designSystem.Textarea,
         {
           style: { width: "100%" },
           onChange: (event) => handleTextarea(event.currentTarget.value),
@@ -3942,13 +3975,13 @@ const FieldOptions = ({ field, config, setConfig, options, setOptions }) => {
           children: content
         }
       ) }),
-      /* @__PURE__ */ jsx(Divider, { style: { width: "100%" } })
+      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Divider, { style: { width: "100%" } })
     ] }) : null,
-    /* @__PURE__ */ jsx(Typography, { variant: "omega", fontWeight: "bold", children: formatMessage({
+    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { variant: "omega", fontWeight: "bold", children: formatMessage({
       id: getTranslation("forms.fields.extra_props.validation")
     }) }),
-    /* @__PURE__ */ jsx(
-      Checkbox$1,
+    /* @__PURE__ */ jsxRuntime.jsx(
+      designSystem.Checkbox,
       {
         name: "isRequired",
         checked,
@@ -3956,11 +3989,11 @@ const FieldOptions = ({ field, config, setConfig, options, setOptions }) => {
         children: formatMessage({ id: getTranslation("forms.fields.extra_props.required") })
       }
     ),
-    /* @__PURE__ */ jsx(FieldValidation, { config, setConfig, field })
+    /* @__PURE__ */ jsxRuntime.jsx(FieldValidation, { config, setConfig, field })
   ] });
 };
 const toCamelCase = (str) => {
-  return camelCase(str.replace(/\s+/g, ""));
+  return lodash.camelCase(str.replace(/\s+/g, ""));
 };
 const FieldModal = ({
   action,
@@ -3970,16 +4003,16 @@ const FieldModal = ({
   setCurrentField
 }) => {
   const { state, dispatch } = useFormContext();
-  const { formatMessage } = useIntl();
-  const [hasAlert, setAlert] = useState(false);
-  const [alertMessage, setAlertMessage] = useState(
+  const { formatMessage } = reactIntl.useIntl();
+  const [hasAlert, setAlert] = React.useState(false);
+  const [alertMessage, setAlertMessage] = React.useState(
     formatMessage({ id: getTranslation("required") })
   );
-  const [label, setLabel] = useState(currentField?.label || "");
-  const [placeholder, setPlaceholder] = useState(currentField?.placeholder || "");
-  const [fieldType, setFieldType] = useState(currentField?.type || null);
-  const [config, setConfig] = useState(currentField?.config || {});
-  const [options, setOptions] = useState(currentField?.options || []);
+  const [label, setLabel] = React.useState(currentField?.label || "");
+  const [placeholder, setPlaceholder] = React.useState(currentField?.placeholder || "");
+  const [fieldType, setFieldType] = React.useState(currentField?.type || null);
+  const [config, setConfig] = React.useState(currentField?.config || {});
+  const [options, setOptions] = React.useState(currentField?.options || []);
   const isFilled = () => label && fieldType;
   const formatOptions = (content) => {
     setOptions(
@@ -4046,44 +4079,44 @@ const FieldModal = ({
     setIsVisible(false);
     setCurrentField(null);
   };
-  return /* @__PURE__ */ jsx(Modal.Root, { open: isVisible, onOpenChange: closeModal, children: /* @__PURE__ */ jsxs(Modal.Content, { children: [
-    /* @__PURE__ */ jsx(Modal.Header, { children: /* @__PURE__ */ jsx(Modal.Title, { children: formatMessage({
+  return /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Root, { open: isVisible, onOpenChange: closeModal, children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Modal.Content, { children: [
+    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Header, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Title, { children: formatMessage({
       id: action === FieldActionsEnum.Add ? getTranslation("forms.fields.add") : getTranslation("forms.fields.edit")
     }) }) }),
-    /* @__PURE__ */ jsx(Modal.Body, { children: /* @__PURE__ */ jsxs(Flex, { direction: "column", gap: 4, alignItems: "stretch", width: "100%", children: [
-      /* @__PURE__ */ jsxs(Field.Root, { name: "type", id: "type", error: hasAlert ? alertMessage : "", children: [
-        /* @__PURE__ */ jsx(Field.Label, { children: formatMessage({ id: getTranslation("forms.fields.type") }) }),
-        /* @__PURE__ */ jsx(
-          SingleSelect,
+    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Body, { children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "column", gap: 4, alignItems: "stretch", width: "100%", children: [
+      /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Field.Root, { name: "type", id: "type", error: hasAlert ? alertMessage : "", children: [
+        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Label, { children: formatMessage({ id: getTranslation("forms.fields.type") }) }),
+        /* @__PURE__ */ jsxRuntime.jsx(
+          designSystem.SingleSelect,
           {
             value: fieldType,
             onChange: (value) => setFieldType(value),
             placeholder: formatMessage({
               id: getTranslation("forms.fields.type.placeholder")
             }),
-            children: Object.keys(FieldTypeEnum).map((key) => /* @__PURE__ */ jsx(SingleSelectOption, { value: key.toLowerCase(), children: formatMessage({
+            children: Object.keys(FieldTypeEnum).map((key) => /* @__PURE__ */ jsxRuntime.jsx(designSystem.SingleSelectOption, { value: key.toLowerCase(), children: formatMessage({
               id: getTranslation(`forms.fields.types.${key.toLowerCase()}`)
             }) }, key))
           }
         ),
-        /* @__PURE__ */ jsx(Field.Error, {})
+        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Error, {})
       ] }),
-      /* @__PURE__ */ jsxs(Field.Root, { name: "label", id: "label", error: hasAlert ? alertMessage : "", children: [
-        /* @__PURE__ */ jsx(Field.Label, { children: formatMessage({ id: getTranslation("forms.fields.label") }) }),
-        /* @__PURE__ */ jsx(
-          Field.Input,
+      /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Field.Root, { name: "label", id: "label", error: hasAlert ? alertMessage : "", children: [
+        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Label, { children: formatMessage({ id: getTranslation("forms.fields.label") }) }),
+        /* @__PURE__ */ jsxRuntime.jsx(
+          designSystem.Field.Input,
           {
             id: "field-label",
             value: label,
             onChange: (event) => setLabel(event.target.value)
           }
         ),
-        /* @__PURE__ */ jsx(Field.Error, {})
+        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Error, {})
       ] }),
-      /* @__PURE__ */ jsxs(Field.Root, { name: "placeholder", id: "placeholder", children: [
-        /* @__PURE__ */ jsx(Field.Label, { children: formatMessage({ id: getTranslation("forms.fields.placeholder") }) }),
-        /* @__PURE__ */ jsx(
-          Field.Input,
+      /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Field.Root, { name: "placeholder", id: "placeholder", children: [
+        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Label, { children: formatMessage({ id: getTranslation("forms.fields.placeholder") }) }),
+        /* @__PURE__ */ jsxRuntime.jsx(
+          designSystem.Field.Input,
           {
             id: "field-placeholder",
             name: "placeholder",
@@ -4092,9 +4125,9 @@ const FieldModal = ({
           }
         )
       ] }),
-      fieldType && /* @__PURE__ */ jsxs(Fragment$2, { children: [
-        /* @__PURE__ */ jsx(Divider, {}),
-        /* @__PURE__ */ jsx(
+      fieldType && /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
+        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Divider, {}),
+        /* @__PURE__ */ jsxRuntime.jsx(
           FieldOptions,
           {
             field: fieldType,
@@ -4106,21 +4139,21 @@ const FieldModal = ({
         )
       ] })
     ] }) }),
-    /* @__PURE__ */ jsxs(Modal.Footer, { children: [
-      /* @__PURE__ */ jsx(Modal.Close, { children: /* @__PURE__ */ jsx(Button, { variant: "tertiary", children: formatMessage({ id: getTranslation("cancel") }) }) }),
-      /* @__PURE__ */ jsx(Button, { onClick: saveField, children: formatMessage({ id: getTranslation("save") }) })
+    /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Modal.Footer, { children: [
+      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Close, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { variant: "tertiary", children: formatMessage({ id: getTranslation("cancel") }) }) }),
+      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { onClick: saveField, children: formatMessage({ id: getTranslation("save") }) })
     ] })
   ] }) });
 };
 const DesktopIcon = ({ ...props }) => {
-  return /* @__PURE__ */ jsx(
+  return /* @__PURE__ */ jsxRuntime.jsx(
     "svg",
     {
       xmlns: "http://www.w3.org/2000/svg",
       width: props.width ?? 48,
       height: props.height ?? 48,
       viewBox: "0 -960 960 960",
-      children: /* @__PURE__ */ jsx(
+      children: /* @__PURE__ */ jsxRuntime.jsx(
         "path",
         {
           fill: "currentColor",
@@ -4131,7 +4164,7 @@ const DesktopIcon = ({ ...props }) => {
   );
 };
 const TabletIcon = ({ ...props }) => {
-  return /* @__PURE__ */ jsx(
+  return /* @__PURE__ */ jsxRuntime.jsx(
     "svg",
     {
       xmlns: "http://www.w3.org/2000/svg",
@@ -4139,7 +4172,7 @@ const TabletIcon = ({ ...props }) => {
       height: props.height ?? 48,
       viewBox: "0 -960 960 960",
       style: props.style,
-      children: /* @__PURE__ */ jsx(
+      children: /* @__PURE__ */ jsxRuntime.jsx(
         "path",
         {
           fill: "currentColor",
@@ -4152,11 +4185,11 @@ const TabletIcon = ({ ...props }) => {
 const margin = 8;
 const FormBuilder = () => {
   const { currentLayouts, currentBreakpoint, setCurrentBreakpoint } = useFormContext();
-  const [isModalVisible, setModalVisible] = useState(false);
-  const [currentField, setCurrentField] = useState(null);
-  const [gridWidth, setGridWidth] = useState(1200);
-  const containerRef = useRef(null);
-  useEffect(() => {
+  const [isModalVisible, setModalVisible] = React.useState(false);
+  const [currentField, setCurrentField] = React.useState(null);
+  const [gridWidth, setGridWidth] = React.useState(1200);
+  const containerRef = React.useRef(null);
+  React.useEffect(() => {
     const updateWidth = () => {
       if (containerRef.current) {
         setGridWidth(containerRef.current.offsetWidth);
@@ -4183,7 +4216,7 @@ const FormBuilder = () => {
   const handleBreakpoint = (breakpoint) => {
     setCurrentBreakpoint(breakpoint);
   };
-  useEffect(() => {
+  React.useEffect(() => {
     const updateHeightsAndPositions = () => {
       const rows = {};
       const rowHeights = {};
@@ -4226,39 +4259,39 @@ const FormBuilder = () => {
     };
     updateHeightsAndPositions();
   }, [currentLayouts, currentBreakpoint, gridWidth]);
-  return /* @__PURE__ */ jsxs(Fragment$2, { children: [
-    /* @__PURE__ */ jsx(Box, { background: "white", padding: 4, hasRadius: true, marginBottom: 4, shadow: "filterShadow", children: /* @__PURE__ */ jsxs(Flex, { direction: "row", gap: 3, style: { width: "100%" }, alignItems: "flex-start", children: [
-      /* @__PURE__ */ jsx(Button, { onClick: handleAddField, startIcon: /* @__PURE__ */ jsx(Plus, {}), children: "Add Field" }),
-      /* @__PURE__ */ jsx(
-        Button,
+  return /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Box, { background: "white", padding: 4, hasRadius: true, marginBottom: 4, shadow: "filterShadow", children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "row", gap: 3, style: { width: "100%" }, alignItems: "flex-start", children: [
+      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { onClick: handleAddField, startIcon: /* @__PURE__ */ jsxRuntime.jsx(icons.Plus, {}), children: "Add Field" }),
+      /* @__PURE__ */ jsxRuntime.jsx(
+        designSystem.Button,
         {
           variant: currentBreakpoint === "lg" ? "primary" : "secondary",
           onClick: () => handleBreakpoint("lg"),
           style: { paddingTop: "4px" },
-          children: /* @__PURE__ */ jsx(DesktopIcon, { width: 20, height: 20 })
+          children: /* @__PURE__ */ jsxRuntime.jsx(DesktopIcon, { width: 20, height: 20 })
         }
       ),
-      /* @__PURE__ */ jsx(
-        Button,
+      /* @__PURE__ */ jsxRuntime.jsx(
+        designSystem.Button,
         {
           variant: currentBreakpoint === "md" ? "primary" : "secondary",
           onClick: () => handleBreakpoint("md"),
           style: { paddingTop: "4px" },
-          children: /* @__PURE__ */ jsx(TabletIcon, { width: 20, height: 20 })
+          children: /* @__PURE__ */ jsxRuntime.jsx(TabletIcon, { width: 20, height: 20 })
         }
       ),
-      /* @__PURE__ */ jsx(
-        Button,
+      /* @__PURE__ */ jsxRuntime.jsx(
+        designSystem.Button,
         {
           variant: currentBreakpoint === "sm" ? "primary" : "secondary",
           onClick: () => handleBreakpoint("sm"),
           style: { paddingTop: "4px" },
-          children: /* @__PURE__ */ jsx(TabletIcon, { width: 20, height: 20, style: { rotate: "90deg" } })
+          children: /* @__PURE__ */ jsxRuntime.jsx(TabletIcon, { width: 20, height: 20, style: { rotate: "90deg" } })
         }
       )
     ] }) }),
-    /* @__PURE__ */ jsx(Box, { background: "white", padding: 4, hasRadius: true, shadow: "filterShadow", children: /* @__PURE__ */ jsx("div", { id: "grid-container", ref: containerRef, children: /* @__PURE__ */ jsx(
-      ReactGridLayout,
+    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Box, { background: "white", padding: 4, hasRadius: true, shadow: "filterShadow", children: /* @__PURE__ */ jsxRuntime.jsx("div", { id: "grid-container", ref: containerRef, children: /* @__PURE__ */ jsxRuntime.jsx(
+      ReactGridLayout__default.default,
       {
         className: "layout",
         layout: currentLayouts[currentBreakpoint],
@@ -4270,12 +4303,12 @@ const FormBuilder = () => {
         containerPadding: [0, 0],
         children: currentLayouts[currentBreakpoint].map((block, index2) => {
           const field = block.field ?? {};
-          return /* @__PURE__ */ jsx(
+          return /* @__PURE__ */ jsxRuntime.jsx(
             "div",
             {
               className: "grid-item",
               id: `card-${block.i}`,
-              children: /* @__PURE__ */ jsx(
+              children: /* @__PURE__ */ jsxRuntime.jsx(
                 FieldCard,
                 {
                   handleEditField,
@@ -4290,7 +4323,7 @@ const FormBuilder = () => {
         })
       }
     ) }) }),
-    isModalVisible && /* @__PURE__ */ jsx(
+    isModalVisible && /* @__PURE__ */ jsxRuntime.jsx(
       FieldModal,
       {
         action: currentField ? FieldActionsEnum.Edit : FieldActionsEnum.Add,
@@ -4303,9 +4336,9 @@ const FormBuilder = () => {
   ] });
 };
 const AlertWrapper = ({ variant, message, toggleAlert }) => {
-  const { formatMessage } = useIntl();
-  return /* @__PURE__ */ jsx(Box, { style: { position: "absolute", top: 0, right: 0, zIndex: 9999, left: 0 }, children: /* @__PURE__ */ jsx(
-    Alert,
+  const { formatMessage } = reactIntl.useIntl();
+  return /* @__PURE__ */ jsxRuntime.jsx(designSystem.Box, { style: { position: "absolute", top: 0, right: 0, zIndex: 9999, left: 0 }, children: /* @__PURE__ */ jsxRuntime.jsx(
+    designSystem.Alert,
     {
       onClose: () => toggleAlert(false),
       title: formatMessage({ id: getTranslation(`alert.${variant}`) }),
@@ -4321,7 +4354,7 @@ const fetchInstance = async (endpoint, token, method, options, formData, isAdmin
   const route = `${isAdmin ? "/" : "/api/"}`;
   try {
     return fetch(
-      `${route}${PLUGIN_ID}/${endpoint}${options ? `?${new URLSearchParams({ ...options })}` : ""}`,
+      `${route}${index$1.PLUGIN_ID}/${endpoint}${options ? `?${new URLSearchParams({ ...options })}` : ""}`,
       {
         method,
         mode: "cors",
@@ -5204,14 +5237,7 @@ function requireFunctionBind() {
   functionBind = Function.prototype.bind || implementation2;
   return functionBind;
 }
-var functionCall;
-var hasRequiredFunctionCall;
-function requireFunctionCall() {
-  if (hasRequiredFunctionCall) return functionCall;
-  hasRequiredFunctionCall = 1;
-  functionCall = Function.prototype.call;
-  return functionCall;
-}
+var functionCall = Function.prototype.call;
 var functionApply;
 var hasRequiredFunctionApply;
 function requireFunctionApply() {
@@ -5223,12 +5249,12 @@ function requireFunctionApply() {
 var reflectApply = typeof Reflect !== "undefined" && Reflect && Reflect.apply;
 var bind$3 = requireFunctionBind();
 var $apply$1 = requireFunctionApply();
-var $call$2 = requireFunctionCall();
+var $call$2 = functionCall;
 var $reflectApply = reflectApply;
 var actualApply = $reflectApply || bind$3.call($call$2, $apply$1);
 var bind$2 = requireFunctionBind();
 var $TypeError$4 = type;
-var $call$1 = requireFunctionCall();
+var $call$1 = functionCall;
 var $actualApply = actualApply;
 var callBindApplyHelpers = function callBindBasic(args) {
   if (args.length < 1 || typeof args[0] !== "function") {
@@ -5343,7 +5369,7 @@ var getProto = requireGetProto();
 var $ObjectGPO = requireObject_getPrototypeOf();
 var $ReflectGPO = requireReflect_getPrototypeOf();
 var $apply = requireFunctionApply();
-var $call = requireFunctionCall();
+var $call = functionCall;
 var needsEval = {};
 var TypedArray = typeof Uint8Array === "undefined" || !getProto ? undefined$1 : getProto(Uint8Array);
 var INTRINSICS = {
@@ -5902,7 +5928,7 @@ var decode = function(str, decoder, charset) {
     return strWithoutPlus;
   }
 };
-var encode = function encode2(str, defaultEncoder, charset, kind, format2) {
+var encode = function encode2(str, defaultEncoder, charset, kind, format) {
   if (str.length === 0) {
     return str;
   }
@@ -5920,7 +5946,7 @@ var encode = function encode2(str, defaultEncoder, charset, kind, format2) {
   var out = "";
   for (var i = 0; i < string.length; ++i) {
     var c = string.charCodeAt(i);
-    if (c === 45 || c === 46 || c === 95 || c === 126 || c >= 48 && c <= 57 || c >= 65 && c <= 90 || c >= 97 && c <= 122 || format2 === formats$2.RFC1738 && (c === 40 || c === 41)) {
+    if (c === 45 || c === 46 || c === 95 || c === 126 || c >= 48 && c <= 57 || c >= 65 && c <= 90 || c >= 97 && c <= 122 || format === formats$2.RFC1738 && (c === 40 || c === 41)) {
       out += string.charAt(i);
       continue;
     }
@@ -6041,7 +6067,7 @@ var isNonNullishPrimitive = function isNonNullishPrimitive2(v) {
   return typeof v === "string" || typeof v === "number" || typeof v === "boolean" || typeof v === "symbol" || typeof v === "bigint";
 };
 var sentinel = {};
-var stringify$1 = function stringify(object, prefix, generateArrayPrefix, commaRoundTrip, strictNullHandling, skipNulls, encoder, filter, sort, allowDots, serializeDate2, format2, formatter, encodeValuesOnly, charset, sideChannel2) {
+var stringify$1 = function stringify(object, prefix, generateArrayPrefix, commaRoundTrip, strictNullHandling, skipNulls, encoder, filter, sort, allowDots, serializeDate2, format, formatter, encodeValuesOnly, charset, sideChannel2) {
   var obj = object;
   var tmpSc = sideChannel2;
   var step = 0;
@@ -6074,14 +6100,14 @@ var stringify$1 = function stringify(object, prefix, generateArrayPrefix, commaR
   }
   if (obj === null) {
     if (strictNullHandling) {
-      return encoder && !encodeValuesOnly ? encoder(prefix, defaults$1.encoder, charset, "key", format2) : prefix;
+      return encoder && !encodeValuesOnly ? encoder(prefix, defaults$1.encoder, charset, "key", format) : prefix;
     }
     obj = "";
   }
   if (isNonNullishPrimitive(obj) || utils$1.isBuffer(obj)) {
     if (encoder) {
-      var keyValue = encodeValuesOnly ? prefix : encoder(prefix, defaults$1.encoder, charset, "key", format2);
-      return [formatter(keyValue) + "=" + formatter(encoder(obj, defaults$1.encoder, charset, "value", format2))];
+      var keyValue = encodeValuesOnly ? prefix : encoder(prefix, defaults$1.encoder, charset, "key", format);
+      return [formatter(keyValue) + "=" + formatter(encoder(obj, defaults$1.encoder, charset, "value", format))];
     }
     return [formatter(prefix) + "=" + formatter(String(obj))];
   }
@@ -6124,7 +6150,7 @@ var stringify$1 = function stringify(object, prefix, generateArrayPrefix, commaR
       sort,
       allowDots,
       serializeDate2,
-      format2,
+      format,
       formatter,
       encodeValuesOnly,
       charset,
@@ -6144,14 +6170,14 @@ var normalizeStringifyOptions = function normalizeStringifyOptions2(opts) {
   if (typeof opts.charset !== "undefined" && opts.charset !== "utf-8" && opts.charset !== "iso-8859-1") {
     throw new TypeError("The charset option must be either utf-8, iso-8859-1, or undefined");
   }
-  var format2 = formats$1["default"];
+  var format = formats$1["default"];
   if (typeof opts.format !== "undefined") {
     if (!has$1.call(formats$1.formatters, opts.format)) {
       throw new TypeError("Unknown format option provided.");
     }
-    format2 = opts.format;
+    format = opts.format;
   }
-  var formatter = formats$1.formatters[format2];
+  var formatter = formats$1.formatters[format];
   var filter = defaults$1.filter;
   if (typeof opts.filter === "function" || isArray$1(opts.filter)) {
     filter = opts.filter;
@@ -6166,7 +6192,7 @@ var normalizeStringifyOptions = function normalizeStringifyOptions2(opts) {
     encoder: typeof opts.encoder === "function" ? opts.encoder : defaults$1.encoder,
     encodeValuesOnly: typeof opts.encodeValuesOnly === "boolean" ? opts.encodeValuesOnly : defaults$1.encodeValuesOnly,
     filter,
-    format: format2,
+    format,
     formatter,
     serializeDate: typeof opts.serializeDate === "function" ? opts.serializeDate : defaults$1.serializeDate,
     skipNulls: typeof opts.skipNulls === "boolean" ? opts.skipNulls : defaults$1.skipNulls,
@@ -6526,27 +6552,27 @@ const formRequests = {
   }
 };
 const FormContent = () => {
-  const history = useNavigate();
-  const { formatMessage } = useIntl();
-  const { id } = useParams();
-  const token = useAuth("Admin", (state2) => state2.token);
+  const history = reactRouterDom.useNavigate();
+  const { formatMessage } = reactIntl.useIntl();
+  const { id } = reactRouterDom.useParams();
+  const token = admin.useAuth("Admin", (state2) => state2.token);
   const { state, dispatch } = useFormContext();
-  const [isLoading, setIsLoading] = useState(true);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [showAlert, toggleAlert] = useState(false);
-  const [alertVariant, setAlertVariant] = useState("success");
-  const [alertMessage, setAlertMessage] = useState("");
-  const [response, setResponse] = useState({});
-  const [initialFromDate, setInitialFromDate] = useState(null);
-  const [initialTillDate, setInitialTillDate] = useState(null);
-  useEffect(() => {
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [isDialogOpen, setIsDialogOpen] = React.useState(false);
+  const [showAlert, toggleAlert] = React.useState(false);
+  const [alertVariant, setAlertVariant] = React.useState("success");
+  const [alertMessage, setAlertMessage] = React.useState("");
+  const [response, setResponse] = React.useState({});
+  const [initialFromDate, setInitialFromDate] = React.useState(null);
+  const [initialTillDate, setInitialTillDate] = React.useState(null);
+  React.useEffect(() => {
     setTimeout(() => {
       if (showAlert) {
         toggleAlert(false);
       }
     }, 5e3);
   }, [alertVariant]);
-  useEffect(() => {
+  React.useEffect(() => {
     if (!id) {
       setIsLoading(false);
       return;
@@ -6565,7 +6591,7 @@ const FormContent = () => {
       setAlertVariant("danger");
       return toggleAlert(true);
     }
-    const data = omit(state, ["currentStep"]);
+    const data = omit__default.default(state, ["currentStep"]);
     try {
       if (!id) {
         const result = await formRequests.submitForm(token, data);
@@ -6582,45 +6608,45 @@ const FormContent = () => {
     }
   };
   if (isLoading) {
-    return /* @__PURE__ */ jsx(Page.Loading, {});
+    return /* @__PURE__ */ jsxRuntime.jsx(admin.Page.Loading, {});
   }
-  return /* @__PURE__ */ jsxs(Layouts.Root, { children: [
-    /* @__PURE__ */ jsx(Page.Title, { children: formatMessage({ id: getTranslation("heading.menu") }) }),
-    /* @__PURE__ */ jsxs(Page.Main, { style: { position: "relative" }, children: [
-      showAlert ? /* @__PURE__ */ jsx(
+  return /* @__PURE__ */ jsxRuntime.jsxs(admin.Layouts.Root, { children: [
+    /* @__PURE__ */ jsxRuntime.jsx(admin.Page.Title, { children: formatMessage({ id: getTranslation("heading.menu") }) }),
+    /* @__PURE__ */ jsxRuntime.jsxs(admin.Page.Main, { style: { position: "relative" }, children: [
+      showAlert ? /* @__PURE__ */ jsxRuntime.jsx(
         AlertWrapper,
         {
           variant: alertVariant,
           toggleAlert,
           message: alertMessage !== "" ? alertMessage : formatMessage({ id: getTranslation(`alert.description.${alertVariant}`) })
         }
-      ) : /* @__PURE__ */ jsx(Fragment$2, {}),
-      /* @__PURE__ */ jsx(
-        Layouts.Header,
+      ) : /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, {}),
+      /* @__PURE__ */ jsxRuntime.jsx(
+        admin.Layouts.Header,
         {
           title: formatMessage({ id: getTranslation("heading.menu") }),
           subtitle: formatMessage({
             id: getTranslation(id ? "heading.edit" : "heading.add")
           }),
-          primaryAction: /* @__PURE__ */ jsx(Button, { onClick: onSave, children: formatMessage({
+          primaryAction: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { onClick: onSave, children: formatMessage({
             id: getTranslation("save")
           }) }),
-          navigationAction: /* @__PURE__ */ jsx(BackButton, { fallback: `/plugins/${PLUGIN_ID}`, disabled: false })
+          navigationAction: /* @__PURE__ */ jsxRuntime.jsx(admin.BackButton, { fallback: `/plugins/${index$1.PLUGIN_ID}`, disabled: false })
         }
       ),
-      /* @__PURE__ */ jsxs(Layouts.Content, { children: [
-        /* @__PURE__ */ jsx(Box, { children: /* @__PURE__ */ jsx(Box, { background: "neutral0", padding: 4, marginBottom: 4, shadow: "filterShadow", hasRadius: true, children: /* @__PURE__ */ jsxs(Grid.Root, { gap: 3, children: [
-          /* @__PURE__ */ jsx(Grid.Item, { col: 6, xs: 12, children: /* @__PURE__ */ jsxs(
-            Field.Root,
+      /* @__PURE__ */ jsxRuntime.jsxs(admin.Layouts.Content, { children: [
+        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Box, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Box, { background: "neutral0", padding: 4, marginBottom: 4, shadow: "filterShadow", hasRadius: true, children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Grid.Root, { gap: 3, children: [
+          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Grid.Item, { col: 6, xs: 12, children: /* @__PURE__ */ jsxRuntime.jsxs(
+            designSystem.Field.Root,
             {
               name: "title",
               required: true,
               style: { width: "100%" },
               error: !state.title && showAlert && alertMessage === "" ? formatMessage({ id: getTranslation(`required`) }) : "",
               children: [
-                /* @__PURE__ */ jsx(Field.Label, { children: formatMessage({ id: getTranslation(`forms.fields.title`) }) }),
-                /* @__PURE__ */ jsx(
-                  Field.Input,
+                /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Label, { children: formatMessage({ id: getTranslation(`forms.fields.title`) }) }),
+                /* @__PURE__ */ jsxRuntime.jsx(
+                  designSystem.Field.Input,
                   {
                     name: "title",
                     type: "text",
@@ -6633,17 +6659,17 @@ const FormContent = () => {
                     })
                   }
                 ),
-                /* @__PURE__ */ jsx(Field.Error, {})
+                /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Error, {})
               ]
             }
           ) }),
-          /* @__PURE__ */ jsx(Grid.Item, { col: 6, xs: 12, children: /* @__PURE__ */ jsxs(Grid.Root, { name: "date", gap: 2, style: { width: "100%" }, children: [
-            /* @__PURE__ */ jsx(Grid.Item, { col: 6, xs: 6, children: /* @__PURE__ */ jsxs(Field.Root, { style: { width: "100%" }, children: [
-              /* @__PURE__ */ jsx(Field.Label, { children: formatMessage({ id: getTranslation(`forms.fields.dateFrom`) }) }),
-              initialFromDate ? /* @__PURE__ */ jsx(Fragment$2, { children: /* @__PURE__ */ jsxs(Flex, { children: [
-                /* @__PURE__ */ jsx(Typography, { children: initialFromDate }),
-                /* @__PURE__ */ jsx(
-                  Pencil,
+          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Grid.Item, { col: 6, xs: 12, children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Grid.Root, { name: "date", gap: 2, style: { width: "100%" }, children: [
+            /* @__PURE__ */ jsxRuntime.jsx(designSystem.Grid.Item, { col: 6, xs: 6, children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Field.Root, { style: { width: "100%" }, children: [
+              /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Label, { children: formatMessage({ id: getTranslation(`forms.fields.dateFrom`) }) }),
+              initialFromDate ? /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, { children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { children: [
+                /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { children: initialFromDate }),
+                /* @__PURE__ */ jsxRuntime.jsx(
+                  icons.Pencil,
                   {
                     style: {
                       cursor: "pointer",
@@ -6654,8 +6680,8 @@ const FormContent = () => {
                     color: "primary"
                   }
                 )
-              ] }) }) : /* @__PURE__ */ jsx(
-                DatePicker,
+              ] }) }) : /* @__PURE__ */ jsxRuntime.jsx(
+                designSystem.DatePicker,
                 {
                   locale: "nl-NL",
                   minDate: /* @__PURE__ */ new Date(),
@@ -6669,7 +6695,7 @@ const FormContent = () => {
                     dispatch({
                       type: "EDIT_FORM",
                       payload: {
-                        dateFrom: format(value, "dd-MM-yyyy") + "T00:00:00.000Z",
+                        dateFrom: dateFns.format(value, "dd-MM-yyyy") + "T00:00:00.000Z",
                         active: currentDate >= value
                       }
                     });
@@ -6684,12 +6710,12 @@ const FormContent = () => {
                 }
               )
             ] }) }),
-            /* @__PURE__ */ jsx(Grid.Item, { col: 6, xs: 6, children: /* @__PURE__ */ jsxs(Field.Root, { style: { width: "100%" }, children: [
-              /* @__PURE__ */ jsx(Field.Label, { children: formatMessage({ id: getTranslation(`forms.fields.dateTill`) }) }),
-              initialTillDate ? /* @__PURE__ */ jsx(Fragment$2, { children: /* @__PURE__ */ jsxs(Flex, { children: [
-                /* @__PURE__ */ jsx(Typography, { children: initialTillDate }),
-                /* @__PURE__ */ jsx(
-                  Pencil,
+            /* @__PURE__ */ jsxRuntime.jsx(designSystem.Grid.Item, { col: 6, xs: 6, children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Field.Root, { style: { width: "100%" }, children: [
+              /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Label, { children: formatMessage({ id: getTranslation(`forms.fields.dateTill`) }) }),
+              initialTillDate ? /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, { children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { children: [
+                /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { children: initialTillDate }),
+                /* @__PURE__ */ jsxRuntime.jsx(
+                  icons.Pencil,
                   {
                     style: {
                       cursor: "pointer",
@@ -6700,8 +6726,8 @@ const FormContent = () => {
                     color: "primary"
                   }
                 )
-              ] }) }) : /* @__PURE__ */ jsx(
-                DatePicker,
+              ] }) }) : /* @__PURE__ */ jsxRuntime.jsx(
+                designSystem.DatePicker,
                 {
                   locale: "nl-NL",
                   minDate: /* @__PURE__ */ new Date(),
@@ -6715,7 +6741,7 @@ const FormContent = () => {
                     dispatch({
                       type: "EDIT_FORM",
                       payload: {
-                        dateTill: format(value, "dd-MM-yyyy") + "T00:00:00.000Z",
+                        dateTill: dateFns.format(value, "dd-MM-yyyy") + "T00:00:00.000Z",
                         active: currentDate <= value
                       }
                     });
@@ -6731,17 +6757,17 @@ const FormContent = () => {
               )
             ] }) })
           ] }) }),
-          /* @__PURE__ */ jsx(Grid.Item, { padding: 1, col: 6, xs: 6, children: /* @__PURE__ */ jsxs(
-            Field.Root,
+          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Grid.Item, { padding: 1, col: 6, xs: 6, children: /* @__PURE__ */ jsxRuntime.jsxs(
+            designSystem.Field.Root,
             {
               required: true,
               name: "successMessage",
               style: { width: "100%" },
               error: !state.successMessage && showAlert && alertMessage === "" ? formatMessage({ id: getTranslation(`required`) }) : "",
               children: [
-                /* @__PURE__ */ jsx(Field.Label, { children: formatMessage({ id: getTranslation(`forms.fields.successMessage`) }) }),
-                /* @__PURE__ */ jsx(
-                  Textarea,
+                /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Label, { children: formatMessage({ id: getTranslation(`forms.fields.successMessage`) }) }),
+                /* @__PURE__ */ jsxRuntime.jsx(
+                  designSystem.Textarea,
                   {
                     name: "successMessage",
                     type: "text",
@@ -6754,21 +6780,21 @@ const FormContent = () => {
                     })
                   }
                 ),
-                /* @__PURE__ */ jsx(Field.Error, {})
+                /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Error, {})
               ]
             }
           ) }),
-          /* @__PURE__ */ jsx(Grid.Item, { padding: 1, col: 6, xs: 6, children: /* @__PURE__ */ jsxs(
-            Field.Root,
+          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Grid.Item, { padding: 1, col: 6, xs: 6, children: /* @__PURE__ */ jsxRuntime.jsxs(
+            designSystem.Field.Root,
             {
               required: true,
               name: "errorMessage",
               style: { width: "100%" },
               error: !state.errorMessage && showAlert && alertMessage === "" ? formatMessage({ id: getTranslation(`required`) }) : "",
               children: [
-                /* @__PURE__ */ jsx(Field.Label, { children: formatMessage({ id: getTranslation(`forms.fields.errorMessage`) }) }),
-                /* @__PURE__ */ jsx(
-                  Textarea,
+                /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Label, { children: formatMessage({ id: getTranslation(`forms.fields.errorMessage`) }) }),
+                /* @__PURE__ */ jsxRuntime.jsx(
+                  designSystem.Textarea,
                   {
                     name: "errorMessage",
                     type: "text",
@@ -6781,34 +6807,34 @@ const FormContent = () => {
                     })
                   }
                 ),
-                /* @__PURE__ */ jsx(Field.Error, {})
+                /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Error, {})
               ]
             }
           ) })
         ] }) }) }),
-        /* @__PURE__ */ jsx(FormBuilder, {}),
-        /* @__PURE__ */ jsx(Dialog.Root, { open: isDialogOpen, onDismiss: () => setIsDialogOpen(false), children: /* @__PURE__ */ jsxs(Dialog.Content, { children: [
-          /* @__PURE__ */ jsx(Dialog.Header, { children: formatMessage({ id: getTranslation("alert.success") }) }),
-          /* @__PURE__ */ jsx(Dialog.Body, { icon: /* @__PURE__ */ jsx(CheckCircle, { fill: "success600" }), children: formatMessage({ id: getTranslation("alert.description.success") }) }),
-          /* @__PURE__ */ jsxs(Dialog.Footer, { children: [
-            /* @__PURE__ */ jsx(Dialog.Cancel, { children: /* @__PURE__ */ jsx(
-              Button,
+        /* @__PURE__ */ jsxRuntime.jsx(FormBuilder, {}),
+        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Root, { open: isDialogOpen, onDismiss: () => setIsDialogOpen(false), children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Dialog.Content, { children: [
+          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Header, { children: formatMessage({ id: getTranslation("alert.success") }) }),
+          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Body, { icon: /* @__PURE__ */ jsxRuntime.jsx(icons.CheckCircle, { fill: "success600" }), children: formatMessage({ id: getTranslation("alert.description.success") }) }),
+          /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Dialog.Footer, { children: [
+            /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Cancel, { children: /* @__PURE__ */ jsxRuntime.jsx(
+              designSystem.Button,
               {
                 fullWidth: true,
                 variant: "secondary",
                 onClick: () => {
-                  history(`/plugins/${PLUGIN_ID}/form/${response.documentId}`);
+                  history(`/plugins/${index$1.PLUGIN_ID}/form/${response.documentId}`);
                   setIsDialogOpen(false);
                 },
                 children: formatMessage({ id: getTranslation("back_to_form") })
               }
             ) }),
-            /* @__PURE__ */ jsx(Dialog.Action, { children: /* @__PURE__ */ jsx(
-              Button,
+            /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Action, { children: /* @__PURE__ */ jsxRuntime.jsx(
+              designSystem.Button,
               {
                 fullWidth: true,
                 variant: "primary",
-                onClick: () => history(`/plugins/${PLUGIN_ID}`),
+                onClick: () => history(`/plugins/${index$1.PLUGIN_ID}`),
                 children: formatMessage({ id: getTranslation("back_to_overview") })
               }
             ) })
@@ -6818,15 +6844,15 @@ const FormContent = () => {
     ] })
   ] });
 };
-const Form = () => /* @__PURE__ */ jsx(FormProvider, { children: /* @__PURE__ */ jsx(FormContent, {}) });
+const Form = () => /* @__PURE__ */ jsxRuntime.jsx(FormProvider, { children: /* @__PURE__ */ jsxRuntime.jsx(FormContent, {}) });
 const ExportButton = ({ formId, disabled }) => {
-  const { formatMessage } = useIntl();
-  const [loading, toggleLoading] = useState(false);
-  const { get: get2 } = useFetchClient();
-  const { toggleNotification } = useNotification();
+  const { formatMessage } = reactIntl.useIntl();
+  const [loading, toggleLoading] = React.useState(false);
+  const { get: get2 } = admin.useFetchClient();
+  const { toggleNotification } = admin.useNotification();
   const processSubmissionExport = async (formId2) => {
     toggleLoading(true);
-    get2(`/${PLUGIN_ID}/submissions/export/${formId2}`).then((response) => {
+    get2(`/${index$1.PLUGIN_ID}/submissions/export/${formId2}`).then((response) => {
       const blob = new Blob([response.data.data]);
       const link = document.createElement("a");
       link.href = window.URL.createObjectURL(blob);
@@ -6838,21 +6864,21 @@ const ExportButton = ({ formId, disabled }) => {
       });
     });
   };
-  return /* @__PURE__ */ jsx(Fragment$2, { children: /* @__PURE__ */ jsx(
-    LinkButton,
+  return /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, { children: /* @__PURE__ */ jsxRuntime.jsx(
+    designSystem.LinkButton,
     {
       variant: "secondary",
       disabled: loading || disabled,
       onClick: () => processSubmissionExport(formId),
-      startIcon: loading ? /* @__PURE__ */ jsx(Loader, { small: true }) : /* @__PURE__ */ jsx(Download, {}),
+      startIcon: loading ? /* @__PURE__ */ jsxRuntime.jsx(designSystem.Loader, { small: true }) : /* @__PURE__ */ jsxRuntime.jsx(icons.Download, {}),
       children: formatMessage({
-        id: `${PLUGIN_ID}.forms.fields.actions.export_submissions`
+        id: `${index$1.PLUGIN_ID}.forms.fields.actions.export_submissions`
       })
     }
   ) });
 };
 const Email = ({ ...props }) => {
-  return /* @__PURE__ */ jsx(
+  return /* @__PURE__ */ jsxRuntime.jsx(
     "svg",
     {
       focusable: "false",
@@ -6861,18 +6887,18 @@ const Email = ({ ...props }) => {
       "data-testid": "SendIcon",
       width: props.width ?? 24,
       height: props.height ?? 24,
-      children: /* @__PURE__ */ jsx("path", { d: "M2.01 21 23 12 2.01 3 2 10l15 2-15 2z", fill: "currentColor" })
+      children: /* @__PURE__ */ jsxRuntime.jsx("path", { d: "M2.01 21 23 12 2.01 3 2 10l15 2-15 2z", fill: "currentColor" })
     }
   );
 };
 const NotificationButton = ({ handleOnClick }) => {
-  const { formatMessage } = useIntl();
-  return /* @__PURE__ */ jsx(Fragment$2, { children: /* @__PURE__ */ jsx(
-    LinkButton,
+  const { formatMessage } = reactIntl.useIntl();
+  return /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, { children: /* @__PURE__ */ jsxRuntime.jsx(
+    designSystem.LinkButton,
     {
       variant: "secondary",
       onClick: () => handleOnClick(HandlerTypeEnum.Notification),
-      startIcon: /* @__PURE__ */ jsx(Email, { width: 16, height: 16 }),
+      startIcon: /* @__PURE__ */ jsxRuntime.jsx(Email, { width: 16, height: 16 }),
       children: formatMessage({
         id: getTranslation("handlers.notification")
       })
@@ -6880,7 +6906,7 @@ const NotificationButton = ({ handleOnClick }) => {
   ) });
 };
 const Reply = ({ ...props }) => {
-  return /* @__PURE__ */ jsx(
+  return /* @__PURE__ */ jsxRuntime.jsx(
     "svg",
     {
       focusable: "false",
@@ -6889,18 +6915,18 @@ const Reply = ({ ...props }) => {
       "data-testid": "SendIcon",
       width: props.width ?? 24,
       height: props.height ?? 24,
-      children: /* @__PURE__ */ jsx("path", { d: "M10 9V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11", fill: "currentColor" })
+      children: /* @__PURE__ */ jsxRuntime.jsx("path", { d: "M10 9V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11", fill: "currentColor" })
     }
   );
 };
 const ConfirmationButton = ({ handleOnClick }) => {
-  const { formatMessage } = useIntl();
-  return /* @__PURE__ */ jsx(
-    LinkButton,
+  const { formatMessage } = reactIntl.useIntl();
+  return /* @__PURE__ */ jsxRuntime.jsx(
+    designSystem.LinkButton,
     {
       variant: "secondary",
       onClick: () => handleOnClick(HandlerTypeEnum.Confirmation),
-      startIcon: /* @__PURE__ */ jsx(Reply, { width: 16, height: 16 }),
+      startIcon: /* @__PURE__ */ jsxRuntime.jsx(Reply, { width: 16, height: 16 }),
       children: formatMessage({
         id: getTranslation("handlers.confirmation")
       })
@@ -6917,8 +6943,8 @@ const HandlerButtonGroup = ({
     setHandlerType(notification);
     setModalIsVisible(true);
   };
-  return /* @__PURE__ */ jsx(Fragment$2, { children: notifications.map(
-    (notification, index2) => notification.identifier === HandlerTypeEnum.Notification ? /* @__PURE__ */ jsx(NotificationButton, { handleOnClick }, index2) : /* @__PURE__ */ jsx(ConfirmationButton, { handleOnClick }, index2)
+  return /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, { children: notifications.map(
+    (notification, index2) => notification.identifier === HandlerTypeEnum.Notification ? /* @__PURE__ */ jsxRuntime.jsx(NotificationButton, { handleOnClick }, index2) : /* @__PURE__ */ jsxRuntime.jsx(ConfirmationButton, { handleOnClick }, index2)
   ) });
 };
 const SelectEmail = ({
@@ -6926,7 +6952,7 @@ const SelectEmail = ({
   setValue
 }) => {
   const { state } = useFormContext();
-  const { formatMessage } = useIntl();
+  const { formatMessage } = reactIntl.useIntl();
   const emailFields = [];
   state.steps.map(
     (step) => step.layouts["lg"].map((block) => {
@@ -6940,10 +6966,10 @@ const SelectEmail = ({
     })
   );
   if (!Boolean(emailFields.length)) {
-    return /* @__PURE__ */ jsx(Fragment$2, {});
+    return /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, {});
   }
-  return /* @__PURE__ */ jsx(Fragment$2, { children: /* @__PURE__ */ jsx(
-    SingleSelect,
+  return /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, { children: /* @__PURE__ */ jsxRuntime.jsx(
+    designSystem.SingleSelect,
     {
       label: formatMessage({
         id: getTranslation("forms.fields.select_recipient")
@@ -6954,7 +6980,7 @@ const SelectEmail = ({
         id: getTranslation("forms.fields.select_recipient")
       }),
       name: "to",
-      children: emailFields.map((field, index2) => /* @__PURE__ */ jsxs(SingleSelectOption, { value: field.name, children: [
+      children: emailFields.map((field, index2) => /* @__PURE__ */ jsxRuntime.jsxs(designSystem.SingleSelectOption, { value: field.name, children: [
         field.label,
         " field"
       ] }, `select-${field.name}-${index2}`))
@@ -14473,7 +14499,7 @@ const HardBreak = Node$1.create({
     };
   }
 });
-const StyledEditor = styled.div`
+const StyledEditor = styled__default.default.div`
   .tiptap {
     min-height: 200px;
     p {
@@ -14522,21 +14548,21 @@ const StyledEditor = styled.div`
   }
 `;
 const RichTextField = ({ value, onChange, availableFields }) => {
-  const editor = useEditor({
+  const editor = react.useEditor({
     extensions: [
-      StarterKit,
-      Paragraph,
+      StarterKit__default.default,
+      Paragraph__default.default,
       HardBreak,
-      Heading.configure({ levels: [1, 2, 3] }),
-      Bold,
-      Italic,
-      Placeholder.configure({ placeholder: "Start typing..." }),
-      Table.configure({
+      Heading__default.default.configure({ levels: [1, 2, 3] }),
+      Bold__default.default,
+      Italic__default.default,
+      Placeholder__default.default.configure({ placeholder: "Start typing..." }),
+      Table__default.default.configure({
         resizable: true
       }),
-      TableRow,
-      TableHeader,
-      TableCell
+      TableRow__default.default,
+      TableHeader__default.default,
+      TableCell__default.default
     ],
     content: value.replaceAll(",", ""),
     onUpdate: ({ editor: editor2 }) => {
@@ -14544,49 +14570,49 @@ const RichTextField = ({ value, onChange, availableFields }) => {
     }
   });
   if (!editor) {
-    return /* @__PURE__ */ jsx("p", { children: "Loading editor..." });
+    return /* @__PURE__ */ jsxRuntime.jsx("p", { children: "Loading editor..." });
   }
   const insertPlaceholder = (field) => {
     editor.commands.insertContent(`{{${field}}}`);
   };
-  return /* @__PURE__ */ jsxs(Box, { padding: 4, background: "neutral100", borderRadius: "4px", children: [
-    /* @__PURE__ */ jsxs(Flex, { gap: 2, paddingBottom: 3, wrap: "wrap", children: [
-      /* @__PURE__ */ jsx(
-        Button,
+  return /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Box, { padding: 4, background: "neutral100", borderRadius: "4px", children: [
+    /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { gap: 2, paddingBottom: 3, wrap: "wrap", children: [
+      /* @__PURE__ */ jsxRuntime.jsx(
+        designSystem.Button,
         {
           variant: "tertiary",
           onClick: () => editor.chain().focus().toggleBold().run(),
-          startIcon: /* @__PURE__ */ jsx(Bold$1, {}),
+          startIcon: /* @__PURE__ */ jsxRuntime.jsx(icons.Bold, {}),
           children: "Bold"
         }
       ),
-      /* @__PURE__ */ jsx(
-        Button,
+      /* @__PURE__ */ jsxRuntime.jsx(
+        designSystem.Button,
         {
           variant: "tertiary",
           onClick: () => editor.chain().focus().toggleItalic().run(),
-          startIcon: /* @__PURE__ */ jsx(Italic$1, {}),
+          startIcon: /* @__PURE__ */ jsxRuntime.jsx(icons.Italic, {}),
           children: "Italic"
         }
       ),
-      /* @__PURE__ */ jsx(
-        Button,
+      /* @__PURE__ */ jsxRuntime.jsx(
+        designSystem.Button,
         {
           variant: "tertiary",
           onClick: () => editor.chain().focus().toggleHeading({ level: 1 }).run(),
           children: "H1"
         }
       ),
-      /* @__PURE__ */ jsx(
-        Button,
+      /* @__PURE__ */ jsxRuntime.jsx(
+        designSystem.Button,
         {
           variant: "tertiary",
           onClick: () => editor.chain().focus().toggleHeading({ level: 2 }).run(),
           children: "H2"
         }
       ),
-      /* @__PURE__ */ jsx(
-        Button,
+      /* @__PURE__ */ jsxRuntime.jsx(
+        designSystem.Button,
         {
           variant: "tertiary",
           onClick: () => editor.chain().focus().toggleHeading({ level: 3 }).run(),
@@ -14594,12 +14620,12 @@ const RichTextField = ({ value, onChange, availableFields }) => {
         }
       )
     ] }),
-    /* @__PURE__ */ jsx(Flex, { gap: 2, paddingBottom: 3, wrap: "wrap", children: availableFields.map((field) => {
+    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { gap: 2, paddingBottom: 3, wrap: "wrap", children: availableFields.map((field) => {
       if (!field.field || field.field.type === "file") {
-        return /* @__PURE__ */ jsx(Fragment$2, {});
+        return /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, {});
       }
-      return /* @__PURE__ */ jsx(
-        Button,
+      return /* @__PURE__ */ jsxRuntime.jsx(
+        designSystem.Button,
         {
           variant: "secondary",
           onClick: () => field.field && insertPlaceholder(field.field?.name),
@@ -14608,15 +14634,15 @@ const RichTextField = ({ value, onChange, availableFields }) => {
         field.i
       );
     }) }),
-    /* @__PURE__ */ jsx(StyledEditor, { children: /* @__PURE__ */ jsx(
-      Box,
+    /* @__PURE__ */ jsxRuntime.jsx(StyledEditor, { children: /* @__PURE__ */ jsxRuntime.jsx(
+      designSystem.Box,
       {
         background: "neutral0",
         border: "1px solid #EAEAEA",
         borderRadius: "4px",
         padding: 3,
         minHeight: "200px",
-        children: /* @__PURE__ */ jsx(EditorContent, { editor })
+        children: /* @__PURE__ */ jsxRuntime.jsx(react.EditorContent, { editor })
       }
     ) })
   ] });
@@ -14627,20 +14653,20 @@ const NotificationModal = ({
   isModalVisible,
   setModalIsVisible
 }) => {
-  const token = useAuth("Admin", (state2) => state2.token);
-  const [notification, setNotification] = useState(currentNotification);
-  const { formatMessage } = useIntl();
+  const token = admin.useAuth("Admin", (state2) => state2.token);
+  const [notification, setNotification] = React.useState(currentNotification);
+  const { formatMessage } = reactIntl.useIntl();
   const { state, dispatch } = useFormContext();
-  const [hasAlert, setAlert] = useState(false);
-  const [loading, setIsLoading] = useState(true);
-  const [alertMessage, setAlertMessage] = useState(
-    formatMessage({ id: `${PLUGIN_ID}.required` })
+  const [hasAlert, setAlert] = React.useState(false);
+  const [loading, setIsLoading] = React.useState(true);
+  const [alertMessage, setAlertMessage] = React.useState(
+    formatMessage({ id: `${index$1.PLUGIN_ID}.required` })
   );
-  const [testEmailStatus, setTestEmailStatus] = useState(null);
+  const [testEmailStatus, setTestEmailStatus] = React.useState(null);
   if (!notification) {
-    return /* @__PURE__ */ jsx(Fragment$2, {});
+    return /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, {});
   }
-  useEffect(() => {
+  React.useEffect(() => {
     notificationRequests.get(token, notification.documentId).then((res) => {
       dispatch({
         type: "EDIT_FORM",
@@ -14676,23 +14702,23 @@ const NotificationModal = ({
     setTimeout(() => setTestEmailStatus(null), 5e3);
   };
   if (!isModalVisible || !notification || !state || loading) {
-    return /* @__PURE__ */ jsx(Fragment$2, {});
+    return /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, {});
   }
-  return /* @__PURE__ */ jsx(Modal.Root, { open: isModalVisible, onOpenChange: closeModal, children: /* @__PURE__ */ jsxs(Modal.Content, { children: [
-    /* @__PURE__ */ jsx(Modal.Header, { children: /* @__PURE__ */ jsx(Flex, { direction: "column", gap: 4, alignItems: "stretch", width: "100%", children: /* @__PURE__ */ jsx(Modal.Title, { children: "E-mail" }) }) }),
-    /* @__PURE__ */ jsx(Modal.Body, { children: /* @__PURE__ */ jsxs(Flex, { direction: "column", gap: 4, alignItems: "stretch", width: "100%", children: [
-      /* @__PURE__ */ jsx(
-        Switch,
+  return /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Root, { open: isModalVisible, onOpenChange: closeModal, children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Modal.Content, { children: [
+    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Header, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { direction: "column", gap: 4, alignItems: "stretch", width: "100%", children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Title, { children: "E-mail" }) }) }),
+    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Body, { children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "column", gap: 4, alignItems: "stretch", width: "100%", children: [
+      /* @__PURE__ */ jsxRuntime.jsx(
+        designSystem.Switch,
         {
           onChange: () => setValue("enabled", notification.enabled = !notification.enabled),
           visibleLabels: true,
           checked: Boolean(notification.enabled)
         }
       ),
-      /* @__PURE__ */ jsxs(Field.Root, { name: "from", id: "from", error: hasAlert ? alertMessage : "", children: [
-        /* @__PURE__ */ jsx(Field.Label, { children: formatMessage({ id: getTranslation("forms.fields.from") }) }),
-        /* @__PURE__ */ jsx(
-          TextInput,
+      /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Field.Root, { name: "from", id: "from", error: hasAlert ? alertMessage : "", children: [
+        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Label, { children: formatMessage({ id: getTranslation("forms.fields.from") }) }),
+        /* @__PURE__ */ jsxRuntime.jsx(
+          designSystem.TextInput,
           {
             name: "from",
             value: notification.from,
@@ -14702,10 +14728,10 @@ const NotificationModal = ({
           }
         )
       ] }),
-      /* @__PURE__ */ jsxs(Field.Root, { name: "to", id: "to", error: hasAlert ? alertMessage : "", children: [
-        /* @__PURE__ */ jsx(Field.Label, { children: formatMessage({ id: getTranslation("forms.fields.recipient") }) }),
-        notification.identifier === HandlerTypeEnum.Notification ? /* @__PURE__ */ jsx(
-          TextInput,
+      /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Field.Root, { name: "to", id: "to", error: hasAlert ? alertMessage : "", children: [
+        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Label, { children: formatMessage({ id: getTranslation("forms.fields.recipient") }) }),
+        notification.identifier === HandlerTypeEnum.Notification ? /* @__PURE__ */ jsxRuntime.jsx(
+          designSystem.TextInput,
           {
             name: "to",
             value: notification.to,
@@ -14713,14 +14739,14 @@ const NotificationModal = ({
               setValue("to", e.target.value);
             }
           }
-        ) : /* @__PURE__ */ jsx(SelectEmail, { notification, setValue })
+        ) : /* @__PURE__ */ jsxRuntime.jsx(SelectEmail, { notification, setValue })
       ] }),
-      /* @__PURE__ */ jsxs(Field.Root, { children: [
-        /* @__PURE__ */ jsx(Field.Label, { children: formatMessage({
+      /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Field.Root, { children: [
+        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Label, { children: formatMessage({
           id: getTranslation("forms.fields.subject")
         }) }),
-        /* @__PURE__ */ jsx(
-          TextInput,
+        /* @__PURE__ */ jsxRuntime.jsx(
+          designSystem.TextInput,
           {
             name: "subject",
             value: notification.subject,
@@ -14730,16 +14756,16 @@ const NotificationModal = ({
           }
         )
       ] }),
-      /* @__PURE__ */ jsx(Divider, {}),
-      /* @__PURE__ */ jsx(Button, { variant: "secondary", onClick: sendTestEmail, children: formatMessage({
+      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Divider, {}),
+      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { variant: "secondary", onClick: sendTestEmail, children: formatMessage({
         id: getTranslation("forms.fields.test_email.send")
       }) }),
-      /* @__PURE__ */ jsx(Typography, { variant: "pi", textColor: "neutral600", children: formatMessage({
+      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { variant: "pi", textColor: "neutral600", children: formatMessage({
         id: getTranslation("forms.fields.test_email.info")
       }) }),
-      testEmailStatus && /* @__PURE__ */ jsx(Alert, { variant: "info", style: { width: "100%" }, children: testEmailStatus }),
-      /* @__PURE__ */ jsx(Divider, {}),
-      /* @__PURE__ */ jsx(
+      testEmailStatus && /* @__PURE__ */ jsxRuntime.jsx(designSystem.Alert, { variant: "info", style: { width: "100%" }, children: testEmailStatus }),
+      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Divider, {}),
+      /* @__PURE__ */ jsxRuntime.jsx(
         RichTextField,
         {
           value: notification.message,
@@ -14748,21 +14774,21 @@ const NotificationModal = ({
         }
       )
     ] }) }),
-    /* @__PURE__ */ jsxs(Modal.Footer, { children: [
-      /* @__PURE__ */ jsx(Modal.Close, { children: /* @__PURE__ */ jsx(Button, { variant: "tertiary", children: formatMessage({ id: getTranslation("cancel") }) }) }),
-      /* @__PURE__ */ jsx(Button, { onClick: save, children: formatMessage({ id: getTranslation("save") }) })
+    /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Modal.Footer, { children: [
+      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Close, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { variant: "tertiary", children: formatMessage({ id: getTranslation("cancel") }) }) }),
+      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { onClick: save, children: formatMessage({ id: getTranslation("save") }) })
     ] })
   ] }) });
 };
 const GenerateForm = ({ onGenerateSuccess }) => {
-  const [hasAISettings, setHasAISettings] = useState(false);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [aiPrompt, setAiPrompt] = useState("");
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [error, setError] = useState("");
+  const [hasAISettings, setHasAISettings] = React.useState(false);
+  const [isDialogOpen, setIsDialogOpen] = React.useState(false);
+  const [aiPrompt, setAiPrompt] = React.useState("");
+  const [isGenerating, setIsGenerating] = React.useState(false);
+  const [error, setError] = React.useState("");
   const isPromptValid = aiPrompt.trim().length > 10;
-  const token = useAuth("Admin", (state) => state.token);
-  useEffect(() => {
+  const token = admin.useAuth("Admin", (state) => state.token);
+  React.useEffect(() => {
     const fetchSettings = async () => {
       const response = await formRequests.getSettings(token);
       const { data } = response;
@@ -14792,16 +14818,16 @@ const GenerateForm = ({ onGenerateSuccess }) => {
     }
   };
   if (!hasAISettings) {
-    return /* @__PURE__ */ jsx(Fragment$2, {});
+    return /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, {});
   }
-  return /* @__PURE__ */ jsxs(Fragment$2, { children: [
-    /* @__PURE__ */ jsx(Button, { startIcon: /* @__PURE__ */ jsx(Magic, {}), onClick: () => setIsDialogOpen(true), children: "Generate Form" }),
-    /* @__PURE__ */ jsx(Dialog.Root, { open: isDialogOpen, onDismiss: () => setIsDialogOpen(false), children: /* @__PURE__ */ jsxs(Dialog.Content, { children: [
-      /* @__PURE__ */ jsx(Dialog.Header, { children: "Generate Form" }),
-      /* @__PURE__ */ jsx(Dialog.Body, { children: /* @__PURE__ */ jsxs(Flex, { direction: "column", gap: 4, alignItems: "flex-start", style: { width: "100%" }, children: [
-        /* @__PURE__ */ jsx(Typography, { children: "Describe the form you want to generate using plain text. The AI will help you!" }),
-        /* @__PURE__ */ jsx(Field.Root, { style: { width: "100%" }, children: /* @__PURE__ */ jsx(
-          Textarea,
+  return /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { startIcon: /* @__PURE__ */ jsxRuntime.jsx(icons.Magic, {}), onClick: () => setIsDialogOpen(true), children: "Generate Form" }),
+    /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Root, { open: isDialogOpen, onDismiss: () => setIsDialogOpen(false), children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Dialog.Content, { children: [
+      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Header, { children: "Generate Form" }),
+      /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Body, { children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "column", gap: 4, alignItems: "flex-start", style: { width: "100%" }, children: [
+        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { children: "Describe the form you want to generate using plain text. The AI will help you!" }),
+        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Root, { style: { width: "100%" }, children: /* @__PURE__ */ jsxRuntime.jsx(
+          designSystem.Textarea,
           {
             name: "aiPrompt",
             placeholder: "e.g. 'Customer feedback form with name, email, and a text field for feedback'",
@@ -14810,21 +14836,21 @@ const GenerateForm = ({ onGenerateSuccess }) => {
             error: aiPrompt && !isPromptValid ? "Please enter more details." : ""
           }
         ) }),
-        error && /* @__PURE__ */ jsx(Typography, { variant: "pi", textColor: "danger500", children: error })
+        error && /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { variant: "pi", textColor: "danger500", children: error })
       ] }) }),
-      /* @__PURE__ */ jsxs(Dialog.Footer, { children: [
-        /* @__PURE__ */ jsx(
-          Button,
+      /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Dialog.Footer, { children: [
+        /* @__PURE__ */ jsxRuntime.jsx(
+          designSystem.Button,
           {
-            startIcon: /* @__PURE__ */ jsx(Magic, {}),
+            startIcon: /* @__PURE__ */ jsxRuntime.jsx(icons.Magic, {}),
             onClick: handleGenerateClick,
             loading: isGenerating,
             disabled: !isPromptValid || isGenerating,
             children: "Generate"
           }
         ),
-        /* @__PURE__ */ jsx(
-          Button,
+        /* @__PURE__ */ jsxRuntime.jsx(
+          designSystem.Button,
           {
             variant: "secondary",
             onClick: () => setIsDialogOpen(false),
@@ -14840,24 +14866,24 @@ const formatDate = (dateString) => {
   return dateString.split("T")[0];
 };
 const HomePage = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const token = useAuth("Admin", (state) => state.token);
-  const { formatMessage } = useIntl();
-  const [isFetching, setIsFetching] = useState(false);
-  const [error, setError] = useState(null);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [selectedRow, setSelectedRow] = useState(null);
-  const [isModalVisible, setModalIsVisible] = useState(false);
-  const [handlerType, setHandlerType] = useState(null);
-  const [results, setResults] = useState([]);
-  const [pagination, setPagination] = useState([]);
-  const [fetchForms, setFetchForms] = useState(false);
-  const [{ query }] = useQueryParams({
+  const navigate = reactRouterDom.useNavigate();
+  const location = reactRouterDom.useLocation();
+  const token = admin.useAuth("Admin", (state) => state.token);
+  const { formatMessage } = reactIntl.useIntl();
+  const [isFetching, setIsFetching] = React.useState(false);
+  const [error, setError] = React.useState(null);
+  const [isDialogOpen, setIsDialogOpen] = React.useState(false);
+  const [selectedRow, setSelectedRow] = React.useState(null);
+  const [isModalVisible, setModalIsVisible] = React.useState(false);
+  const [handlerType, setHandlerType] = React.useState(null);
+  const [results, setResults] = React.useState([]);
+  const [pagination, setPagination] = React.useState([]);
+  const [fetchForms, setFetchForms] = React.useState(false);
+  const [{ query }] = admin.useQueryParams({
     page: 1,
     pageSize: 10
   });
-  useEffect(() => {
+  React.useEffect(() => {
     const fetchForms2 = async () => {
       setIsFetching(true);
       try {
@@ -14874,7 +14900,7 @@ const HomePage = () => {
     };
     fetchForms2();
   }, [navigate, fetchForms]);
-  useEffect(() => {
+  React.useEffect(() => {
     const fetchForms2 = async () => {
       setIsFetching(true);
       try {
@@ -14908,7 +14934,7 @@ const HomePage = () => {
     formatMessage({
       id: getTranslation(`list.active`)
     }),
-    /* @__PURE__ */ jsx(VisuallyHidden, { children: "Actions" })
+    /* @__PURE__ */ jsxRuntime.jsx(designSystem.VisuallyHidden, { children: "Actions" })
   ];
   const handleDeleteClick = (row) => {
     setSelectedRow(row);
@@ -14927,57 +14953,57 @@ const HomePage = () => {
     }
   };
   if (isFetching) {
-    return /* @__PURE__ */ jsx(Page.Loading, {});
+    return /* @__PURE__ */ jsxRuntime.jsx(admin.Page.Loading, {});
   }
   if (error) {
-    return /* @__PURE__ */ jsx(Page.Error, {});
+    return /* @__PURE__ */ jsxRuntime.jsx(admin.Page.Error, {});
   }
-  return /* @__PURE__ */ jsx(Fragment$2, { children: /* @__PURE__ */ jsxs(Layouts.Root, { children: [
-    /* @__PURE__ */ jsx(Page.Title, { children: formatMessage({ id: getTranslation("heading.menu") }) }),
-    /* @__PURE__ */ jsxs(Page.Main, { style: { position: "relative" }, children: [
-      /* @__PURE__ */ jsx(
-        Layouts.Header,
+  return /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, { children: /* @__PURE__ */ jsxRuntime.jsxs(admin.Layouts.Root, { children: [
+    /* @__PURE__ */ jsxRuntime.jsx(admin.Page.Title, { children: formatMessage({ id: getTranslation("heading.menu") }) }),
+    /* @__PURE__ */ jsxRuntime.jsxs(admin.Page.Main, { style: { position: "relative" }, children: [
+      /* @__PURE__ */ jsxRuntime.jsx(
+        admin.Layouts.Header,
         {
           title: formatMessage({ id: getTranslation("forms.label") }),
-          primaryAction: /* @__PURE__ */ jsxs(Flex, { gap: 4, children: [
-            /* @__PURE__ */ jsx(GenerateForm, { onGenerateSuccess: setFetchForms }),
-            /* @__PURE__ */ jsx(
-              LinkButton,
+          primaryAction: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { gap: 4, children: [
+            /* @__PURE__ */ jsxRuntime.jsx(GenerateForm, { onGenerateSuccess: setFetchForms }),
+            /* @__PURE__ */ jsxRuntime.jsx(
+              designSystem.LinkButton,
               {
-                startIcon: /* @__PURE__ */ jsx(Plus, { style: { fill: "white" } }),
-                href: `/admin/plugins/${PLUGIN_ID}/form`,
+                startIcon: /* @__PURE__ */ jsxRuntime.jsx(icons.Plus, { style: { fill: "white" } }),
+                href: `/admin/plugins/${index$1.PLUGIN_ID}/form`,
                 children: formatMessage({
                   id: getTranslation("forms.subtitle")
                 })
               }
             )
           ] }),
-          secondaryAction: /* @__PURE__ */ jsx(
-            LinkButton,
+          secondaryAction: /* @__PURE__ */ jsxRuntime.jsx(
+            designSystem.LinkButton,
             {
               variant: "tertiary",
-              startIcon: /* @__PURE__ */ jsx(Mail, {}),
-              to: `/plugins/${PLUGIN_ID}/submissions`,
-              tag: NavLink,
+              startIcon: /* @__PURE__ */ jsxRuntime.jsx(icons.Mail, {}),
+              to: `/plugins/${index$1.PLUGIN_ID}/submissions`,
+              tag: reactRouterDom.NavLink,
               children: formatMessage({ id: getTranslation("submissions.all") })
             }
           ),
-          navigationAction: /* @__PURE__ */ jsx(BackButton, { disabled: void 0 })
+          navigationAction: /* @__PURE__ */ jsxRuntime.jsx(admin.BackButton, { disabled: void 0 })
         }
       ),
-      /* @__PURE__ */ jsxs(Layouts.Content, { children: [
-        /* @__PURE__ */ jsx(Grid.Root, { children: /* @__PURE__ */ jsx(Grid.Item, { col: 12, s: 12, children: /* @__PURE__ */ jsxs(Box, { style: { width: "100%" }, children: [
-          /* @__PURE__ */ jsx(Table$1.Root, { rows: results, headers: tableHeaders, isLoading: isFetching, children: /* @__PURE__ */ jsxs(Table$1.Content, { children: [
-            /* @__PURE__ */ jsx(Table$1.Head, { children: tableHeaders.map((header, index2) => /* @__PURE__ */ jsx(Table$1.HeaderCell, { name: header, label: header }, index2)) }),
-            /* @__PURE__ */ jsx(Table$1.Loading, {}),
-            /* @__PURE__ */ jsx(
-              Table$1.Empty,
+      /* @__PURE__ */ jsxRuntime.jsxs(admin.Layouts.Content, { children: [
+        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Grid.Root, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Grid.Item, { col: 12, s: 12, children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Box, { style: { width: "100%" }, children: [
+          /* @__PURE__ */ jsxRuntime.jsx(admin.Table.Root, { rows: results, headers: tableHeaders, isLoading: isFetching, children: /* @__PURE__ */ jsxRuntime.jsxs(admin.Table.Content, { children: [
+            /* @__PURE__ */ jsxRuntime.jsx(admin.Table.Head, { children: tableHeaders.map((header, index2) => /* @__PURE__ */ jsxRuntime.jsx(admin.Table.HeaderCell, { name: header, label: header }, index2)) }),
+            /* @__PURE__ */ jsxRuntime.jsx(admin.Table.Loading, {}),
+            /* @__PURE__ */ jsxRuntime.jsx(
+              admin.Table.Empty,
               {
-                action: /* @__PURE__ */ jsx(
-                  LinkButton,
+                action: /* @__PURE__ */ jsxRuntime.jsx(
+                  designSystem.LinkButton,
                   {
-                    startIcon: /* @__PURE__ */ jsx(Plus, { style: { fill: "white" } }),
-                    href: `/admin/plugins/${PLUGIN_ID}/form/add`,
+                    startIcon: /* @__PURE__ */ jsxRuntime.jsx(icons.Plus, { style: { fill: "white" } }),
+                    href: `/admin/plugins/${index$1.PLUGIN_ID}/form/add`,
                     children: formatMessage({
                       id: getTranslation("forms.subtitle")
                     })
@@ -14985,7 +15011,7 @@ const HomePage = () => {
                 )
               }
             ),
-            /* @__PURE__ */ jsx(Table$1.Body, { children: results && results.map((row) => {
+            /* @__PURE__ */ jsxRuntime.jsx(admin.Table.Body, { children: results && results.map((row) => {
               const formattedDate = new Intl.DateTimeFormat("nl-NL", {
                 year: "numeric",
                 month: "long",
@@ -14996,23 +15022,23 @@ const HomePage = () => {
               }).format(new Date(row.createdAt));
               const formattedDateFrom = row.dateFrom ? formatDate(row.dateFrom) : "";
               const formattedDateTill = row.dateTill ? formatDate(row.dateTill) : "";
-              return /* @__PURE__ */ jsxs(Table$1.Row, { children: [
-                /* @__PURE__ */ jsx(Table$1.Cell, { children: /* @__PURE__ */ jsx(Typography, { textColor: "neutral800", children: row.id }) }),
-                /* @__PURE__ */ jsx(Table$1.Cell, { children: /* @__PURE__ */ jsx(Typography, { textColor: "neutral800", children: row.title }) }),
-                /* @__PURE__ */ jsx(Table$1.Cell, { children: /* @__PURE__ */ jsx(Typography, { textColor: "neutral800", children: formattedDate }) }),
-                /* @__PURE__ */ jsx(Table$1.Cell, { children: /* @__PURE__ */ jsxs(Flex, { gap: 2, justifyContent: "flex-start", children: [
-                  /* @__PURE__ */ jsx(
-                    LinkButton,
+              return /* @__PURE__ */ jsxRuntime.jsxs(admin.Table.Row, { children: [
+                /* @__PURE__ */ jsxRuntime.jsx(admin.Table.Cell, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { textColor: "neutral800", children: row.id }) }),
+                /* @__PURE__ */ jsxRuntime.jsx(admin.Table.Cell, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { textColor: "neutral800", children: row.title }) }),
+                /* @__PURE__ */ jsxRuntime.jsx(admin.Table.Cell, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { textColor: "neutral800", children: formattedDate }) }),
+                /* @__PURE__ */ jsxRuntime.jsx(admin.Table.Cell, { children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { gap: 2, justifyContent: "flex-start", children: [
+                  /* @__PURE__ */ jsxRuntime.jsx(
+                    designSystem.LinkButton,
                     {
                       disabled: row.submissions.length === 0,
                       variant: "secondary",
                       to: `form/${row.documentId}/submissions`,
-                      startIcon: /* @__PURE__ */ jsx(Mail, {}),
-                      tag: NavLink,
+                      startIcon: /* @__PURE__ */ jsxRuntime.jsx(icons.Mail, {}),
+                      tag: reactRouterDom.NavLink,
                       children: row.submissions.length
                     }
                   ),
-                  /* @__PURE__ */ jsx(
+                  /* @__PURE__ */ jsxRuntime.jsx(
                     ExportButton,
                     {
                       formId: row.documentId,
@@ -15020,7 +15046,7 @@ const HomePage = () => {
                     }
                   )
                 ] }) }),
-                /* @__PURE__ */ jsx(Table$1.Cell, { children: /* @__PURE__ */ jsx(Flex, { gap: 2, justifyContent: "flex-start", children: Boolean(row.notifications.length) && /* @__PURE__ */ jsx(
+                /* @__PURE__ */ jsxRuntime.jsx(admin.Table.Cell, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Flex, { gap: 2, justifyContent: "flex-start", children: Boolean(row.notifications.length) && /* @__PURE__ */ jsxRuntime.jsx(
                   HandlerButtonGroup,
                   {
                     notifications: row.notifications,
@@ -15028,34 +15054,34 @@ const HomePage = () => {
                     setHandlerType
                   }
                 ) }) }),
-                /* @__PURE__ */ jsx(Table$1.Cell, { children: /* @__PURE__ */ jsxs(Flex, { gap: 2, justifyContent: "flex-start", children: [
+                /* @__PURE__ */ jsxRuntime.jsx(admin.Table.Cell, { children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { gap: 2, justifyContent: "flex-start", children: [
                   row.active,
-                  /* @__PURE__ */ jsx(Badge, { active: row.active, children: formatMessage({
+                  /* @__PURE__ */ jsxRuntime.jsx(designSystem.Badge, { active: row.active, children: formatMessage({
                     id: getTranslation(
                       `list.${row.active ? "active" : "inactive"}`
                     )
                   }) }),
-                  row.dateFrom || row.dateTill ? /* @__PURE__ */ jsxs(Fragment$2, { children: [
+                  row.dateFrom || row.dateTill ? /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
                     formattedDateFrom,
                     " - ",
                     formattedDateTill
-                  ] }) : /* @__PURE__ */ jsx(Fragment$2, {})
+                  ] }) : /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, {})
                 ] }) }),
-                /* @__PURE__ */ jsx(Table$1.Cell, { children: /* @__PURE__ */ jsxs(Flex, { gap: 2, justifyContent: "flex-end", children: [
-                  /* @__PURE__ */ jsx(
-                    LinkButton,
+                /* @__PURE__ */ jsxRuntime.jsx(admin.Table.Cell, { children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { gap: 2, justifyContent: "flex-end", children: [
+                  /* @__PURE__ */ jsxRuntime.jsx(
+                    designSystem.LinkButton,
                     {
-                      href: `/admin/plugins/${PLUGIN_ID}/form/${row.documentId}`,
-                      startIcon: /* @__PURE__ */ jsx(Pencil, {}),
+                      href: `/admin/plugins/${index$1.PLUGIN_ID}/form/${row.documentId}`,
+                      startIcon: /* @__PURE__ */ jsxRuntime.jsx(icons.Pencil, {}),
                       style: { fill: "white", color: "white" },
                       children: formatMessage({ id: getTranslation("actions.edit") })
                     }
                   ),
-                  /* @__PURE__ */ jsx(
-                    LinkButton,
+                  /* @__PURE__ */ jsxRuntime.jsx(
+                    designSystem.LinkButton,
                     {
                       variant: "danger",
-                      startIcon: /* @__PURE__ */ jsx(Trash, {}),
+                      startIcon: /* @__PURE__ */ jsxRuntime.jsx(icons.Trash, {}),
                       onClick: () => handleDeleteClick(row),
                       style: { fill: "white", color: "white" },
                       children: formatMessage({ id: getTranslation("actions.delete") })
@@ -15065,12 +15091,12 @@ const HomePage = () => {
               ] }, row.id);
             }) })
           ] }) }),
-          /* @__PURE__ */ jsxs(Pagination.Root, { ...pagination, defaultPageSize: 10, children: [
-            /* @__PURE__ */ jsx(Pagination.PageSize, {}),
-            /* @__PURE__ */ jsx(Pagination.Links, {})
+          /* @__PURE__ */ jsxRuntime.jsxs(admin.Pagination.Root, { ...pagination, defaultPageSize: 10, children: [
+            /* @__PURE__ */ jsxRuntime.jsx(admin.Pagination.PageSize, {}),
+            /* @__PURE__ */ jsxRuntime.jsx(admin.Pagination.Links, {})
           ] })
         ] }) }) }),
-        isModalVisible && handlerType && /* @__PURE__ */ jsx(FormProvider, { children: /* @__PURE__ */ jsx(
+        isModalVisible && handlerType && /* @__PURE__ */ jsxRuntime.jsx(FormProvider, { children: /* @__PURE__ */ jsxRuntime.jsx(
           NotificationModal,
           {
             currentNotification: handlerType,
@@ -15078,12 +15104,12 @@ const HomePage = () => {
             setModalIsVisible
           }
         ) }),
-        /* @__PURE__ */ jsx(Dialog.Root, { open: isDialogOpen, onDismiss: () => setIsDialogOpen(false), children: /* @__PURE__ */ jsxs(Dialog.Content, { children: [
-          /* @__PURE__ */ jsx(Dialog.Header, { children: formatMessage({ id: getTranslation("dialog.delete.text") }) }),
-          /* @__PURE__ */ jsx(Dialog.Body, { icon: /* @__PURE__ */ jsx(WarningCircle, { fill: "danger600" }), children: formatMessage({ id: getTranslation("dialog.delete.description") }) }),
-          /* @__PURE__ */ jsxs(Dialog.Footer, { children: [
-            /* @__PURE__ */ jsx(Dialog.Cancel, { children: /* @__PURE__ */ jsx(Button, { fullWidth: true, variant: "tertiary", onClick: () => setIsDialogOpen(false), children: formatMessage({ id: getTranslation("dialog.cancel") }) }) }),
-            /* @__PURE__ */ jsx(Dialog.Action, { children: /* @__PURE__ */ jsx(Button, { fullWidth: true, variant: "danger-light", onClick: handleDeleteConfirm, children: formatMessage({ id: getTranslation("dialog.confirm") }) }) })
+        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Root, { open: isDialogOpen, onDismiss: () => setIsDialogOpen(false), children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Dialog.Content, { children: [
+          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Header, { children: formatMessage({ id: getTranslation("dialog.delete.text") }) }),
+          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Body, { icon: /* @__PURE__ */ jsxRuntime.jsx(icons.WarningCircle, { fill: "danger600" }), children: formatMessage({ id: getTranslation("dialog.delete.description") }) }),
+          /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Dialog.Footer, { children: [
+            /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Cancel, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { fullWidth: true, variant: "tertiary", onClick: () => setIsDialogOpen(false), children: formatMessage({ id: getTranslation("dialog.cancel") }) }) }),
+            /* @__PURE__ */ jsxRuntime.jsx(designSystem.Dialog.Action, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { fullWidth: true, variant: "danger-light", onClick: handleDeleteConfirm, children: formatMessage({ id: getTranslation("dialog.confirm") }) }) })
           ] })
         ] }) })
       ] })
@@ -15111,11 +15137,11 @@ const submissionRequests = {
   }
 };
 const Submission = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { id } = useParams();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedSubmission, setSelectedSubmission] = useState(null);
+  const navigate = reactRouterDom.useNavigate();
+  const location = reactRouterDom.useLocation();
+  const { id } = reactRouterDom.useParams();
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [selectedSubmission, setSelectedSubmission] = React.useState(null);
   const truncateValue = (value, maxLength = 100) => {
     if (typeof value === "string" && value.length > maxLength) {
       return value.substring(0, maxLength) + "...";
@@ -15130,20 +15156,20 @@ const Submission = () => {
     setIsModalOpen(false);
     setSelectedSubmission(null);
   };
-  const { formatMessage } = useIntl();
-  const [isFetching, setIsFetching] = useState(false);
-  const [error, setError] = useState(null);
-  const [results, setResults] = useState([]);
-  const [pagination, setPagination] = useState([]);
-  const token = useAuth("Admin", (state) => state.token);
+  const { formatMessage } = reactIntl.useIntl();
+  const [isFetching, setIsFetching] = React.useState(false);
+  const [error, setError] = React.useState(null);
+  const [results, setResults] = React.useState([]);
+  const [pagination, setPagination] = React.useState([]);
+  const token = admin.useAuth("Admin", (state) => state.token);
   if (!token) {
-    return /* @__PURE__ */ jsx(Page.Loading, {});
+    return /* @__PURE__ */ jsxRuntime.jsx(admin.Page.Loading, {});
   }
-  const [{ query }, querySet] = useQueryParams({
+  const [{ query }, querySet] = admin.useQueryParams({
     page: 1,
     pageSize: 10
   });
-  useEffect(() => {
+  React.useEffect(() => {
     const fetchForms = async () => {
       setIsFetching(true);
       try {
@@ -15160,7 +15186,7 @@ const Submission = () => {
     };
     fetchForms();
   }, [navigate]);
-  useEffect(() => {
+  React.useEffect(() => {
     const fetchForms = async () => {
       setIsFetching(true);
       try {
@@ -15185,41 +15211,41 @@ const Submission = () => {
     formatMessage({
       id: getTranslation(`list.creation_date`)
     }),
-    /* @__PURE__ */ jsx(VisuallyHidden, { children: "Actions" })
+    /* @__PURE__ */ jsxRuntime.jsx(designSystem.VisuallyHidden, { children: "Actions" })
   ];
   if (isFetching) {
-    return /* @__PURE__ */ jsx(Page.Loading, {});
+    return /* @__PURE__ */ jsxRuntime.jsx(admin.Page.Loading, {});
   }
   if (error) {
-    return /* @__PURE__ */ jsx(Page.Error, {});
+    return /* @__PURE__ */ jsxRuntime.jsx(admin.Page.Error, {});
   }
-  return /* @__PURE__ */ jsx(Fragment$2, { children: /* @__PURE__ */ jsxs(Layouts.Root, { children: [
-    /* @__PURE__ */ jsx(Page.Title, { children: formatMessage({ id: getTranslation("submissions.label") }) }),
-    /* @__PURE__ */ jsxs(Page.Main, { style: { position: "relative" }, children: [
-      /* @__PURE__ */ jsx(
-        Layouts.Header,
+  return /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, { children: /* @__PURE__ */ jsxRuntime.jsxs(admin.Layouts.Root, { children: [
+    /* @__PURE__ */ jsxRuntime.jsx(admin.Page.Title, { children: formatMessage({ id: getTranslation("submissions.label") }) }),
+    /* @__PURE__ */ jsxRuntime.jsxs(admin.Page.Main, { style: { position: "relative" }, children: [
+      /* @__PURE__ */ jsxRuntime.jsx(
+        admin.Layouts.Header,
         {
           title: formatMessage({ id: getTranslation("submissions.label") }),
-          navigationAction: /* @__PURE__ */ jsx(BackButton, { disabled: void 0 }),
-          secondaryAction: /* @__PURE__ */ jsx(
-            LinkButton,
+          navigationAction: /* @__PURE__ */ jsxRuntime.jsx(admin.BackButton, { disabled: void 0 }),
+          secondaryAction: /* @__PURE__ */ jsxRuntime.jsx(
+            designSystem.LinkButton,
             {
               variant: "tertiary",
-              startIcon: /* @__PURE__ */ jsx(File, {}),
-              to: `/plugins/${PLUGIN_ID}`,
-              tag: NavLink,
+              startIcon: /* @__PURE__ */ jsxRuntime.jsx(icons.File, {}),
+              to: `/plugins/${index$1.PLUGIN_ID}`,
+              tag: reactRouterDom.NavLink,
               children: formatMessage({ id: getTranslation("forms.all") })
             }
           )
         }
       ),
-      /* @__PURE__ */ jsxs(Layouts.Content, { children: [
-        /* @__PURE__ */ jsx(Grid.Root, { children: /* @__PURE__ */ jsx(Grid.Item, { col: 12, s: 12, children: /* @__PURE__ */ jsxs(Box, { style: { width: "100%" }, children: [
-          /* @__PURE__ */ jsx(Table$1.Root, { rows: results, headers: tableHeaders, isLoading: isFetching, children: /* @__PURE__ */ jsxs(Table$1.Content, { children: [
-            /* @__PURE__ */ jsx(Table$1.Head, { children: tableHeaders.map((header, index2) => /* @__PURE__ */ jsx(Table$1.HeaderCell, { name: header, label: header }, index2)) }),
-            /* @__PURE__ */ jsx(Table$1.Loading, {}),
-            /* @__PURE__ */ jsx(Table$1.Empty, {}),
-            /* @__PURE__ */ jsx(Table$1.Body, { children: results && results.map((row) => {
+      /* @__PURE__ */ jsxRuntime.jsxs(admin.Layouts.Content, { children: [
+        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Grid.Root, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Grid.Item, { col: 12, s: 12, children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Box, { style: { width: "100%" }, children: [
+          /* @__PURE__ */ jsxRuntime.jsx(admin.Table.Root, { rows: results, headers: tableHeaders, isLoading: isFetching, children: /* @__PURE__ */ jsxRuntime.jsxs(admin.Table.Content, { children: [
+            /* @__PURE__ */ jsxRuntime.jsx(admin.Table.Head, { children: tableHeaders.map((header, index2) => /* @__PURE__ */ jsxRuntime.jsx(admin.Table.HeaderCell, { name: header, label: header }, index2)) }),
+            /* @__PURE__ */ jsxRuntime.jsx(admin.Table.Loading, {}),
+            /* @__PURE__ */ jsxRuntime.jsx(admin.Table.Empty, {}),
+            /* @__PURE__ */ jsxRuntime.jsx(admin.Table.Body, { children: results && results.map((row) => {
               const creationDate = new Intl.DateTimeFormat("nl-NL", {
                 year: "numeric",
                 month: "long",
@@ -15231,17 +15257,17 @@ const Submission = () => {
               const submission = Object.entries(row.submission).map(
                 (value, key) => `${value.join(": ")}  `
               );
-              return /* @__PURE__ */ jsxs(Table$1.Row, { children: [
-                /* @__PURE__ */ jsx(Table$1.Cell, { children: /* @__PURE__ */ jsx(Typography, { textColor: "neutral800", children: row.id }) }),
-                /* @__PURE__ */ jsx(Table$1.Cell, { children: /* @__PURE__ */ jsx(Typography, { textColor: "neutral800", children: /* @__PURE__ */ jsx("div", { children: truncateValue(submission.join(" - ")) }) }) }),
-                /* @__PURE__ */ jsx(Table$1.Cell, { children: /* @__PURE__ */ jsx(Typography, { textColor: "neutral800", children: creationDate }) }),
-                /* @__PURE__ */ jsx(Table$1.Cell, { children: /* @__PURE__ */ jsx(
-                  LinkButton,
+              return /* @__PURE__ */ jsxRuntime.jsxs(admin.Table.Row, { children: [
+                /* @__PURE__ */ jsxRuntime.jsx(admin.Table.Cell, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { textColor: "neutral800", children: row.id }) }),
+                /* @__PURE__ */ jsxRuntime.jsx(admin.Table.Cell, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { textColor: "neutral800", children: /* @__PURE__ */ jsxRuntime.jsx("div", { children: truncateValue(submission.join(" - ")) }) }) }),
+                /* @__PURE__ */ jsxRuntime.jsx(admin.Table.Cell, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { textColor: "neutral800", children: creationDate }) }),
+                /* @__PURE__ */ jsxRuntime.jsx(admin.Table.Cell, { children: /* @__PURE__ */ jsxRuntime.jsx(
+                  designSystem.LinkButton,
                   {
                     variant: "secondary",
                     onClick: () => handleOpenModal(row),
-                    children: /* @__PURE__ */ jsxs(Flex, { gap: 2, justifyContent: "flex-start", alignItems: "center", children: [
-                      /* @__PURE__ */ jsx(Eye, {}),
+                    children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { gap: 2, justifyContent: "flex-start", alignItems: "center", children: [
+                      /* @__PURE__ */ jsxRuntime.jsx(icons.Eye, {}),
                       "View details"
                     ] })
                   }
@@ -15249,23 +15275,23 @@ const Submission = () => {
               ] }, row.id);
             }) })
           ] }) }),
-          /* @__PURE__ */ jsxs(Pagination.Root, { ...pagination, defaultPageSize: 10, children: [
-            /* @__PURE__ */ jsx(Pagination.PageSize, {}),
-            /* @__PURE__ */ jsx(Pagination.Links, {})
+          /* @__PURE__ */ jsxRuntime.jsxs(admin.Pagination.Root, { ...pagination, defaultPageSize: 10, children: [
+            /* @__PURE__ */ jsxRuntime.jsx(admin.Pagination.PageSize, {}),
+            /* @__PURE__ */ jsxRuntime.jsx(admin.Pagination.Links, {})
           ] })
         ] }) }) }),
-        /* @__PURE__ */ jsx(Modal.Root, { open: isModalOpen && selectedSubmission, onOpenChange: handleCloseModal, children: /* @__PURE__ */ jsxs(Modal.Content, { children: [
-          /* @__PURE__ */ jsx(Modal.Header, { children: /* @__PURE__ */ jsx(Typography, { variant: "beta", children: "Submission Details" }) }),
-          /* @__PURE__ */ jsx(Modal.Body, { children: selectedSubmission?.submission && /* @__PURE__ */ jsx(Box, { padding: 0, children: /* @__PURE__ */ jsx(Box, { background: "neutral100", padding: 4, shadow: "tableShadow", hasRadius: true, children: Object.entries(selectedSubmission.submission).map(([key, value]) => /* @__PURE__ */ jsxs(
-            Flex,
+        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Root, { open: isModalOpen && selectedSubmission, onOpenChange: handleCloseModal, children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Modal.Content, { children: [
+          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Header, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { variant: "beta", children: "Submission Details" }) }),
+          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Body, { children: selectedSubmission?.submission && /* @__PURE__ */ jsxRuntime.jsx(designSystem.Box, { padding: 0, children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Box, { background: "neutral100", padding: 4, shadow: "tableShadow", hasRadius: true, children: Object.entries(selectedSubmission.submission).map(([key, value]) => /* @__PURE__ */ jsxRuntime.jsxs(
+            designSystem.Flex,
             {
               marginBottom: 4,
               justifyContent: "space-between",
               alignItems: "flex-start",
               wrap: "wrap",
               children: [
-                /* @__PURE__ */ jsxs(
-                  Typography,
+                /* @__PURE__ */ jsxRuntime.jsxs(
+                  designSystem.Typography,
                   {
                     fontWeight: "bold",
                     textColor: "neutral800",
@@ -15276,7 +15302,7 @@ const Submission = () => {
                     ]
                   }
                 ),
-                /* @__PURE__ */ jsx(Typography, { textColor: "neutral800", style: { flex: 2 }, children: typeof value === "object" ? /* @__PURE__ */ jsx(
+                /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { textColor: "neutral800", style: { flex: 2 }, children: typeof value === "object" ? /* @__PURE__ */ jsxRuntime.jsx(
                   "pre",
                   {
                     style: {
@@ -15291,22 +15317,20 @@ const Submission = () => {
             },
             key
           )) }) }) }),
-          /* @__PURE__ */ jsx(Modal.Footer, { children: /* @__PURE__ */ jsx(Modal.Close, { children: /* @__PURE__ */ jsx(Button, { variant: "tertiary", children: formatMessage({ id: getTranslation("close") }) }) }) })
+          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Footer, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Close, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { variant: "tertiary", children: formatMessage({ id: getTranslation("close") }) }) }) })
         ] }) })
       ] })
     ] })
   ] }) });
 };
 const App = () => {
-  return /* @__PURE__ */ jsx(Layouts.Root, { children: /* @__PURE__ */ jsxs(Routes, { children: [
-    /* @__PURE__ */ jsx(Route, { index: true, element: /* @__PURE__ */ jsx(HomePage, {}) }),
-    /* @__PURE__ */ jsx(Route, { path: "/submissions", element: /* @__PURE__ */ jsx(Submission, {}) }),
-    /* @__PURE__ */ jsx(Route, { path: "/form/:id/submissions", element: /* @__PURE__ */ jsx(Submission, {}) }),
-    /* @__PURE__ */ jsx(Route, { path: "/form", element: /* @__PURE__ */ jsx(Form, {}) }),
-    /* @__PURE__ */ jsx(Route, { path: `/form/:id`, element: /* @__PURE__ */ jsx(Form, {}) }),
-    /* @__PURE__ */ jsx(Route, { path: "*", element: /* @__PURE__ */ jsx(Page.Error, {}) })
+  return /* @__PURE__ */ jsxRuntime.jsx(admin.Layouts.Root, { children: /* @__PURE__ */ jsxRuntime.jsxs(reactRouterDom.Routes, { children: [
+    /* @__PURE__ */ jsxRuntime.jsx(reactRouterDom.Route, { index: true, element: /* @__PURE__ */ jsxRuntime.jsx(HomePage, {}) }),
+    /* @__PURE__ */ jsxRuntime.jsx(reactRouterDom.Route, { path: "/submissions", element: /* @__PURE__ */ jsxRuntime.jsx(Submission, {}) }),
+    /* @__PURE__ */ jsxRuntime.jsx(reactRouterDom.Route, { path: "/form/:id/submissions", element: /* @__PURE__ */ jsxRuntime.jsx(Submission, {}) }),
+    /* @__PURE__ */ jsxRuntime.jsx(reactRouterDom.Route, { path: "/form", element: /* @__PURE__ */ jsxRuntime.jsx(Form, {}) }),
+    /* @__PURE__ */ jsxRuntime.jsx(reactRouterDom.Route, { path: `/form/:id`, element: /* @__PURE__ */ jsxRuntime.jsx(Form, {}) }),
+    /* @__PURE__ */ jsxRuntime.jsx(reactRouterDom.Route, { path: "*", element: /* @__PURE__ */ jsxRuntime.jsx(admin.Page.Error, {}) })
   ] }) });
 };
-export {
-  App
-};
+exports.App = App;

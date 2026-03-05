@@ -17682,7 +17682,7 @@ const lifecycles = {
         throw new ForbiddenError2("No form found");
       }
       const form2 = await strapi.documents("plugin::api-forms.form").findFirst({
-        where: { id: formId },
+        filters: { id: formId },
         populate: ["notifications"]
       });
       if (!form2?.notifications?.length) {

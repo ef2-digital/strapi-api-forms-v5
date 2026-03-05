@@ -1,5 +1,6 @@
-import { useRef, useEffect } from "react";
-import { jsxs, jsx } from "react/jsx-runtime";
+"use strict";
+const React = require("react");
+const jsxRuntime = require("react/jsx-runtime");
 const __variableDynamicImportRuntimeHelper = (glob, path, segs) => {
   const v = glob[path];
   if (v) {
@@ -18,15 +19,15 @@ const __variableDynamicImportRuntimeHelper = (glob, path, segs) => {
 };
 const PLUGIN_ID = "api-forms";
 const Initializer = ({ setPlugin }) => {
-  const ref = useRef(setPlugin);
-  useEffect(() => {
+  const ref = React.useRef(setPlugin);
+  React.useEffect(() => {
     ref.current(PLUGIN_ID);
   }, []);
   return null;
 };
-const PluginIcon = () => /* @__PURE__ */ jsxs("svg", { width: "20", height: "20", viewBox: "0 0 512 512", fill: "none", xmlns: "http://www.w3.org/2000/svg", children: [
-  /* @__PURE__ */ jsx("rect", { width: "512", height: "512", rx: "64", fill: "#4DADF7" }),
-  /* @__PURE__ */ jsx(
+const PluginIcon = () => /* @__PURE__ */ jsxRuntime.jsxs("svg", { width: "20", height: "20", viewBox: "0 0 512 512", fill: "none", xmlns: "http://www.w3.org/2000/svg", children: [
+  /* @__PURE__ */ jsxRuntime.jsx("rect", { width: "512", height: "512", rx: "64", fill: "#4DADF7" }),
+  /* @__PURE__ */ jsxRuntime.jsx(
     "rect",
     {
       x: "120",
@@ -39,7 +40,7 @@ const PluginIcon = () => /* @__PURE__ */ jsxs("svg", { width: "20", height: "20"
       "stroke-width": "10"
     }
   ),
-  /* @__PURE__ */ jsx(
+  /* @__PURE__ */ jsxRuntime.jsx(
     "line",
     {
       x1: "140",
@@ -51,7 +52,7 @@ const PluginIcon = () => /* @__PURE__ */ jsxs("svg", { width: "20", height: "20"
       "stroke-linecap": "round"
     }
   ),
-  /* @__PURE__ */ jsx(
+  /* @__PURE__ */ jsxRuntime.jsx(
     "line",
     {
       x1: "140",
@@ -63,7 +64,7 @@ const PluginIcon = () => /* @__PURE__ */ jsxs("svg", { width: "20", height: "20"
       "stroke-linecap": "round"
     }
   ),
-  /* @__PURE__ */ jsx(
+  /* @__PURE__ */ jsxRuntime.jsx(
     "line",
     {
       x1: "140",
@@ -75,9 +76,9 @@ const PluginIcon = () => /* @__PURE__ */ jsxs("svg", { width: "20", height: "20"
       "stroke-linecap": "round"
     }
   ),
-  /* @__PURE__ */ jsx("circle", { cx: "340", cy: "220", r: "10", fill: "white" }),
-  /* @__PURE__ */ jsx("circle", { cx: "360", cy: "260", r: "10", fill: "white" }),
-  /* @__PURE__ */ jsx(
+  /* @__PURE__ */ jsxRuntime.jsx("circle", { cx: "340", cy: "220", r: "10", fill: "white" }),
+  /* @__PURE__ */ jsxRuntime.jsx("circle", { cx: "360", cy: "260", r: "10", fill: "white" }),
+  /* @__PURE__ */ jsxRuntime.jsx(
     "text",
     {
       x: "80",
@@ -99,7 +100,7 @@ const index = {
         defaultMessage: PLUGIN_ID
       },
       Component: async () => {
-        const { App } = await import("./App-Di-uRuwM.mjs");
+        const { App } = await Promise.resolve().then(() => require("./App-CUol5_aa.js"));
         return App;
       }
     });
@@ -114,7 +115,7 @@ const index = {
     return await Promise.all(
       locales.map(async (locale) => {
         try {
-          const { default: data } = await __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "./translations/en.json": () => import("./en-DX3eDqlW.mjs"), "./translations/nl.json": () => import("./nl-K2D_XQ-0.mjs") }), `./translations/${locale}.json`, 3);
+          const { default: data } = await __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "./translations/en.json": () => Promise.resolve().then(() => require("./en-RVsKvN1O.js")), "./translations/nl.json": () => Promise.resolve().then(() => require("./nl-C39qzstY.js")) }), `./translations/${locale}.json`, 3);
           return { data, locale };
         } catch {
           return { data: {}, locale };
@@ -123,7 +124,5 @@ const index = {
     );
   }
 };
-export {
-  PLUGIN_ID as P,
-  index as i
-};
+exports.PLUGIN_ID = PLUGIN_ID;
+exports.index = index;

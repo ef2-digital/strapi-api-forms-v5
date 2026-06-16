@@ -143,5 +143,6 @@
 	"api-forms.settings.description.globalErrorMessage": "Set an error message for all forms. This can be overridden by the error message in the form settings.",
 	"api-forms.settings.description.htmlFooter": "Set an HTML footer for all forms.",
 	"api-forms.settings.description.htmlBgColor": "Set an HTML background color as a HEX code.",
-	"api-forms.settings.description.html": "Set an HTML template for all forms. The submitted entry will be included here."
+	"api-forms.settings.description.html": "Set an HTML template for all forms. The submitted entry will be included here.",
+	"api-forms.forms.fields.types.tel": "Phone field"
 }

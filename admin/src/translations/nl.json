@@ -116,5 +116,6 @@
 	"api-forms.list.inactive": "Inactief",
 	"api-forms.tooltips.enabled": "Activeer/deactiveer",
 	"api-forms.handlers.notification": "Naar ontvanger",
-	"api-forms.handlers.confirmation": "Naar verzender"
+	"api-forms.handlers.confirmation": "Naar verzender",
+	"api-forms.forms.fields.types.tel": "Telefoonveld"
 }

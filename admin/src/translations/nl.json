@@ -81,6 +81,7 @@
   "api-forms.forms.fields.types.number": "Numeriek veld",
   "api-forms.forms.fields.types.select": "Selectieveld",
   "api-forms.forms.fields.types.file": "Bestandveld",
+  "api-forms.forms.fields.types.tel": "Telefoonveld",
   "api-forms.forms.deleted": "Formulier verwijderd",
   "api-forms.handlers.label": "E-mail berichten",
   "api-forms.handlers.title": "E-mailhandelingen",

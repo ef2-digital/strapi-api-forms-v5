@@ -17,6 +17,7 @@ const fieldMap = new Map<string, FunctionComponent<any>>([
   ['radio', (props: FieldType) => <RadioGroup {...props} />],
   ['select', (props: FieldType) => <Select {...props} />],
   ['file', (props: FieldType) => <TextInput {...props} />],
+  ['tel', (props: FieldType) => <TextInput {...props} />],
 ]);
 
 export default fieldMap;

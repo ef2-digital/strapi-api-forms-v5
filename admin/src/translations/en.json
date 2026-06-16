@@ -87,6 +87,7 @@
   "api-forms.forms.fields.types.number": "Numeric field",
   "api-forms.forms.fields.types.select": "Select field",
   "api-forms.forms.fields.types.file": "File field",
+  "api-forms.forms.fields.types.tel": "Phone field",
   "api-forms.forms.deleted": "Form deleted",
   "api-forms.handlers.label": "Email messages",
   "api-forms.handlers.title": "Email messages",

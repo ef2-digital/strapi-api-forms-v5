@@ -1,54 +1,54 @@
 {
-  "kind": "collectionType",
-  "collectionName": "notification",
-  "info": {
-    "singularName": "notification",
-    "pluralName": "notificatons",
-    "displayName": "Email notifications"
-  },
-  "pluginOptions": {
-    "content-manager": {
-      "visible": false
-    },
-    "content-type-builder": {
-      "visible": true
-    }
-  },
-  "options": {
-    "draftAndPublish": false,
-    "privateAttributes": ["createdAt", "updatedAt"]
-  },
-  "attributes": {
-    "from": {
-      "type": "string"
-    },
-    "to": {
-      "type": "string"
-    },
-    "subject": {
-      "type": "string"
-    },
-    "message": {
-      "type": "text",
-      "default": ""
-    },
-    "enabled": {
-      "type": "boolean"
-    },
-    "identifier": {
-      "type": "enumeration",
-      "enum": ["notification", "confirmation"],
-      "default": "notification"
-    },
-    "service": {
-      "type": "string",
-      "default": "emailService"
-    },
-    "form": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::api-forms.form",
-      "inversedBy": "notifications"
-    }
-  }
+	"kind": "collectionType",
+	"collectionName": "notification",
+	"info": {
+		"singularName": "notification",
+		"pluralName": "notificatons",
+		"displayName": "Email notifications"
+	},
+	"pluginOptions": {
+		"content-manager": {
+			"visible": false
+		},
+		"content-type-builder": {
+			"visible": true
+		}
+	},
+	"options": {
+		"draftAndPublish": false,
+		"privateAttributes": ["createdAt", "updatedAt"]
+	},
+	"attributes": {
+		"from": {
+			"type": "string"
+		},
+		"to": {
+			"type": "string"
+		},
+		"subject": {
+			"type": "string"
+		},
+		"message": {
+			"type": "text",
+			"default": ""
+		},
+		"enabled": {
+			"type": "boolean"
+		},
+		"identifier": {
+			"type": "enumeration",
+			"enum": ["notification", "confirmation"],
+			"default": "notification"
+		},
+		"service": {
+			"type": "string",
+			"default": "emailService"
+		},
+		"form": {
+			"type": "relation",
+			"relation": "manyToOne",
+			"target": "plugin::api-forms.form",
+			"inversedBy": "notifications"
+		}
+	}
 }

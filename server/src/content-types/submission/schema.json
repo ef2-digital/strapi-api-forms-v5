@@ -1,37 +1,40 @@
 {
-  "kind": "collectionType",
-  "collectionName": "submissions",
-  "info": {
-    "singularName": "submission",
-    "pluralName": "submissions",
-    "displayName": "submission"
-  },
-  "pluginOptions": {
-    "content-manager": {
-      "visible": false
-    },
-    "content-type-builder": {
-      "visible": true
-    }
-  },
+	"kind": "collectionType",
+	"collectionName": "submissions",
+	"info": {
+		"singularName": "submission",
+		"pluralName": "submissions",
+		"displayName": "submission"
+	},
+	"pluginOptions": {
+		"content-manager": {
+			"visible": false
+		},
+		"content-type-builder": {
+			"visible": true
+		}
+	},
 
-  "options": {
-    "draftAndPublish": false,
-    "privateAttributes": ["createdAt", "updatedAt"]
-  },
-  "attributes": {
-    "submission": {
-      "type": "json"
-    },
-    "files": {
-      "type": "media",
-      "multiple": true
-    },
-    "form": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::api-forms.form",
-      "inversedBy": "submissions"
-    }
-  }
+	"options": {
+		"draftAndPublish": false,
+		"privateAttributes": ["createdAt", "updatedAt"]
+	},
+	"attributes": {
+		"submission": {
+			"type": "json"
+		},
+		"referer": {
+			"type": "string"
+		},
+		"files": {
+			"type": "media",
+			"multiple": true
+		},
+		"form": {
+			"type": "relation",
+			"relation": "manyToOne",
+			"target": "plugin::api-forms.form",
+			"inversedBy": "submissions"
+		}
+	}
 }

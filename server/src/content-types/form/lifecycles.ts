@@ -1,77 +1,55 @@
-const { ForbiddenError } = require('@strapi/utils').errors;
+import { errors } from '@strapi/utils';
+import { generateNotificationHtml } from '../../functions';
+const { ForbiddenError } = errors;
 
 function isJSON(str) {
-  try {
-    let newJson = JSON.parse(str);
-    return (typeof newJson === 'object' && newJson !== str) || false;
-  } catch (e) {
-    return false;
-  }
+	try {
+		let newJson = JSON.parse(str);
+		return (typeof newJson === 'object' && newJson !== str) || false;
+	} catch (e) {
+		return false;
+	}
 }
 
 export default {
-  async afterCreate(event) {
-    const { result, params } = event;
+	async beforeCreate(event) {},
+	async afterCreate(event) {
+		const { result } = event;
 
-    if (!result.id) {
-      throw new ForbiddenError('No form');
-    }
+		if (!result.id) {
+			throw new ForbiddenError('No form');
+		}
 
-    strapi.log.info('afterCreate');
+		const settings = await strapi.documents('plugin::api-forms.setting').findFirst();
+		const message = generateNotificationHtml(result, settings);
+		const defaultEmail = await strapi.plugins['email'].services.email.getProviderSettings().settings.defaultFrom;
 
-    const defaultEmail =
-      await strapi.plugins['email'].services.email.getProviderSettings().settings.defaultFrom;
+		const notification = await strapi.documents('plugin::api-forms.notification').create({
+			data: {
+				form: result.id,
+				enabled: true,
+				identifier: 'notification',
+				service: 'emailService',
+				from: settings && settings?.globalFromEmail ? `${settings.globalFromName} <${settings.globalFromEmail}>` : defaultEmail,
+				to: settings && settings?.globalEmail ? settings.globalEmail : defaultEmail,
+				message: message,
+				subject: `New submission from API form: ${result.title}`,
+			},
+		});
 
-    const tableRows = result.steps
-      .map((step) => {
-        if (!step.layouts.lg) {
-          return '';
-        }
+		const confirmation = await strapi.documents('plugin::api-forms.notification').create({
+			data: {
+				form: result.id,
+				enabled: false,
+				identifier: 'confirmation',
+				service: 'emailService',
+				from: settings && settings?.globalFromEmail ? `${settings.globalFromName} <${settings.globalFromEmail}>` : defaultEmail,
+				to: '',
+				subject: `Thank you for your submission on form: ${result.title}`,
+				message: message,
+			},
+		});
 
-        return step.layouts.lg.map((block) => {
-          const { field } = block;
-
-          if (field.type === 'file') {
-            return '';
-          }
-
-          return `<tr><td><strong>${field.label}</strong></td><td>{{${field.name}}}</td></tr>`;
-        });
-      })
-      .join('');
-
-    const message = `<table>
-              <tbody>
-           ${tableRows}
-              </tbody>
-            </table>
-                `;
-    const notification = await strapi.entityService.create('plugin::api-forms.notification', {
-      data: {
-        form: result.id,
-        enabled: true,
-        identifier: 'notification',
-        service: 'emailService',
-        from: defaultEmail,
-        to: defaultEmail,
-        message: message,
-        subject: `New submission from API form: ${result.title}`,
-      },
-    });
-
-    const confirmation = await strapi.entityService.create('plugin::api-forms.notification', {
-      data: {
-        form: result.id,
-        enabled: false,
-        identifier: 'confirmation',
-        service: 'emailService',
-        from: defaultEmail,
-        to: '',
-        subject: `Thank you for your submission on form: ${result.title}`,
-        message: message,
-      },
-    });
-
-    return [confirmation, notification];
-  },
+		return [confirmation, notification];
+	},
 };

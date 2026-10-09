@@ -107,12 +107,48 @@ async function cleanupFiles(files: any[]): Promise<void> {
 	);
 }
 
+const ADDRESS_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 /**
- * Validate email format
+ * One address, bare or with a display name ("Name <address>"). Mail providers
+ * accept both, and editors type both.
  */
-function validateEmail(emails: string): boolean {
-	const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-	return emails.split(',').every((email) => emailPattern.test(email.trim()));
+function isMailbox(value: string): boolean {
+	const trimmed = value.trim();
+	const named = trimmed.match(/^[^<>]*<([^<>]+)>$/);
+
+	return ADDRESS_PATTERN.test(named ? named[1].trim() : trimmed);
+}
+
+/**
+ * Validate a comma separated list of addresses. Anything that is not a string,
+ * or is empty, holds no address.
+ */
+function validateEmail(emails: unknown): boolean {
+	if (typeof emails !== 'string' || emails.trim() === '') {
+		return false;
+	}
+
+	return emails.split(',').every(isMailbox);
+}
+
+/**
+ * The sender to hand to the provider, or undefined to let the provider use its
+ * default sender. A sender without an address ("Team" instead of
+ * "Team <team@example.com>") makes the provider refuse the whole message, so it
+ * is better to fall back than to pass it on.
+ */
+function resolveSender(from: unknown, context: string): string | undefined {
+	if (typeof from !== 'string' || from.trim() === '') {
+		return undefined;
+	}
+
+	if (!isMailbox(from)) {
+		strapi.log.warn(`The sender "${from}" of ${context} holds no valid address, so the default sender is used.`);
+		return undefined;
+	}
+
+	return from.trim();
 }
 
 /**
@@ -196,6 +232,7 @@ function generateNotificationHtml(result, settings) {
 
 export {
 	validateEmail,
+	resolveSender,
 	getValueFromSubmissionByKey,
 	replaceDynamicVariables,
 	getFiles,

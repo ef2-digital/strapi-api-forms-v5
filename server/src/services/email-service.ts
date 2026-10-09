@@ -1,4 +1,11 @@
-import { getFiles, getRequestFileAttachments, getValueFromSubmissionByKey, replaceDynamicVariables, validateEmail } from '../functions';
+import {
+	getFiles,
+	getRequestFileAttachments,
+	getValueFromSubmissionByKey,
+	replaceDynamicVariables,
+	resolveSender,
+	validateEmail,
+} from '../functions';
 import { FormType, NotificationType, SubmissionType, EmailSubmissionType } from '../../../admin/src/utils/types';
 
 /**
@@ -54,7 +61,7 @@ export default {
 
 			const emailSubmission: EmailSubmissionType = {
 				to: [emailAddress],
-				from: notification.from,
+				from: resolveSender(notification.from, `the ${notification.identifier} notification of form ${form?.id}`),
 				subject: notification.subject,
 				html: messageWithReferer,
 			};

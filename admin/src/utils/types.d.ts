@@ -172,7 +172,7 @@ export type EmailHandlerDataType = {
 
 export type EmailSubmissionType = {
 	to: string[];
-	from: string;
+	from?: string;
 	subject: string;
 	html: string;
 	attachment?: { data?: string; filename: string }[];

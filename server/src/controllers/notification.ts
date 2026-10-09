@@ -1,6 +1,6 @@
 import { factories } from '@strapi/strapi';
 import { faker } from '@faker-js/faker';
-import { replaceDynamicVariables } from '../functions';
+import { replaceDynamicVariables, resolveSender } from '../functions';
 import { EmailSubmissionType } from '../../../admin/src/utils/types';
 
 export default factories.createCoreController('plugin::api-forms.notification', ({ strapi }) => ({
@@ -38,7 +38,7 @@ export default factories.createCoreController('plugin::api-forms.notification', 
 
 			const emailSubmission: EmailSubmissionType = {
 				to: email,
-				from: notification.from,
+				from: resolveSender(notification.from, `the ${notification.identifier} notification ${notification.documentId}`),
 				subject: notification.subject,
 				html: message,
 			};

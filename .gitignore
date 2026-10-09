@@ -136,3 +136,13 @@ yarn-error.log
 ############################
 
 coverage
+
+
+############################
+# Agent tooling
+############################
+
+CLAUDE.local.md
+AGENTS.local.md
+.claude/settings.local.json
+.claude/worktrees/

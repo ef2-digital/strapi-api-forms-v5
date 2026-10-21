@@ -46,6 +46,6 @@ They have to switch the dependency to `@ef2/strapi-api-forms` first.
 
 ## Branches and pull requests
 
-Open pull requests against `main`. Yassir Saouf reviews. No `Co-Authored-By` trailers and no
+Open pull requests against `main`. Someone from CS reviews. No `Co-Authored-By` trailers and no
 "Generated with" lines. Do not commit `dist`, a `package-lock.json` (this is a Yarn repo) or
 `node_modules`.
